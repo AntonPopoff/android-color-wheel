@@ -26,7 +26,6 @@ class AlphaSeekBar(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : 
 
     private var motionEventDownX = 0f
     private var barWidth = 0
-    private var thumbRadius = 0
 
     val argb get() = setAlpha(gradientColors[1], alphaValue)
 
@@ -36,6 +35,13 @@ class AlphaSeekBar(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : 
         private set
 
     var alphaChangeListener: ((Int) -> Unit)? = null
+
+    var thumbRadius = 0
+        set(value) {
+            thumbDrawable.applyInsets(value.toFloat())
+            field = value
+            requestLayout()
+        }
 
     init {
         parseAttributes(context, attrs, R.style.AlphaSeekBarDefaultStyle)
@@ -103,8 +109,8 @@ class AlphaSeekBar(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : 
         val top = paddingTop + thumbRadius
         val bottom = height - paddingBottom - thumbRadius
 
-        gradientDrawable.bounds.set(left, top, right, bottom)
         gradientDrawable.cornerRadius = gradientDrawable.bounds.width() / 2f
+        gradientDrawable.setBounds(left, top, right, bottom)
         gradientDrawable.draw(canvas)
     }
 
