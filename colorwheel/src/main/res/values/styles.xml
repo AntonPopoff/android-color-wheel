@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="ColorWheelDefaultStyle">
+        <item name="cw_thumbRadius">@dimen/default_thumb_radius</item>
+    </style>
+
+    <style name="AlphaSeekBarDefaultStyle">
+        <item name="asb_thumbRadius">@dimen/default_thumb_radius</item>
+        <item name="asb_barWidth">10dp</item>
+    </style>
+
+</resources>
