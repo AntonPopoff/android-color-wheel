@@ -28,13 +28,13 @@ class MainFragment : Fragment() {
         colorIndicator.background = colorIndicatorBackground
         colorWheel.colorChangeListener = this::onColorWheelUpdateListener
         alphaSeekBar.alphaChangeListener = this::onAlphaSeekBarUpdateListener
-        alphaSeekBar.setOriginColor(colorWheel.argb)
-        colorIndicatorBackground.setColor(setAlpha(colorWheel.argb, alphaSeekBar.colorAlpha))
+        alphaSeekBar.setBarColorRgb(colorWheel.argb)
+        colorIndicatorBackground.setColor(setAlpha(colorWheel.argb, alphaSeekBar.alphaValue))
     }
 
     private fun onColorWheelUpdateListener(argb: Int) {
-        alphaSeekBar.setOriginColor(argb)
-        colorIndicatorBackground.setColor(setAlpha(argb, alphaSeekBar.colorAlpha))
+        alphaSeekBar.setBarColorRgb(argb)
+        colorIndicatorBackground.setColor(setAlpha(argb, alphaSeekBar.alphaValue))
     }
 
     private fun onAlphaSeekBarUpdateListener(alpha: Int) {
