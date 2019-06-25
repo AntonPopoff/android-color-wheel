@@ -3,13 +3,13 @@ package com.colorwheelapp.colorwheel
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
-import android.graphics.Rect
 import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewConfiguration
 import com.colorwheelapp.colorwheel.utils.clearAlpha
+import com.colorwheelapp.colorwheel.utils.getAlpha
 import com.colorwheelapp.colorwheel.utils.setAlpha
 import kotlin.math.abs
 import kotlin.math.roundToInt
@@ -20,21 +20,19 @@ class AlphaSeekBar(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : 
 
     private val viewConfig = ViewConfiguration.get(context)
 
-    private val gradientRect = Rect()
     private val gradientColors = IntArray(2)
-    private val gradient = GradientDrawable(GradientDrawable.Orientation.BOTTOM_TOP, gradientColors)
-
-    private var thumbRadius = 0
     private val thumbDrawable = ThumbDrawable()
+    private val gradientDrawable = GradientDrawable(GradientDrawable.Orientation.BOTTOM_TOP, gradientColors)
 
     private var motionEventDownX = 0f
     private var barWidth = 0
+    private var thumbRadius = 0
 
-    val originColor get() = gradientColors[1]
+    val argb get() = setAlpha(gradientColors[1], alphaValue)
 
-    val argb get() = setAlpha(originColor, colorAlpha)
+    val rgb get() = gradientColors[1]
 
-    var colorAlpha = MAX_ALPHA
+    var alphaValue = MAX_ALPHA
         private set
 
     var alphaChangeListener: ((Int) -> Unit)? = null
@@ -52,16 +50,22 @@ class AlphaSeekBar(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : 
         context.obtainStyledAttributes(attrs, R.styleable.AlphaSeekBar, 0, defStyle).apply {
             thumbRadius = getDimensionPixelSize(R.styleable.AlphaSeekBar_asb_thumbRadius, 0)
             barWidth = getDimensionPixelSize(R.styleable.AlphaSeekBar_asb_barWidth, 0)
-            setAlpha(getInteger(R.styleable.AlphaSeekBar_asb_alpha, MAX_ALPHA))
-            setOriginColor(getColor(R.styleable.AlphaSeekBar_asb_color, Color.BLACK))
+            setBarAlpha(getInteger(R.styleable.AlphaSeekBar_asb_alpha, MAX_ALPHA))
+            setBarColorRgb(getColor(R.styleable.AlphaSeekBar_asb_color, Color.BLACK))
             recycle()
         }
     }
 
-    fun setAlpha(alpha: Int) {
-        colorAlpha = ensureAlphaWithinRange(alpha)
+    fun setBarAlpha(alpha: Int) {
+        alphaValue = ensureAlphaWithinRange(alpha)
         fireListener()
         invalidate()
+    }
+
+    fun setBarColorArgb(argb: Int) {
+        alphaValue = ensureAlphaWithinRange(getAlpha(argb))
+        fireListener()
+        setBarColorRgb(argb)
     }
 
     private fun ensureAlphaWithinRange(alpha: Int) = when {
@@ -70,10 +74,10 @@ class AlphaSeekBar(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : 
         else -> alpha
     }
 
-    fun setOriginColor(argb: Int) {
-        gradientColors[0] = clearAlpha(argb)
-        gradientColors[1] = setAlpha(argb, MAX_ALPHA)
-        gradient.colors = gradientColors
+    fun setBarColorRgb(rgb: Int) {
+        gradientColors[0] = clearAlpha(rgb)
+        gradientColors[1] = setAlpha(rgb, MAX_ALPHA)
+        gradientDrawable.colors = gradientColors
         invalidate()
     }
 
@@ -88,40 +92,32 @@ class AlphaSeekBar(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : 
     }
 
     override fun onDraw(canvas: Canvas) {
-        calculateGradientRect()
-        calculateThumbRect()
         updateIndicatorColor()
         drawGradientRect(canvas)
-        thumbDrawable.draw(canvas)
-    }
-
-    private fun calculateGradientRect() {
-        gradientRect.apply {
-            left = paddingLeft + (width - paddingLeft - paddingRight - barWidth) / 2
-            right = left + barWidth
-            top = paddingTop + thumbRadius
-            bottom = height - paddingBottom - thumbRadius
-        }
+        drawThumb(canvas)
     }
 
     private fun drawGradientRect(canvas: Canvas) {
-        gradient.apply {
-            bounds = gradientRect
-            cornerRadius = gradientRect.width() / 2f
-            draw(canvas)
-        }
+        val left = paddingLeft + (width - paddingLeft - paddingRight - barWidth) / 2
+        val right = left + barWidth
+        val top = paddingTop + thumbRadius
+        val bottom = height - paddingBottom - thumbRadius
+
+        gradientDrawable.bounds.set(left, top, right, bottom)
+        gradientDrawable.cornerRadius = gradientDrawable.bounds.width() / 2f
+        gradientDrawable.draw(canvas)
     }
 
-    private fun calculateThumbRect() {
-        val thumbY = convertAlphaToThumbPosition(colorAlpha)
+    private fun drawThumb(canvas: Canvas) {
+        val thumbY = convertAlphaToThumbPosition(alphaValue)
         val thumbDiameter = thumbRadius * 2
-
-        val left = gradientRect.centerX() - thumbRadius
+        val left = gradientDrawable.bounds.centerX() - thumbRadius
         val right = left + thumbDiameter
         val top = thumbY - thumbRadius
         val bottom = top + thumbDiameter
 
         thumbDrawable.setBounds(left, top, right, bottom)
+        thumbDrawable.draw(canvas)
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
@@ -144,24 +140,24 @@ class AlphaSeekBar(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : 
     }
 
     private fun calculateAlphaOnMotionEvent(event: MotionEvent) {
-        colorAlpha = calculateAlphaByMotionEventY(ensureMotionEventYInBounds(event))
+        alphaValue = calculateAlphaByMotionEventY(ensureMotionEventYInBounds(event))
         fireListener()
         invalidate()
     }
 
     private fun ensureMotionEventYInBounds(event: MotionEvent) = when {
-        event.y > gradientRect.bottom -> gradientRect.bottom
-        event.y < gradientRect.top -> gradientRect.top
+        event.y > gradientDrawable.bounds.bottom -> gradientDrawable.bounds.bottom
+        event.y < gradientDrawable.bounds.top -> gradientDrawable.bounds.top
         else -> event.y.roundToInt()
     }
 
     private fun calculateAlphaByMotionEventY(y: Int): Int {
-        val relativeThumbY = (y - gradientRect.top).toFloat()
-        return MAX_ALPHA - ((relativeThumbY / gradientRect.height()) * MAX_ALPHA).roundToInt()
+        val relativeThumbY = (y - gradientDrawable.bounds.top).toFloat()
+        return MAX_ALPHA - ((relativeThumbY / gradientDrawable.bounds.height()) * MAX_ALPHA).roundToInt()
     }
 
     private fun updateIndicatorColor() {
-        thumbDrawable.indicatorColor = setAlpha(originColor, colorAlpha)
+        thumbDrawable.indicatorColor = setAlpha(gradientColors[1], alphaValue)
     }
 
     private fun isTap(event: MotionEvent): Boolean {
@@ -172,11 +168,11 @@ class AlphaSeekBar(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : 
 
     private fun convertAlphaToThumbPosition(alpha: Int): Int {
         val alphaNormalized = 1 - (alpha.toFloat() / MAX_ALPHA)
-        return (gradientRect.top + alphaNormalized * gradientRect.height()).roundToInt()
+        return (gradientDrawable.bounds.top + alphaNormalized * gradientDrawable.bounds.height()).roundToInt()
     }
 
     private fun fireListener() {
-        alphaChangeListener?.invoke(colorAlpha)
+        alphaChangeListener?.invoke(alphaValue)
     }
 
     override fun performClick() = super.performClick()
