@@ -16,6 +16,7 @@
         app:layout_constraintHeight_percent="0.55" />
 
     <com.colorwheelapp.colorwheel.ColorWheel
+        android:id="@+id/colorWheel"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:paddingStart="18dp"
@@ -24,5 +25,18 @@
         app:layout_constraintEnd_toStartOf="@id/alphaSeekBar"
         app:layout_constraintTop_toTopOf="@id/alphaSeekBar"
         app:layout_constraintBottom_toBottomOf="@id/alphaSeekBar"/>
+
+    <View
+        android:id="@+id/colorIndicator"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/colorWheel"
+        app:layout_constraintHeight_percent="0.1"
+        android:background="@android:color/black"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
