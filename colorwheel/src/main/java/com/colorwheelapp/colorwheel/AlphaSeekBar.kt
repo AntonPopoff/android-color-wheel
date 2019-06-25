@@ -3,7 +3,6 @@ package com.colorwheelapp.colorwheel
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
-import android.graphics.Rect
 import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
 import android.view.MotionEvent
@@ -21,15 +20,13 @@ class AlphaSeekBar(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : 
 
     private val viewConfig = ViewConfiguration.get(context)
 
-    private val gradientRect = Rect()
     private val gradientColors = IntArray(2)
-    private val gradientDrawable = GradientDrawable(GradientDrawable.Orientation.BOTTOM_TOP, gradientColors)
-
-    private var thumbRadius = 0
     private val thumbDrawable = ThumbDrawable()
+    private val gradientDrawable = GradientDrawable(GradientDrawable.Orientation.BOTTOM_TOP, gradientColors)
 
     private var motionEventDownX = 0f
     private var barWidth = 0
+    private var thumbRadius = 0
 
     val argb get() = setAlpha(gradientColors[1], alphaValue)
 
@@ -95,40 +92,32 @@ class AlphaSeekBar(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : 
     }
 
     override fun onDraw(canvas: Canvas) {
-        calculateGradientRect()
-        calculateThumbRect()
         updateIndicatorColor()
         drawGradientRect(canvas)
-        thumbDrawable.draw(canvas)
-    }
-
-    private fun calculateGradientRect() {
-        gradientRect.apply {
-            left = paddingLeft + (width - paddingLeft - paddingRight - barWidth) / 2
-            right = left + barWidth
-            top = paddingTop + thumbRadius
-            bottom = height - paddingBottom - thumbRadius
-        }
+        drawThumb(canvas)
     }
 
     private fun drawGradientRect(canvas: Canvas) {
-        gradientDrawable.apply {
-            bounds = gradientRect
-            cornerRadius = gradientRect.width() / 2f
-            draw(canvas)
-        }
+        val left = paddingLeft + (width - paddingLeft - paddingRight - barWidth) / 2
+        val right = left + barWidth
+        val top = paddingTop + thumbRadius
+        val bottom = height - paddingBottom - thumbRadius
+
+        gradientDrawable.bounds.set(left, top, right, bottom)
+        gradientDrawable.cornerRadius = gradientDrawable.bounds.width() / 2f
+        gradientDrawable.draw(canvas)
     }
 
-    private fun calculateThumbRect() {
+    private fun drawThumb(canvas: Canvas) {
         val thumbY = convertAlphaToThumbPosition(alphaValue)
         val thumbDiameter = thumbRadius * 2
-
-        val left = gradientRect.centerX() - thumbRadius
+        val left = gradientDrawable.bounds.centerX() - thumbRadius
         val right = left + thumbDiameter
         val top = thumbY - thumbRadius
         val bottom = top + thumbDiameter
 
         thumbDrawable.setBounds(left, top, right, bottom)
+        thumbDrawable.draw(canvas)
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
@@ -157,14 +146,14 @@ class AlphaSeekBar(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : 
     }
 
     private fun ensureMotionEventYInBounds(event: MotionEvent) = when {
-        event.y > gradientRect.bottom -> gradientRect.bottom
-        event.y < gradientRect.top -> gradientRect.top
+        event.y > gradientDrawable.bounds.bottom -> gradientDrawable.bounds.bottom
+        event.y < gradientDrawable.bounds.top -> gradientDrawable.bounds.top
         else -> event.y.roundToInt()
     }
 
     private fun calculateAlphaByMotionEventY(y: Int): Int {
-        val relativeThumbY = (y - gradientRect.top).toFloat()
-        return MAX_ALPHA - ((relativeThumbY / gradientRect.height()) * MAX_ALPHA).roundToInt()
+        val relativeThumbY = (y - gradientDrawable.bounds.top).toFloat()
+        return MAX_ALPHA - ((relativeThumbY / gradientDrawable.bounds.height()) * MAX_ALPHA).roundToInt()
     }
 
     private fun updateIndicatorColor() {
@@ -179,7 +168,7 @@ class AlphaSeekBar(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : 
 
     private fun convertAlphaToThumbPosition(alpha: Int): Int {
         val alphaNormalized = 1 - (alpha.toFloat() / MAX_ALPHA)
-        return (gradientRect.top + alphaNormalized * gradientRect.height()).roundToInt()
+        return (gradientDrawable.bounds.top + alphaNormalized * gradientDrawable.bounds.height()).roundToInt()
     }
 
     private fun fireListener() {
