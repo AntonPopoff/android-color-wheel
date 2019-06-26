@@ -38,14 +38,14 @@ class AlphaSeekBar(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : 
 
     var thumbRadius = 0
         set(value) {
-            thumbDrawable.applyInsets(value.toFloat())
             field = value
+            updateThumbInsets()
             requestLayout()
         }
 
     init {
         parseAttributes(context, attrs, R.style.AlphaSeekBarDefaultStyle)
-        thumbDrawable.applyInsets(thumbRadius.toFloat())
+        updateThumbInsets()
     }
 
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
@@ -60,6 +60,10 @@ class AlphaSeekBar(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : 
             setBarColorRgb(getColor(R.styleable.AlphaSeekBar_asb_color, Color.BLACK))
             recycle()
         }
+    }
+
+    private fun updateThumbInsets() {
+        thumbDrawable.applyInsets(thumbRadius.toFloat())
     }
 
     fun setBarAlpha(alpha: Int) {
