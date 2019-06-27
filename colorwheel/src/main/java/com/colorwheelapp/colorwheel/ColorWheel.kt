@@ -42,7 +42,13 @@ class ColorWheel(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : Vi
 
     var colorChangeListener: ((Int) -> Unit)? = null
 
-    val argb get() = hsvColor.toArgb()
+    var argb
+        get() = hsvColor.toArgb()
+        set(value) {
+            hsvColor.set(value)
+            fireColorListener()
+            invalidate()
+        }
 
     var thumbRadius = 0
         set(value) {
@@ -69,12 +75,6 @@ class ColorWheel(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : Vi
 
     private fun updateThumbInsets() {
         thumbDrawable.applyInsets(thumbRadius.toFloat())
-    }
-
-    fun setColor(argb: Int) {
-        hsvColor.set(argb)
-        fireColorListener()
-        invalidate()
     }
 
     override fun onDraw(canvas: Canvas) {
