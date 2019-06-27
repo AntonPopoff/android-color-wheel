@@ -19,10 +19,6 @@ class ThumbDrawable {
     private val colorIndicatorDrawable = ShapeDrawable(OvalShape())
     private val thumbDrawable = LayerDrawable(arrayOf(thumbCircle, colorIndicatorDrawable))
 
-    var bounds: Rect
-        get() = thumbDrawable.bounds
-        set(value) { thumbDrawable.bounds = value }
-
     var indicatorColor
         get() = colorIndicatorDrawable.paint.color
         set(value) { colorIndicatorDrawable.paint.color = value }
