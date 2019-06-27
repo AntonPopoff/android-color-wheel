@@ -85,11 +85,10 @@ class ColorWheel(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : Vi
     private fun drawColorWheel(canvas: Canvas) {
         val hSpace = width - paddingLeft - paddingRight
         val vSpace = height - paddingTop - paddingBottom
-        val space = minOf(hSpace, vSpace)
 
         wheelCenterX = paddingLeft + hSpace / 2
         wheelCenterY = paddingTop + vSpace / 2
-        wheelRadius = space / 2
+        wheelRadius = minOf(hSpace, vSpace) / 2
 
         val left = wheelCenterX - wheelRadius
         val top = wheelCenterY - wheelRadius
