@@ -27,9 +27,22 @@ class AlphaSeekBar(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : 
     private var motionEventDownX = 0f
     private var barWidth = 0
 
-    val argb get() = setAlpha(gradientColors[1], alphaValue)
+    var argb
+        get() = setAlpha(gradientColors[1], alphaValue)
+        set(argb) {
+            alphaValue = ensureAlphaWithinRange(getAlpha(argb))
+            rgb = argb
+            fireListener()
+        }
 
-    val rgb get() = gradientColors[1]
+    var rgb
+        get() = gradientColors[1]
+        set(rgb) {
+            gradientColors[0] = clearAlpha(rgb)
+            gradientColors[1] = setAlpha(rgb, MAX_ALPHA)
+            gradientDrawable.colors = gradientColors
+            invalidate()
+        }
 
     var alphaValue = MAX_ALPHA
         private set
@@ -56,8 +69,8 @@ class AlphaSeekBar(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : 
         context.obtainStyledAttributes(attrs, R.styleable.AlphaSeekBar, 0, defStyle).apply {
             thumbRadius = getDimensionPixelSize(R.styleable.AlphaSeekBar_asb_thumbRadius, 0)
             barWidth = getDimensionPixelSize(R.styleable.AlphaSeekBar_asb_barWidth, 0)
+            rgb = getColor(R.styleable.AlphaSeekBar_asb_color, Color.BLACK)
             setBarAlpha(getInteger(R.styleable.AlphaSeekBar_asb_alpha, MAX_ALPHA))
-            setBarColorRgb(getColor(R.styleable.AlphaSeekBar_asb_color, Color.BLACK))
             recycle()
         }
     }
@@ -72,23 +85,10 @@ class AlphaSeekBar(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : 
         invalidate()
     }
 
-    fun setBarColorArgb(argb: Int) {
-        alphaValue = ensureAlphaWithinRange(getAlpha(argb))
-        fireListener()
-        setBarColorRgb(argb)
-    }
-
     private fun ensureAlphaWithinRange(alpha: Int) = when {
         alpha < 0 -> 0
         alpha > MAX_ALPHA -> MAX_ALPHA
         else -> alpha
-    }
-
-    fun setBarColorRgb(rgb: Int) {
-        gradientColors[0] = clearAlpha(rgb)
-        gradientColors[1] = setAlpha(rgb, MAX_ALPHA)
-        gradientDrawable.colors = gradientColors
-        invalidate()
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
