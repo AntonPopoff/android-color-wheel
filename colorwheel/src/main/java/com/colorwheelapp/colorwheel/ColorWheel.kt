@@ -42,7 +42,7 @@ class ColorWheel(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : Vi
 
     var colorChangeListener: ((Int) -> Unit)? = null
 
-    val argb get() = hsvColor.toArgb()
+    val rgb get() = hsvColor.toRgb()
 
     var thumbRadius = 0
         set(value) {
@@ -71,8 +71,8 @@ class ColorWheel(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : Vi
         thumbDrawable.applyInsets(thumbRadius.toFloat())
     }
 
-    fun setColor(argb: Int) {
-        hsvColor.set(argb)
+    fun setColor(rgb: Int) {
+        hsvColor.set(rgb)
         fireColorListener()
         invalidate()
     }
@@ -116,12 +116,12 @@ class ColorWheel(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : Vi
             thumbY + thumbRadius
         )
 
-        thumbDrawable.indicatorColor = hsvColor.toArgb()
+        thumbDrawable.indicatorColor = hsvColor.toRgb()
         thumbDrawable.draw(canvas)
     }
 
     private fun fireColorListener() {
-        colorChangeListener?.invoke(hsvColor.toArgb())
+        colorChangeListener?.invoke(hsvColor.toRgb())
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {

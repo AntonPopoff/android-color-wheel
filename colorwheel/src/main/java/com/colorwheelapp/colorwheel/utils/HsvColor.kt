@@ -28,9 +28,9 @@ class HsvColor(hue: Float = 0f, saturation: Float = 0f, value: Float = 0f) {
         hsvComponents[2] = ensureValueWithinRange(value)
     }
 
-    fun set(argb: Int) = Color.colorToHSV(argb, hsvComponents)
+    fun set(rgb: Int) = Color.colorToHSV(rgb, hsvComponents)
 
-    fun toArgb() = Color.HSVToColor(hsvComponents)
+    fun toRgb() = Color.HSVToColor(hsvComponents)
 }
 
 private fun ensureHueWithinRange(hue: Float) = when {
@@ -38,10 +38,10 @@ private fun ensureHueWithinRange(hue: Float) = when {
     else -> hue % 360
 }
 
-private fun ensureSaturationWithinRange(saturation: Float) = ensureValueWithinRange(saturation)
-
 private fun ensureValueWithinRange(value: Float) = when {
     value < 0f -> 0f
     value > 1f -> 1f
     else -> value
 }
+
+private fun ensureSaturationWithinRange(saturation: Float) = ensureValueWithinRange(saturation)
