@@ -15,7 +15,11 @@ import kotlin.math.*
 private val HUE_COLORS = intArrayOf(Color.RED, Color.YELLOW, Color.GREEN, Color.CYAN, Color.BLUE, Color.MAGENTA, Color.RED)
 private val SATURATION_COLORS = intArrayOf(Color.WHITE, Color.TRANSPARENT)
 
-class ColorWheel constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : View(context, attrs, defStyleAttr) {
+class ColorWheel @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : View(context, attrs, defStyleAttr) {
 
     private val viewConfig = ViewConfiguration.get(context)
 
@@ -60,10 +64,6 @@ class ColorWheel constructor(context: Context, attrs: AttributeSet?, defStyleAtt
         parseAttributes(context, attrs)
         updateThumbInsets()
     }
-
-    constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, R.style.ColorWheelDefaultStyle)
-
-    constructor(context: Context) : this(context, null)
 
     private fun parseAttributes(context: Context, attrs: AttributeSet?) {
         context.obtainStyledAttributes(attrs, R.styleable.ColorWheel, 0, R.style.ColorWheelDefaultStyle).apply {
