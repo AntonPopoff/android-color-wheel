@@ -15,7 +15,7 @@ import kotlin.math.*
 private val HUE_COLORS = intArrayOf(Color.RED, Color.YELLOW, Color.GREEN, Color.CYAN, Color.BLUE, Color.MAGENTA, Color.RED)
 private val SATURATION_COLORS = intArrayOf(Color.WHITE, Color.TRANSPARENT)
 
-class ColorWheel(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : View(context, attrs, defStyleAttr) {
+class ColorWheel constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : View(context, attrs, defStyleAttr) {
 
     private val viewConfig = ViewConfiguration.get(context)
 
@@ -41,7 +41,13 @@ class ColorWheel(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : Vi
 
     var colorChangeListener: ((Int) -> Unit)? = null
 
-    val rgb get() = hsvColor.toRgb()
+    var rgb
+        get() = hsvColor.toRgb()
+        set(rgb) {
+            hsvColor.set(rgb)
+            fireColorListener()
+            invalidate()
+        }
 
     var thumbRadius = 0
         set(value) {
@@ -68,12 +74,6 @@ class ColorWheel(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : Vi
 
     private fun updateThumbInsets() {
         thumbDrawable.applyInsets(thumbRadius.toFloat())
-    }
-
-    fun setColor(rgb: Int) {
-        hsvColor.set(rgb)
-        fireColorListener()
-        invalidate()
     }
 
     override fun onDraw(canvas: Canvas) {
