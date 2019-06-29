@@ -108,8 +108,8 @@ class AlphaSeekBar @JvmOverloads constructor(
         val top = paddingTop + thumbRadius
         val bottom = height - paddingBottom - thumbRadius
 
-        gradientDrawable.cornerRadius = gradientDrawable.bounds.width() / 2f
         gradientDrawable.setBounds(left, top, right, bottom)
+        gradientDrawable.cornerRadius = gradientDrawable.bounds.width() / 2f
         gradientDrawable.draw(canvas)
     }
 
