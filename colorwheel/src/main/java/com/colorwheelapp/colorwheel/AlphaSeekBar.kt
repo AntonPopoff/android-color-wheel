@@ -8,13 +8,9 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewConfiguration
-import com.colorwheelapp.colorwheel.utils.clearAlpha
-import com.colorwheelapp.colorwheel.utils.getAlpha
-import com.colorwheelapp.colorwheel.utils.setAlpha
+import com.colorwheelapp.colorwheel.utils.*
 import kotlin.math.abs
 import kotlin.math.roundToInt
-
-private const val MAX_ALPHA = 255
 
 class AlphaSeekBar @JvmOverloads constructor(
     context: Context,
@@ -30,7 +26,12 @@ class AlphaSeekBar @JvmOverloads constructor(
 
     private var internalAlpha = MAX_ALPHA
     private var motionEventDownX = 0f
-    private var barWidth = 0
+
+    var barWidth = 0
+        set(width) {
+            field = width
+            requestLayout()
+        }
 
     var argb
         get() = setAlpha(gradientColors[1], internalAlpha)
@@ -107,8 +108,8 @@ class AlphaSeekBar @JvmOverloads constructor(
         val top = paddingTop + thumbRadius
         val bottom = height - paddingBottom - thumbRadius
 
-        gradientDrawable.cornerRadius = gradientDrawable.bounds.width() / 2f
         gradientDrawable.setBounds(left, top, right, bottom)
+        gradientDrawable.cornerRadius = gradientDrawable.bounds.width() / 2f
         gradientDrawable.draw(canvas)
     }
 
@@ -180,10 +181,4 @@ class AlphaSeekBar @JvmOverloads constructor(
     }
 
     override fun performClick() = super.performClick()
-}
-
-private fun ensureAlphaWithinRange(alpha: Int) = when {
-    alpha < 0 -> 0
-    alpha > MAX_ALPHA -> MAX_ALPHA
-    else -> alpha
 }
