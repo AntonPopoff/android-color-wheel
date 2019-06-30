@@ -27,10 +27,16 @@ class AlphaSeekBar @JvmOverloads constructor(
     private var internalAlpha = MAX_ALPHA
     private var motionEventDownX = 0f
 
-    var barWidth = 0
+    var barSize = 0
         set(width) {
             field = width
             requestLayout()
+        }
+
+    var cornersRadius = 0f
+        set(radius) {
+            field = radius
+            invalidate()
         }
 
     var argb
@@ -75,7 +81,8 @@ class AlphaSeekBar @JvmOverloads constructor(
     private fun parseAttributes(context: Context, attrs: AttributeSet?, defStyle: Int) {
         context.obtainStyledAttributes(attrs, R.styleable.AlphaSeekBar, 0, defStyle).apply {
             thumbRadius = getDimensionPixelSize(R.styleable.AlphaSeekBar_asb_thumbRadius, 0)
-            barWidth = getDimensionPixelSize(R.styleable.AlphaSeekBar_asb_barWidth, 0)
+            barSize = getDimensionPixelSize(R.styleable.AlphaSeekBar_asb_barSize, 0)
+            cornersRadius = getDimension(R.styleable.AlphaSeekBar_asb_barCornersRadius, 0f)
             internalAlpha = getInteger(R.styleable.AlphaSeekBar_asb_alpha, MAX_ALPHA)
             rgb = getColor(R.styleable.AlphaSeekBar_asb_color, Color.BLACK)
             recycle()
@@ -87,7 +94,7 @@ class AlphaSeekBar @JvmOverloads constructor(
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        val preferredWidth = maxOf(barWidth, thumbRadius * 2)
+        val preferredWidth = maxOf(barSize, thumbRadius * 2)
         val preferredHeight = MeasureSpec.getSize(heightMeasureSpec)
 
         setMeasuredDimension(
@@ -103,13 +110,13 @@ class AlphaSeekBar @JvmOverloads constructor(
     }
 
     private fun drawGradientRect(canvas: Canvas) {
-        val left = paddingLeft + (width - paddingLeft - paddingRight - barWidth) / 2
-        val right = left + barWidth
+        val left = paddingLeft + (width - paddingLeft - paddingRight - barSize) / 2
+        val right = left + barSize
         val top = paddingTop + thumbRadius
         val bottom = height - paddingBottom - thumbRadius
 
         gradientDrawable.setBounds(left, top, right, bottom)
-        gradientDrawable.cornerRadius = gradientDrawable.bounds.width() / 2f
+        gradientDrawable.cornerRadius = cornersRadius
         gradientDrawable.draw(canvas)
     }
 

@@ -7,9 +7,10 @@
 
     <declare-styleable name="AlphaSeekBar">
         <attr name="asb_thumbRadius" format="dimension"/>
-        <attr name="asb_barWidth" format="dimension" />
+        <attr name="asb_barSize" format="dimension" />
         <attr name="asb_alpha" format="integer" />
         <attr name="asb_color" format="color" />
+        <attr name="asb_barCornersRadius" format="dimension"/>
     </declare-styleable>
 
 </resources>
