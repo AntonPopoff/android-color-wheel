@@ -33,6 +33,12 @@ class AlphaSeekBar @JvmOverloads constructor(
             requestLayout()
         }
 
+    var cornersRadius = 0f
+        set(radius) {
+            field = radius
+            invalidate()
+        }
+
     var argb
         get() = setAlpha(gradientColors[1], internalAlpha)
         set(argb) {
@@ -76,6 +82,7 @@ class AlphaSeekBar @JvmOverloads constructor(
         context.obtainStyledAttributes(attrs, R.styleable.AlphaSeekBar, 0, defStyle).apply {
             thumbRadius = getDimensionPixelSize(R.styleable.AlphaSeekBar_asb_thumbRadius, 0)
             barSize = getDimensionPixelSize(R.styleable.AlphaSeekBar_asb_barSize, 0)
+            cornersRadius = getDimension(R.styleable.AlphaSeekBar_asb_barCornersRadius, 0f)
             internalAlpha = getInteger(R.styleable.AlphaSeekBar_asb_alpha, MAX_ALPHA)
             rgb = getColor(R.styleable.AlphaSeekBar_asb_color, Color.BLACK)
             recycle()
@@ -109,7 +116,7 @@ class AlphaSeekBar @JvmOverloads constructor(
         val bottom = height - paddingBottom - thumbRadius
 
         gradientDrawable.setBounds(left, top, right, bottom)
-        gradientDrawable.cornerRadius = gradientDrawable.bounds.width() / 2f
+        gradientDrawable.cornerRadius = cornersRadius
         gradientDrawable.draw(canvas)
     }
 
