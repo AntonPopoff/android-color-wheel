@@ -27,17 +27,30 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         colorIndicator.background = colorIndicatorBackground
         colorWheel.colorChangeListener = this::onColorWheelUpdateListener
-        alphaSeekBar.alphaChangeListener = this::onAlphaSeekBarUpdateListener
+        alphaSeekBar.alphaChangeListener = this::onAlphaSeekBarUpdate
+        horizontalAlphaSeekBar.alphaChangeListener = this::onHorizontalAlphaSeekBarUpdate
         alphaSeekBar.rgb = colorWheel.rgb
+        horizontalAlphaSeekBar.rgb = colorWheel.rgb
         colorIndicatorBackground.setColor(setAlpha(colorWheel.rgb, alphaSeekBar.alphaValue))
     }
 
     private fun onColorWheelUpdateListener(rgb: Int) {
         alphaSeekBar.rgb = rgb
+        horizontalAlphaSeekBar.rgb = colorWheel.rgb
         colorIndicatorBackground.setColor(setAlpha(rgb, alphaSeekBar.alphaValue))
     }
 
-    private fun onAlphaSeekBarUpdateListener(alpha: Int) {
+    private fun onAlphaSeekBarUpdate(alpha: Int) {
         colorIndicatorBackground.setColor(setAlpha(colorWheel.rgb, alpha))
+        horizontalAlphaSeekBar.alphaChangeListener = null
+        horizontalAlphaSeekBar.alphaValue = alpha
+        horizontalAlphaSeekBar.alphaChangeListener = this::onHorizontalAlphaSeekBarUpdate
+    }
+
+    private fun onHorizontalAlphaSeekBarUpdate(alpha: Int) {
+        colorIndicatorBackground.setColor(setAlpha(colorWheel.rgb, alpha))
+        alphaSeekBar.alphaChangeListener = null
+        alphaSeekBar.alphaValue = alpha
+        alphaSeekBar.alphaChangeListener = this::onAlphaSeekBarUpdate
     }
 }
