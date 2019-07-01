@@ -13,10 +13,6 @@ import com.colorwheelapp.colorwheel.ThumbDrawable
 import com.colorwheelapp.colorwheel.utils.*
 import kotlin.math.abs
 
-private const val VERTICAL = 0
-
-private const val HORIZONTAL = 1
-
 class AlphaSeekBar @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
@@ -27,11 +23,19 @@ class AlphaSeekBar @JvmOverloads constructor(
     private val gradientColors = IntArray(2)
     private val thumbDrawable = ThumbDrawable()
     private val gradientDrawable = GradientDrawable()
-    private val orientationStrategy: AlphaSeekBarOrientationStrategy
 
-    private var orientation = VERTICAL
+    private var orientationStrategy: AlphaSeekBarOrientationStrategy
+    private var internalOrientation = Orientation.VERTICAL
     private var internalAlpha = MAX_ALPHA
     private var motionEventDownX = 0f
+
+    var orientation
+        get() = internalOrientation
+        set(orientation) {
+            internalOrientation = orientation
+            orientationStrategy = createOrientationStrategy()
+            requestLayout()
+        }
 
     var barSize = 0
         set(width) {
@@ -92,14 +96,14 @@ class AlphaSeekBar @JvmOverloads constructor(
             cornersRadius = getDimension(R.styleable.AlphaSeekBar_asb_barCornersRadius, 0f)
             internalAlpha = getInteger(R.styleable.AlphaSeekBar_asb_alpha, MAX_ALPHA)
             rgb = getColor(R.styleable.AlphaSeekBar_asb_color, Color.BLACK)
-            orientation = getInt(R.styleable.AlphaSeekBar_asb_orientation, VERTICAL)
+            internalOrientation = Orientation.values()[getInt(R.styleable.AlphaSeekBar_asb_orientation, 0)]
             recycle()
         }
     }
 
     private fun createOrientationStrategy() = when (orientation) {
-        HORIZONTAL -> HorizontalAlphaSeekBar()
-        else -> VerticalAlphaSeekBar()
+        Orientation.VERTICAL -> VerticalAlphaSeekBar()
+        Orientation.HORIZONTAL -> HorizontalAlphaSeekBar()
     }
 
     private fun updateThumbInsets() {
@@ -169,6 +173,8 @@ class AlphaSeekBar @JvmOverloads constructor(
     }
 
     override fun performClick() = super.performClick()
+
+    enum class Orientation { VERTICAL, HORIZONTAL }
 }
 
 fun AlphaSeekBar.setAlphaSilently(alpha: Int) {
