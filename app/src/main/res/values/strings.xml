@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">ColorWheelApp</string>
+    <string name="show_preview_screen">Show Preview Screen</string>
+    <string name="show_test_colorwheel_screen">Show Test ColorWheel Screen</string>
+    <string name="show_test_alphaseekbar_screen">Show Test AlphaSeekBar Screen</string>
 </resources>
