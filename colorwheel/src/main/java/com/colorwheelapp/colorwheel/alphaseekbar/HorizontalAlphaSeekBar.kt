@@ -34,8 +34,8 @@ class HorizontalAlphaSeekBar : AlphaSeekBarOrientationStrategy {
         return rect.apply { set(left, top, right, bottom) }
     }
 
-    override fun calculateThumbBounds(view: AlphaSeekBar, barBounds: Rect, alpha: Int): Rect {
-        val thumbX = convertAlphaToThumbPosition(barBounds, alpha)
+    override fun calculateThumbBounds(view: AlphaSeekBar, barBounds: Rect): Rect {
+        val thumbX = convertAlphaToThumbPosition(barBounds, view.alphaValue)
         val cy = barBounds.centerY()
         val left = thumbX - view.thumbRadius
         val right = thumbX + view.thumbRadius

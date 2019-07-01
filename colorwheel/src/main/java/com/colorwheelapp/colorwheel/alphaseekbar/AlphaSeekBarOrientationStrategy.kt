@@ -13,7 +13,7 @@ interface AlphaSeekBarOrientationStrategy {
 
     fun calculateGradientBounds(view: AlphaSeekBar): Rect
 
-    fun calculateThumbBounds(view: AlphaSeekBar, barBounds: Rect, alpha: Int): Rect
+    fun calculateThumbBounds(view: AlphaSeekBar, barBounds: Rect): Rect
 
     fun calculateAlphaOnMotionEvent(view: AlphaSeekBar, event: MotionEvent, barBounds: Rect): Int
 }

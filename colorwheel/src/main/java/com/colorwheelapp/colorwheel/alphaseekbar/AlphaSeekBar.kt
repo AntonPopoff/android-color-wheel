@@ -115,7 +115,7 @@ class AlphaSeekBar @JvmOverloads constructor(
     }
 
     private fun drawThumb(canvas: Canvas) {
-        thumbDrawable.bounds = strategy.calculateThumbBounds(this, gradientDrawable.bounds, internalAlpha)
+        thumbDrawable.bounds = strategy.calculateThumbBounds(this, gradientDrawable.bounds)
         thumbDrawable.draw(canvas)
     }
 
