@@ -76,6 +76,12 @@ class ColorWheel @JvmOverloads constructor(
         thumbDrawable.applyInsets(thumbRadius.toFloat())
     }
 
+    fun setRgb(r: Int, g: Int, b: Int) {
+        hsvColor.set(r, g, b)
+        fireColorListener()
+        invalidate()
+    }
+
     override fun onDraw(canvas: Canvas) {
         drawColorWheel(canvas)
         drawThumb(canvas)
