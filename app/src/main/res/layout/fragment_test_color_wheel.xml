@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/thumbRadiusText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        android:layout_marginTop="20dp"
+        tools:text="Thumb Radius - 13dp"/>
+
+    <SeekBar
+        android:id="@+id/thumbRadiusSeekBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:padding="8dp"
+        android:max="64"/>
+
+    <TextView
+        android:id="@+id/colorWheelPadding"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        android:layout_marginTop="20dp"
+        tools:text="Color Wheel Padding - 13dp"/>
+
+    <SeekBar
+        android:id="@+id/colorWheelPaddingSeekBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:padding="8dp"
+        android:max="128"/>
+
+    <Button
+        android:id="@+id/randomizeColorButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/randomize_color"
+        android:layout_gravity="center"/>
+
+    <com.colorwheelapp.colorwheel.ColorWheel
+        android:id="@+id/colorWheel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
+        android:padding="16dp"/>
+
+</LinearLayout>

@@ -16,7 +16,7 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         previewScreenButton.setOnClickListener { replaceFragment(PreviewFragment()) }
-        testColorWheelScreenButton.setOnClickListener {  }
+        testColorWheelScreenButton.setOnClickListener { replaceFragment(TestColorWheelFragment()) }
         testAlphaSeekBarScreen.setOnClickListener {  }
     }
 

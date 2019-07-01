@@ -3,4 +3,7 @@
     <string name="show_preview_screen">Show Preview Screen</string>
     <string name="show_test_colorwheel_screen">Show Test ColorWheel Screen</string>
     <string name="show_test_alphaseekbar_screen">Show Test AlphaSeekBar Screen</string>
+    <string name="randomize_color">Randomize Color</string>
+    <string name="thumb_radius">Thumb Radius - %d dp</string>
+    <string name="color_wheel_padding">Color Wheel Padding - %d dp</string>
 </resources>
