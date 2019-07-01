@@ -165,3 +165,10 @@ class AlphaSeekBar @JvmOverloads constructor(
         HORIZONTAL(HorizontalAlphaSeekBar())
     }
 }
+
+fun AlphaSeekBar.setAlphaSilently(alpha: Int) {
+    val listener = this.alphaChangeListener
+    this.alphaChangeListener = null
+    this.alphaValue = alpha
+    this.alphaChangeListener = listener
+}
