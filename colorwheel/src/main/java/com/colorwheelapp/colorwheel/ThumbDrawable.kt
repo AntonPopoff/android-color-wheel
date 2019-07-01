@@ -17,11 +17,16 @@ class ThumbDrawable {
     }
 
     private val colorIndicatorDrawable = ShapeDrawable(OvalShape())
+
     private val thumbDrawable = LayerDrawable(arrayOf(thumbCircle, colorIndicatorDrawable))
 
     var indicatorColor
         get() = colorIndicatorDrawable.paint.color
         set(value) { colorIndicatorDrawable.paint.color = value }
+
+    var bounds
+        get() = thumbDrawable.bounds
+        set(bounds) { thumbDrawable.bounds = bounds }
 
     fun applyInsets(thumbRadius: Float) {
         val colorHInset = (thumbRadius * 0.3f).toInt()

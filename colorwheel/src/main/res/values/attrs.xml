@@ -11,6 +11,10 @@
         <attr name="asb_alpha" format="integer" />
         <attr name="asb_color" format="color" />
         <attr name="asb_barCornersRadius" format="dimension"/>
+        <attr name="asb_orientation" format="enum">
+            <enum name="vertical" value="0" />
+            <enum name="horizontal" value="1" />
+        </attr>
     </declare-styleable>
 
 </resources>
