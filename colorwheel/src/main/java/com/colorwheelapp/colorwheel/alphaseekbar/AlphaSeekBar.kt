@@ -13,6 +13,10 @@ import com.colorwheelapp.colorwheel.ThumbDrawable
 import com.colorwheelapp.colorwheel.utils.*
 import kotlin.math.abs
 
+private const val VERTICAL = 0
+
+private const val HORIZONTAL = 1
+
 class AlphaSeekBar @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
@@ -20,14 +24,14 @@ class AlphaSeekBar @JvmOverloads constructor(
 ) : View(context, attrs, defStyleAttr) {
 
     private val viewConfig = ViewConfiguration.get(context)
-
     private val gradientColors = IntArray(2)
     private val thumbDrawable = ThumbDrawable()
     private val gradientDrawable = GradientDrawable()
+    private val orientationStrategy: AlphaSeekBarOrientationStrategy
 
+    private var orientation = VERTICAL
     private var internalAlpha = MAX_ALPHA
     private var motionEventDownX = 0f
-    private var strategy: AlphaSeekBarOrientationStrategy = Orientation.VERTICAL.strategy
 
     var barSize = 0
         set(width) {
@@ -77,6 +81,7 @@ class AlphaSeekBar @JvmOverloads constructor(
 
     init {
         parseAttributes(context, attrs, R.style.AlphaSeekBarDefaultStyle)
+        orientationStrategy = createOrientationStrategy()
         updateThumbInsets()
     }
 
@@ -87,9 +92,14 @@ class AlphaSeekBar @JvmOverloads constructor(
             cornersRadius = getDimension(R.styleable.AlphaSeekBar_asb_barCornersRadius, 0f)
             internalAlpha = getInteger(R.styleable.AlphaSeekBar_asb_alpha, MAX_ALPHA)
             rgb = getColor(R.styleable.AlphaSeekBar_asb_color, Color.BLACK)
-            strategy = Orientation.values()[getInt(R.styleable.AlphaSeekBar_asb_orientation, 0)].strategy
+            orientation = getInt(R.styleable.AlphaSeekBar_asb_orientation, VERTICAL)
             recycle()
         }
+    }
+
+    private fun createOrientationStrategy() = when (orientation) {
+        HORIZONTAL -> HorizontalAlphaSeekBar()
+        else -> VerticalAlphaSeekBar()
     }
 
     private fun updateThumbInsets() {
@@ -97,25 +107,25 @@ class AlphaSeekBar @JvmOverloads constructor(
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        val dimens = strategy.measure(this, widthMeasureSpec, heightMeasureSpec)
+        val dimens = orientationStrategy.measure(this, widthMeasureSpec, heightMeasureSpec)
         setMeasuredDimension(dimens.width, dimens.height)
     }
 
     override fun onDraw(canvas: Canvas) {
-        gradientDrawable.orientation = strategy.gradientOrientation
+        gradientDrawable.orientation = orientationStrategy.gradientOrientation
         updateIndicatorColor()
         drawGradientRect(canvas)
         drawThumb(canvas)
     }
 
     private fun drawGradientRect(canvas: Canvas) {
-        gradientDrawable.bounds = strategy.calculateGradientBounds(this)
+        gradientDrawable.bounds = orientationStrategy.calculateGradientBounds(this)
         gradientDrawable.cornerRadius = cornersRadius
         gradientDrawable.draw(canvas)
     }
 
     private fun drawThumb(canvas: Canvas) {
-        thumbDrawable.bounds = strategy.calculateThumbBounds(this, gradientDrawable.bounds)
+        thumbDrawable.bounds = orientationStrategy.calculateThumbBounds(this, gradientDrawable.bounds)
         thumbDrawable.draw(canvas)
     }
 
@@ -139,7 +149,7 @@ class AlphaSeekBar @JvmOverloads constructor(
     }
 
     private fun calculateAlphaOnMotionEvent(event: MotionEvent) {
-        internalAlpha = strategy.calculateAlphaOnMotionEvent(this, event, gradientDrawable.bounds)
+        internalAlpha = orientationStrategy.calculateAlphaOnMotionEvent(this, event, gradientDrawable.bounds)
         fireListener()
         invalidate()
     }
@@ -159,11 +169,6 @@ class AlphaSeekBar @JvmOverloads constructor(
     }
 
     override fun performClick() = super.performClick()
-
-    private enum class Orientation(val strategy: AlphaSeekBarOrientationStrategy) {
-        VERTICAL(VerticalAlphaSeekBar()),
-        HORIZONTAL(HorizontalAlphaSeekBar())
-    }
 }
 
 fun AlphaSeekBar.setAlphaSilently(alpha: Int) {
