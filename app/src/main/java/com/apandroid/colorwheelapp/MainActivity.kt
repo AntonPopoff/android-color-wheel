@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
     private fun addMainFragmentIfNotAttached() {
         if (supportFragmentManager.fragments.isEmpty()) {
             supportFragmentManager.beginTransaction()
-                .add(R.id.container, MainFragment())
+                .add(R.id.container, PreviewFragment())
                 .commit()
         }
     }
