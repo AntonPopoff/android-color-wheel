@@ -22,22 +22,15 @@ class HsvColor(hue: Float = 0f, saturation: Float = 0f, value: Float = 0f) {
         get() = hsv[2]
         set(value) { hsv[2] = ensureValueWithinRange(value) }
 
-    fun set(hue: Float, saturation: Float, value: Float) {
+    var rgb
+        get() = Color.HSVToColor(hsv)
+        set(rgb) { Color.colorToHSV(rgb, hsv) }
+
+    fun set(hue: Float = hsv[0], saturation: Float = hsv[1], value: Float = hsv[2]) {
         hsv[0] = ensureHueWithinRange(hue)
         hsv[1] = ensureSaturationWithinRange(saturation)
         hsv[2] = ensureValueWithinRange(value)
     }
-
-    fun set(r: Int, g: Int, b: Int) {
-        set(Color.rgb(r, g, b))
-    }
-
-    fun set(rgb: Int) {
-        Color.colorToHSV(rgb, hsv)
-        value = 1f
-    }
-
-    fun toRgb() = Color.HSVToColor(hsv)
 }
 
 private fun ensureHueWithinRange(hue: Float) = when {

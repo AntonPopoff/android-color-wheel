@@ -46,9 +46,10 @@ class ColorWheel @JvmOverloads constructor(
     var colorChangeListener: ((Int) -> Unit)? = null
 
     var rgb
-        get() = hsvColor.toRgb()
+        get() = hsvColor.rgb
         set(rgb) {
-            hsvColor.set(rgb)
+            hsvColor.rgb = rgb
+            hsvColor.set(value = 1f)
             fireColorListener()
             invalidate()
         }
@@ -77,9 +78,7 @@ class ColorWheel @JvmOverloads constructor(
     }
 
     fun setRgb(r: Int, g: Int, b: Int) {
-        hsvColor.set(r, g, b)
-        fireColorListener()
-        invalidate()
+        rgb = Color.rgb(r, g, b)
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -121,7 +120,7 @@ class ColorWheel @JvmOverloads constructor(
             thumbY + thumbRadius
         )
 
-        thumbDrawable.indicatorColor = hsvColor.toRgb()
+        thumbDrawable.indicatorColor = hsvColor.rgb
         thumbDrawable.draw(canvas)
     }
 
@@ -179,6 +178,6 @@ class ColorWheel @JvmOverloads constructor(
     }
 
     private fun fireColorListener() {
-        colorChangeListener?.invoke(hsvColor.toRgb())
+        colorChangeListener?.invoke(hsvColor.rgb)
     }
 }
