@@ -6,4 +6,12 @@
     <string name="randomize_color">Randomize Color</string>
     <string name="thumb_radius">Thumb Radius - %d dp</string>
     <string name="color_wheel_padding">Color Wheel Padding - %d dp</string>
+    <string name="dp">dp</string>
+    <string name="bar_size">Bar Size:</string>
+    <string name="corner_radius">Corner Radius:</string>
+    <string name="thumb_radius_text">Thumb Radius:</string>
+    <string name="vertical">Vertical</string>
+    <string name="horizontal">Horizontal</string>
+    <string name="randomize_rgb">Randomize RGB</string>
+    <string name="randomize_argb">Randomize ARGB</string>
 </resources>
