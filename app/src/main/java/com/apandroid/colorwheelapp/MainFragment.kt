@@ -17,7 +17,7 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         previewScreenButton.setOnClickListener { replaceFragment(PreviewFragment()) }
         testColorWheelScreenButton.setOnClickListener { replaceFragment(TestColorWheelFragment()) }
-        testAlphaSeekBarScreen.setOnClickListener {  }
+        testAlphaSeekBarScreen.setOnClickListener { replaceFragment(TestAlphaSeekBarColor()) }
     }
 
     private fun replaceFragment(fragment: Fragment) {
