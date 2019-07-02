@@ -28,13 +28,12 @@ class HsvColor(hue: Float = 0f, saturation: Float = 0f, value: Float = 0f) {
         hsv[2] = ensureValueWithinRange(value)
     }
 
-    fun set(rgb: Int) {
-        Color.colorToHSV(rgb, hsv)
-        value = 1f
+    fun set(r: Int, g: Int, b: Int) {
+        set(Color.rgb(r, g, b))
     }
 
-    fun set(r: Int, g: Int, b: Int) {
-        Color.RGBToHSV(r, g, b, hsv)
+    fun set(rgb: Int) {
+        Color.colorToHSV(rgb, hsv)
         value = 1f
     }
 
