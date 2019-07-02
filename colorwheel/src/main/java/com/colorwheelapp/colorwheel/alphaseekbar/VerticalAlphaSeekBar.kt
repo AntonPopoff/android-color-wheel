@@ -17,9 +17,12 @@ class VerticalAlphaSeekBar : AlphaSeekBarOrientationStrategy {
     override val gradientOrientation = GradientDrawable.Orientation.BOTTOM_TOP
 
     override fun measure(view: AlphaSeekBar, widthSpec: Int, heightSpec: Int): ViewDimensions {
+        val preferredWidth = maxOf(view.barSize, view.thumbRadius * 2) + view.paddingStart + view.paddingEnd
+        val preferredHeight = View.MeasureSpec.getSize(heightSpec) + view.paddingTop + view.paddingBottom
+
         return dimens.apply {
-            width = View.resolveSize(maxOf(view.barSize, view.thumbRadius * 2), widthSpec)
-            height = View.resolveSize(View.MeasureSpec.getSize(heightSpec), heightSpec)
+            width = View.resolveSize(preferredWidth, widthSpec)
+            height = View.resolveSize(preferredHeight, heightSpec)
         }
     }
 
