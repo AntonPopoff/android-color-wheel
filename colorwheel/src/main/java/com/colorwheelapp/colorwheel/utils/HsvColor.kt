@@ -4,33 +4,33 @@ import android.graphics.Color
 
 class HsvColor(hue: Float = 0f, saturation: Float = 0f, value: Float = 0f) {
 
-    private val hsvComponents = floatArrayOf(
+    private val hsv = floatArrayOf(
             ensureHueWithinRange(hue),
             ensureSaturationWithinRange(saturation),
             ensureValueWithinRange(value)
     )
 
     var hue
-        get() = hsvComponents[0]
-        set(hue) { hsvComponents[0] = ensureHueWithinRange(hue) }
+        get() = hsv[0]
+        set(hue) { hsv[0] = ensureHueWithinRange(hue) }
 
     var saturation
-        get() = hsvComponents[1]
-        set(saturation) { hsvComponents[1] = ensureSaturationWithinRange(saturation) }
+        get() = hsv[1]
+        set(saturation) { hsv[1] = ensureSaturationWithinRange(saturation) }
 
     var value
-        get() = hsvComponents[2]
-        set(value) { hsvComponents[2] = ensureValueWithinRange(value) }
+        get() = hsv[2]
+        set(value) { hsv[2] = ensureValueWithinRange(value) }
 
-    fun set(hue: Float, saturation: Float, value: Float) {
-        hsvComponents[0] = ensureHueWithinRange(hue)
-        hsvComponents[1] = ensureSaturationWithinRange(saturation)
-        hsvComponents[2] = ensureValueWithinRange(value)
+    var rgb
+        get() = Color.HSVToColor(hsv)
+        set(rgb) { Color.colorToHSV(rgb, hsv) }
+
+    fun set(hue: Float = hsv[0], saturation: Float = hsv[1], value: Float = hsv[2]) {
+        hsv[0] = ensureHueWithinRange(hue)
+        hsv[1] = ensureSaturationWithinRange(saturation)
+        hsv[2] = ensureValueWithinRange(value)
     }
-
-    fun set(rgb: Int) = Color.colorToHSV(rgb, hsvComponents)
-
-    fun toRgb() = Color.HSVToColor(hsvComponents)
 }
 
 private fun ensureHueWithinRange(hue: Float) = when {
