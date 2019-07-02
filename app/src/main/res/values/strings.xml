@@ -14,4 +14,6 @@
     <string name="horizontal">Horizontal</string>
     <string name="randomize_rgb">Randomize RGB</string>
     <string name="randomize_argb">Randomize ARGB</string>
+    <string name="zero">0</string>
+    <string name="alpha_template">Alpha - %d</string>
 </resources>
