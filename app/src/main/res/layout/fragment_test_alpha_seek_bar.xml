@@ -158,7 +158,7 @@
         app:layout_constraintTop_toBottomOf="@id/thumbRadiusDivider" />
 
     <SeekBar
-        android:id="@+id/alphaSeekBar"
+        android:id="@+id/alphaSeekBarController"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -173,7 +173,7 @@
         android:layout_height="1px"
         android:background="@android:color/darker_gray"
         android:layout_marginTop="10dp"
-        app:layout_constraintTop_toBottomOf="@id/alphaSeekBar"
+        app:layout_constraintTop_toBottomOf="@id/alphaSeekBarController"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -245,11 +245,12 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <com.colorwheelapp.colorwheel.alphaseekbar.AlphaSeekBar
-        android:id="@+id/libAlphaSeekBar"
+        android:id="@+id/alphaSeekBar"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
+        android:padding="1dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/randomDivider"
