@@ -52,8 +52,8 @@ class AlphaSeekBar @JvmOverloads constructor(
     var argb
         get() = setAlpha(gradientColors[1], internalAlpha)
         set(argb) {
-            internalAlpha = ensureAlphaWithinRange(getAlpha(argb))
             rgb = argb
+            internalAlpha = getAlpha(argb)
             fireListener()
         }
 

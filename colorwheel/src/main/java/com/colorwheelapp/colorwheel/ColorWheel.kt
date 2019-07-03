@@ -92,7 +92,7 @@ class ColorWheel @JvmOverloads constructor(
 
         wheelCenterX = paddingLeft + hSpace / 2
         wheelCenterY = paddingTop + vSpace / 2
-        wheelRadius = minOf(hSpace, vSpace) / 2
+        wheelRadius = (minOf(hSpace, vSpace) / 2).takeIf { it > 0 } ?: 0
 
         val left = wheelCenterX - wheelRadius
         val top = wheelCenterY - wheelRadius
