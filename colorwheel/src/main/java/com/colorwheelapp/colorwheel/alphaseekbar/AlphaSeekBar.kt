@@ -83,6 +83,8 @@ class AlphaSeekBar @JvmOverloads constructor(
 
     var alphaChangeListener: ((Int) -> Unit)? = null
 
+    var interceptTouchEvent = true
+
     init {
         parseAttributes(context, attrs, R.style.AlphaSeekBarDefaultStyle)
         orientationStrategy = createOrientationStrategy()
@@ -137,6 +139,7 @@ class AlphaSeekBar @JvmOverloads constructor(
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {
                 motionEventDownX = event.x
+                parent.requestDisallowInterceptTouchEvent(interceptTouchEvent)
                 calculateAlphaOnMotionEvent(event)
                 return true
             }
