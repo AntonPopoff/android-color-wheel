@@ -21,8 +21,6 @@ class ColorWheel @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
 
-    private val viewConfig = ViewConfiguration.get(context)
-
     private val hueGradient = GradientDrawable().apply {
         gradientType = GradientDrawable.SWEEP_GRADIENT
         shape = GradientDrawable.OVAL
@@ -35,6 +33,7 @@ class ColorWheel @JvmOverloads constructor(
         colors = SATURATION_COLORS
     }
 
+    private val viewConfig = ViewConfiguration.get(context)
     private val thumbDrawable = ThumbDrawable()
     private val hsvColor = HsvColor(value = 1f)
 
@@ -42,8 +41,6 @@ class ColorWheel @JvmOverloads constructor(
     private var wheelCenterY = 0
     private var wheelRadius = 0
     private var motionEventDownX = 0f
-
-    var colorChangeListener: ((Int) -> Unit)? = null
 
     var rgb
         get() = hsvColor.rgb
@@ -60,6 +57,10 @@ class ColorWheel @JvmOverloads constructor(
             updateThumbInsets()
             invalidate()
         }
+
+    var colorChangeListener: ((Int) -> Unit)? = null
+
+    var interceptTouchEvent = true
 
     init {
         parseAttributes(context, attrs)
@@ -135,6 +136,7 @@ class ColorWheel @JvmOverloads constructor(
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {
                 motionEventDownX = event.x
+                parent.requestDisallowInterceptTouchEvent(interceptTouchEvent)
                 updateColorOnMotionEvent(event)
                 return true
             }
