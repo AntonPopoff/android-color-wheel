@@ -81,6 +81,13 @@ class ColorWheel @JvmOverloads constructor(
         rgb = Color.rgb(r, g, b)
     }
 
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        setMeasuredDimension(
+            resolveSize(MeasureSpec.getSize(widthMeasureSpec), widthMeasureSpec),
+            resolveSize(MeasureSpec.getSize(heightMeasureSpec), heightMeasureSpec)
+        )
+    }
+
     override fun onDraw(canvas: Canvas) {
         drawColorWheel(canvas)
         drawThumb(canvas)
