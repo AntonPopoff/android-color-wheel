@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.fragment_test_alpha_seek_bar.*
 import java.util.*
 import kotlin.math.roundToInt
 
-class TestAlphaSeekBarColor : Fragment() {
+class TestAlphaSeekBarFragment : Fragment() {
 
     private val random by lazy { Random() }
 
