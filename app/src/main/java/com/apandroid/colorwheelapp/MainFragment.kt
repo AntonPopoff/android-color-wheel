@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment : Fragment() {
@@ -21,9 +22,11 @@ class MainFragment : Fragment() {
     }
 
     private fun replaceFragment(fragment: Fragment) {
-        fragmentManager?.beginTransaction()
-            ?.replace(R.id.container, fragment)
-            ?.addToBackStack(null)
-            ?.commit()
+        fragmentManager?.beginTransaction()?.apply {
+            setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+            replace(R.id.container, fragment)
+            addToBackStack(null)
+            commit()
+        }
     }
 }
