@@ -14,7 +14,7 @@ import com.colorwheelapp.colorwheel.ThumbDrawable
 import com.colorwheelapp.colorwheel.utils.interpolateColorLinear
 import kotlin.math.abs
 
-class AlphaSeekBar @JvmOverloads constructor(
+class GradientSeekBar @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
@@ -25,7 +25,7 @@ class AlphaSeekBar @JvmOverloads constructor(
     private val thumbDrawable = ThumbDrawable()
     private val gradientDrawable = GradientDrawable()
 
-    private var orientationStrategy: AlphaSeekBarOrientationStrategy
+    private var orientationStrategy: OrientationStrategy
     private var internalOrientation = Orientation.VERTICAL
     private var internalOffset = 0f
     private var motionEventDownX = 0f
@@ -76,25 +76,25 @@ class AlphaSeekBar @JvmOverloads constructor(
     }
 
     private fun parseAttributes(context: Context, attrs: AttributeSet?, defStyle: Int) {
-        context.obtainStyledAttributes(attrs, R.styleable.AlphaSeekBar, 0, defStyle).apply {
-            thumbRadius = getDimensionPixelSize(R.styleable.AlphaSeekBar_asb_thumbRadius, 0)
-            barSize = getDimensionPixelSize(R.styleable.AlphaSeekBar_asb_barSize, 0)
-            cornersRadius = getDimension(R.styleable.AlphaSeekBar_asb_barCornersRadius, 0f)
-            internalOrientation = Orientation.values()[getInt(R.styleable.AlphaSeekBar_asb_orientation, 0)]
+        context.obtainStyledAttributes(attrs, R.styleable.GradientSeekBar, 0, defStyle).apply {
+            thumbRadius = getDimensionPixelSize(R.styleable.GradientSeekBar_asb_thumbRadius, 0)
+            barSize = getDimensionPixelSize(R.styleable.GradientSeekBar_asb_barSize, 0)
+            cornersRadius = getDimension(R.styleable.GradientSeekBar_asb_barCornersRadius, 0f)
+            internalOrientation = Orientation.values()[getInt(R.styleable.GradientSeekBar_asb_orientation, 0)]
             readGradientColors(this)
             recycle()
         }
     }
 
     private fun readGradientColors(array: TypedArray) {
-        val start = array.getColor(R.styleable.AlphaSeekBar_asb_startColor, Color.TRANSPARENT)
-        val end = array.getColor(R.styleable.AlphaSeekBar_asb_startColor, Color.BLACK)
+        val start = array.getColor(R.styleable.GradientSeekBar_asb_startColor, Color.TRANSPARENT)
+        val end = array.getColor(R.styleable.GradientSeekBar_asb_startColor, Color.BLACK)
         setColors(start, end)
     }
 
     private fun createOrientationStrategy() = when (orientation) {
-        Orientation.VERTICAL -> VerticalAlphaSeekBar()
-        Orientation.HORIZONTAL -> HorizontalAlphaSeekBar()
+        Orientation.VERTICAL -> VerticalStrategy()
+        Orientation.HORIZONTAL -> HorizontalStrategy()
     }
 
     private fun updateThumbInsets() {
@@ -136,14 +136,14 @@ class AlphaSeekBar @JvmOverloads constructor(
             MotionEvent.ACTION_DOWN -> {
                 motionEventDownX = event.x
                 parent.requestDisallowInterceptTouchEvent(interceptTouchEvent)
-                calculateAlphaOnMotionEvent(event)
+                calculateOffsetOnMotionEvent(event)
                 return true
             }
             MotionEvent.ACTION_MOVE -> {
-                calculateAlphaOnMotionEvent(event)
+                calculateOffsetOnMotionEvent(event)
             }
             MotionEvent.ACTION_UP -> {
-                calculateAlphaOnMotionEvent(event)
+                calculateOffsetOnMotionEvent(event)
                 if (isTap(event)) performClick()
             }
         }
@@ -157,7 +157,7 @@ class AlphaSeekBar @JvmOverloads constructor(
         return eventDuration < ViewConfiguration.getTapTimeout() && eventTravelDistance < viewConfig.scaledTouchSlop
     }
 
-    private fun calculateAlphaOnMotionEvent(event: MotionEvent) {
+    private fun calculateOffsetOnMotionEvent(event: MotionEvent) {
         internalOffset = orientationStrategy.calculateOffsetOnMotionEvent(this, event, gradientDrawable.bounds)
         fireListener()
         invalidate()
@@ -174,7 +174,7 @@ class AlphaSeekBar @JvmOverloads constructor(
 
 private fun ensureOffsetWithinRange(offset: Float) = abs(offset % 1f)
 
-fun AlphaSeekBar.setAlphaSilently(alpha: Int) {
+fun GradientSeekBar.setAlphaSilently(alpha: Int) {
 //    val listener = this.alphaChangeListener
 
 //    this.alphaChangeListener = null

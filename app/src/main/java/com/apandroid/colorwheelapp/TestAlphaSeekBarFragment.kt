@@ -1,6 +1,5 @@
 package com.apandroid.colorwheelapp
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,9 +8,7 @@ import android.widget.RadioGroup
 import androidx.fragment.app.Fragment
 import com.apandroid.colorwheelapp.extensions.density
 import com.apandroid.colorwheelapp.extensions.afterTextChanged
-import com.apandroid.colorwheelapp.extensions.setOnProgressChangeListener
-import com.colorwheelapp.colorwheel.alphaseekbar.AlphaSeekBar
-import com.colorwheelapp.colorwheel.alphaseekbar.setAlphaSilently
+import com.colorwheelapp.colorwheel.alphaseekbar.GradientSeekBar
 import kotlinx.android.synthetic.main.fragment_test_alpha_seek_bar.*
 import java.util.*
 import kotlin.math.roundToInt
@@ -73,9 +70,9 @@ class TestAlphaSeekBarFragment : Fragment() {
 
     private fun onOrientationChange(group: RadioGroup, checkedId: Int) {
         if (checkedId == R.id.verticalOrientationButton) {
-            alphaSeekBar.orientation = AlphaSeekBar.Orientation.VERTICAL
+            alphaSeekBar.orientation = GradientSeekBar.Orientation.VERTICAL
         } else if (checkedId == R.id.horizontalOrientationButton) {
-            alphaSeekBar.orientation = AlphaSeekBar.Orientation.HORIZONTAL
+            alphaSeekBar.orientation = GradientSeekBar.Orientation.HORIZONTAL
         }
     }
 

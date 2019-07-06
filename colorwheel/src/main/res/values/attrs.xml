@@ -5,7 +5,7 @@
         <attr name="cw_thumbRadius" format="dimension" />
     </declare-styleable>
 
-    <declare-styleable name="AlphaSeekBar">
+    <declare-styleable name="GradientSeekBar">
         <attr name="asb_thumbRadius" format="dimension"/>
         <attr name="asb_barSize" format="dimension" />
         <!--<attr name="asb_alpha" format="integer" />-->
