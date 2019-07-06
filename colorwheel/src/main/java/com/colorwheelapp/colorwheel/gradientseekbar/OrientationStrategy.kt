@@ -1,4 +1,4 @@
-package com.colorwheelapp.colorwheel.alphaseekbar
+package com.colorwheelapp.colorwheel.gradientseekbar
 
 import android.graphics.Rect
 import android.graphics.drawable.GradientDrawable

@@ -1,4 +1,4 @@
-package com.colorwheelapp.colorwheel.alphaseekbar
+package com.colorwheelapp.colorwheel.gradientseekbar
 
 import android.content.Context
 import android.content.res.TypedArray

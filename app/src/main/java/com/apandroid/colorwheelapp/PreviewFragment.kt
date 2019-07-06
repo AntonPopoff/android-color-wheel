@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.apandroid.colorwheelapp.extensions.density
-import com.colorwheelapp.colorwheel.alphaseekbar.setAlphaSilently
+import com.colorwheelapp.colorwheel.gradientseekbar.setAlphaSilently
 import com.colorwheelapp.colorwheel.utils.setAlpha
 import kotlinx.android.synthetic.main.fragment_preview.*
 

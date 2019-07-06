@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.colorwheelapp.colorwheel.alphaseekbar.GradientSeekBar
+    <com.colorwheelapp.colorwheel.gradientseekbar.GradientSeekBar
         android:id="@+id/alphaSeekBar"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
@@ -40,7 +40,7 @@
         app:layout_constraintHeight_percent="0.1"
         android:background="@android:color/black"/>
 
-    <com.colorwheelapp.colorwheel.alphaseekbar.GradientSeekBar
+    <com.colorwheelapp.colorwheel.gradientseekbar.GradientSeekBar
         android:id="@+id/horizontalAlphaSeekBar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

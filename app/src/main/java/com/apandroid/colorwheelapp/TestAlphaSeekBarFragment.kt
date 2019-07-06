@@ -8,7 +8,7 @@ import android.widget.RadioGroup
 import androidx.fragment.app.Fragment
 import com.apandroid.colorwheelapp.extensions.density
 import com.apandroid.colorwheelapp.extensions.afterTextChanged
-import com.colorwheelapp.colorwheel.alphaseekbar.GradientSeekBar
+import com.colorwheelapp.colorwheel.gradientseekbar.GradientSeekBar
 import kotlinx.android.synthetic.main.fragment_test_alpha_seek_bar.*
 import java.util.*
 import kotlin.math.roundToInt
