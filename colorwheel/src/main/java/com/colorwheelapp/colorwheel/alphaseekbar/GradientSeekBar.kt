@@ -38,6 +38,27 @@ class GradientSeekBar @JvmOverloads constructor(
             requestLayout()
         }
 
+    var offset
+        get() = internalOffset
+        set(offset) {
+            internalOffset = ensureOffsetWithinRange(offset)
+            updateCurrentColor()
+        }
+
+    var startColor
+        get() = gradientColors[0]
+        set(startColor) {
+            gradientColors[0] = startColor
+            updateCurrentColor()
+        }
+
+    var endColor
+        get() = gradientColors[1]
+        set(endColor) {
+            gradientColors[1] = endColor
+            updateCurrentColor()
+        }
+
     var barSize = 0
         set(width) {
             field = width
@@ -50,14 +71,6 @@ class GradientSeekBar @JvmOverloads constructor(
             invalidate()
         }
 
-    var offset
-        get() = internalOffset
-        set(offset) {
-            internalOffset = ensureOffsetWithinRange(offset)
-            fireListener()
-            invalidate()
-        }
-
     var thumbRadius = 0
         set(radius) {
             field = radius
@@ -65,7 +78,10 @@ class GradientSeekBar @JvmOverloads constructor(
             requestLayout()
         }
 
-    var offsetChangeListener: ((Float) -> Unit)? = null
+    var currentColor = 0
+        private set
+
+    var changeListener: ((Float, Int) -> Unit)? = null
 
     var interceptTouchEvent = true
 
@@ -80,6 +96,7 @@ class GradientSeekBar @JvmOverloads constructor(
             thumbRadius = getDimensionPixelSize(R.styleable.GradientSeekBar_asb_thumbRadius, 0)
             barSize = getDimensionPixelSize(R.styleable.GradientSeekBar_asb_barSize, 0)
             cornersRadius = getDimension(R.styleable.GradientSeekBar_asb_barCornersRadius, 0f)
+            internalOffset = ensureOffsetWithinRange(getFloat(R.styleable.GradientSeekBar_asb_offset, 0f))
             internalOrientation = Orientation.values()[getInt(R.styleable.GradientSeekBar_asb_orientation, 0)]
             readGradientColors(this)
             recycle()
@@ -105,7 +122,7 @@ class GradientSeekBar @JvmOverloads constructor(
         gradientColors[0] = startColor
         gradientColors[1] = endColor
         gradientDrawable.colors = gradientColors
-        invalidate()
+        updateCurrentColor()
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
@@ -115,7 +132,7 @@ class GradientSeekBar @JvmOverloads constructor(
 
     override fun onDraw(canvas: Canvas) {
         gradientDrawable.orientation = orientationStrategy.gradientOrientation
-        thumbDrawable.indicatorColor = interpolateColorLinear(gradientColors[0], gradientColors[1], internalOffset)
+        thumbDrawable.indicatorColor = currentColor
         drawGradientRect(canvas)
         drawThumb(canvas)
     }
@@ -151,6 +168,8 @@ class GradientSeekBar @JvmOverloads constructor(
         return super.onTouchEvent(event)
     }
 
+    override fun performClick() = super.performClick()
+
     private fun isTap(event: MotionEvent): Boolean {
         val eventDuration = event.eventTime - event.downTime
         val eventTravelDistance = abs(event.x - motionEventDownX)
@@ -159,15 +178,18 @@ class GradientSeekBar @JvmOverloads constructor(
 
     private fun calculateOffsetOnMotionEvent(event: MotionEvent) {
         internalOffset = orientationStrategy.calculateOffsetOnMotionEvent(this, event, gradientDrawable.bounds)
+        updateCurrentColor()
+    }
+
+    private fun updateCurrentColor() {
+        currentColor = interpolateColorLinear(gradientColors[0], gradientColors[1], internalOffset)
         fireListener()
         invalidate()
     }
 
     private fun fireListener() {
-        offsetChangeListener?.invoke(internalOffset)
+        changeListener?.invoke(internalOffset, currentColor)
     }
-
-    override fun performClick() = super.performClick()
 
     enum class Orientation { VERTICAL, HORIZONTAL }
 }
@@ -175,11 +197,11 @@ class GradientSeekBar @JvmOverloads constructor(
 private fun ensureOffsetWithinRange(offset: Float) = abs(offset % 1f)
 
 fun GradientSeekBar.setAlphaSilently(alpha: Int) {
-//    val listener = this.alphaChangeListener
+//    val changeListener = this.alphaChangeListener
 
 //    this.alphaChangeListener = null
 
 //    this.alphaValue = alpha
 
-//    this.alphaChangeListener = listener
+//    this.alphaChangeListener = changeListener
 }
