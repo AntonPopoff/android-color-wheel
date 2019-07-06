@@ -35,7 +35,7 @@ class HorizontalAlphaSeekBar : AlphaSeekBarOrientationStrategy {
     }
 
     override fun calculateThumbBounds(view: AlphaSeekBar, barBounds: Rect): Rect {
-        val thumbX = convertAlphaToThumbPosition(barBounds, view.alphaValue)
+        val thumbX = (barBounds.left + view.offset * barBounds.width()).roundToInt()
         val cy = barBounds.centerY()
         val left = thumbX - view.thumbRadius
         val right = thumbX + view.thumbRadius
@@ -44,14 +44,9 @@ class HorizontalAlphaSeekBar : AlphaSeekBarOrientationStrategy {
         return rect.apply { set(left, top, right, bottom) }
     }
 
-    private fun convertAlphaToThumbPosition(bounds: Rect, alpha: Int): Int {
-        val alphaNormalized = (alpha.toFloat() / MAX_ALPHA)
-        return (bounds.left + alphaNormalized * bounds.width()).roundToInt()
-    }
-
-    override fun calculateAlphaOnMotionEvent(view: AlphaSeekBar, event: MotionEvent, barBounds: Rect): Int {
+    override fun calculateOffsetOnMotionEvent(view: AlphaSeekBar, event: MotionEvent, barBounds: Rect): Float {
         val relativeThumbX = (ensureMotionEventInBounds(event, barBounds) - barBounds.left).toFloat()
-        return ((relativeThumbX / barBounds.width()) * MAX_ALPHA).roundToInt()
+        return relativeThumbX / barBounds.width()
     }
 
     private fun ensureMotionEventInBounds(event: MotionEvent, bounds: Rect) = when {

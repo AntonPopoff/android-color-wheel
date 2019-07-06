@@ -36,11 +36,11 @@ class TestAlphaSeekBarFragment : Fragment() {
         thumbRadiusEdit.afterTextChanged(this::onThumbRadiusChanged)
         thumbRadiusEdit.setText((alphaSeekBar.thumbRadius / density).roundToInt().toString())
 
-        alphaSeekBarController.progress = alphaSeekBar.alphaValue
-        alphaSeekBarController.setOnProgressChangeListener(this::onAlphaSeekBarControllerChanged)
-        alphaText.text = getString(R.string.alpha_with_value, alphaSeekBar.alphaValue)
-
-        alphaSeekBar.alphaChangeListener = this::onAlphaSeekBarChange
+//        alphaSeekBarController.progress = alphaSeekBar.alphaValue
+//        alphaSeekBarController.setOnProgressChangeListener(this::onAlphaSeekBarControllerChanged)
+//        alphaText.text = getString(R.string.alpha_with_value, alphaSeekBar.alphaValue)
+//
+//        alphaSeekBar.alphaChangeListener = this::onAlphaSeekBarChange
 
         orientationRadioGroup.check(R.id.verticalOrientationButton)
         orientationRadioGroup.setOnCheckedChangeListener(this::onOrientationChange)
@@ -62,13 +62,13 @@ class TestAlphaSeekBarFragment : Fragment() {
     }
 
     private fun onAlphaSeekBarControllerChanged(progress: Int) {
-        alphaText.text = getString(R.string.alpha_with_value, alphaSeekBar.alphaValue)
-        alphaSeekBar.setAlphaSilently(progress)
+//        alphaText.text = getString(R.string.alpha_with_value, alphaSeekBar.alphaValue)
+//        alphaSeekBar.setAlphaSilently(progress)
     }
 
     private fun onAlphaSeekBarChange(alpha: Int) {
-        alphaText.text = getString(R.string.alpha_with_value, alphaSeekBar.alphaValue)
-        alphaSeekBarController.progress = alpha
+//        alphaText.text = getString(R.string.alpha_with_value, alphaSeekBar.alphaValue)
+//        alphaSeekBarController.progress = alpha
     }
 
     private fun onOrientationChange(group: RadioGroup, checkedId: Int) {
@@ -80,10 +80,10 @@ class TestAlphaSeekBarFragment : Fragment() {
     }
 
     private fun randomizeRgb() {
-        alphaSeekBar.rgb = Color.rgb(random.nextInt(255), random.nextInt(255), random.nextInt(255))
+//        alphaSeekBar.rgb = Color.rgb(random.nextInt(255), random.nextInt(255), random.nextInt(255))
     }
 
     private fun randomizeArgb() {
-        alphaSeekBar.argb = Color.argb(random.nextInt(255), random.nextInt(255), random.nextInt(255), random.nextInt(255))
+//        alphaSeekBar.argb = Color.argb(random.nextInt(255), random.nextInt(255), random.nextInt(255), random.nextInt(255))
     }
 }

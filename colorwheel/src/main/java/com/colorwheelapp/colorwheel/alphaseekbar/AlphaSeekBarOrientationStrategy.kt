@@ -15,5 +15,5 @@ interface AlphaSeekBarOrientationStrategy {
 
     fun calculateThumbBounds(view: AlphaSeekBar, barBounds: Rect): Rect
 
-    fun calculateAlphaOnMotionEvent(view: AlphaSeekBar, event: MotionEvent, barBounds: Rect): Int
+    fun calculateOffsetOnMotionEvent(view: AlphaSeekBar, event: MotionEvent, barBounds: Rect): Float
 }

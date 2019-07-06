@@ -8,9 +8,11 @@
     <declare-styleable name="AlphaSeekBar">
         <attr name="asb_thumbRadius" format="dimension"/>
         <attr name="asb_barSize" format="dimension" />
-        <attr name="asb_alpha" format="integer" />
-        <attr name="asb_color" format="color" />
+        <!--<attr name="asb_alpha" format="integer" />-->
+        <!--<attr name="asb_color" format="color" />-->
         <attr name="asb_barCornersRadius" format="dimension"/>
+        <attr name="asb_startColor" format="color" />
+        <attr name="asb_endColor" format="color" />
         <attr name="asb_orientation" format="enum">
             <enum name="vertical" value="0" />
             <enum name="horizontal" value="1" />

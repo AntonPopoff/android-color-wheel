@@ -1,6 +1,7 @@
 package com.colorwheelapp.colorwheel.alphaseekbar
 
 import android.content.Context
+import android.content.res.TypedArray
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
@@ -10,7 +11,7 @@ import android.view.View
 import android.view.ViewConfiguration
 import com.colorwheelapp.colorwheel.R
 import com.colorwheelapp.colorwheel.ThumbDrawable
-import com.colorwheelapp.colorwheel.utils.*
+import com.colorwheelapp.colorwheel.utils.interpolateColorLinear
 import kotlin.math.abs
 
 class AlphaSeekBar @JvmOverloads constructor(
@@ -26,7 +27,7 @@ class AlphaSeekBar @JvmOverloads constructor(
 
     private var orientationStrategy: AlphaSeekBarOrientationStrategy
     private var internalOrientation = Orientation.VERTICAL
-    private var internalAlpha = MAX_ALPHA
+    private var internalOffset = 0f
     private var motionEventDownX = 0f
 
     var orientation
@@ -49,27 +50,10 @@ class AlphaSeekBar @JvmOverloads constructor(
             invalidate()
         }
 
-    var argb
-        get() = setAlpha(gradientColors[1], internalAlpha)
-        set(argb) {
-            rgb = argb
-            internalAlpha = getAlpha(argb)
-            fireListener()
-        }
-
-    var rgb
-        get() = gradientColors[1]
-        set(rgb) {
-            gradientColors[0] = clearAlpha(rgb)
-            gradientColors[1] = setAlpha(rgb, MAX_ALPHA)
-            gradientDrawable.colors = gradientColors
-            invalidate()
-        }
-
-    var alphaValue
-        get() = internalAlpha
-        set(alpha) {
-            internalAlpha = ensureAlphaWithinRange(alpha)
+    var offset
+        get() = internalOffset
+        set(offset) {
+            internalOffset = ensureOffsetWithinRange(offset)
             fireListener()
             invalidate()
         }
@@ -81,7 +65,7 @@ class AlphaSeekBar @JvmOverloads constructor(
             requestLayout()
         }
 
-    var alphaChangeListener: ((Int) -> Unit)? = null
+    var offsetChangeListener: ((Float) -> Unit)? = null
 
     var interceptTouchEvent = true
 
@@ -96,11 +80,16 @@ class AlphaSeekBar @JvmOverloads constructor(
             thumbRadius = getDimensionPixelSize(R.styleable.AlphaSeekBar_asb_thumbRadius, 0)
             barSize = getDimensionPixelSize(R.styleable.AlphaSeekBar_asb_barSize, 0)
             cornersRadius = getDimension(R.styleable.AlphaSeekBar_asb_barCornersRadius, 0f)
-            internalAlpha = getInteger(R.styleable.AlphaSeekBar_asb_alpha, MAX_ALPHA)
-            rgb = getColor(R.styleable.AlphaSeekBar_asb_color, Color.BLACK)
             internalOrientation = Orientation.values()[getInt(R.styleable.AlphaSeekBar_asb_orientation, 0)]
+            readGradientColors(this)
             recycle()
         }
+    }
+
+    private fun readGradientColors(array: TypedArray) {
+        val start = array.getColor(R.styleable.AlphaSeekBar_asb_startColor, Color.TRANSPARENT)
+        val end = array.getColor(R.styleable.AlphaSeekBar_asb_startColor, Color.BLACK)
+        setColors(start, end)
     }
 
     private fun createOrientationStrategy() = when (orientation) {
@@ -112,6 +101,13 @@ class AlphaSeekBar @JvmOverloads constructor(
         thumbDrawable.applyInsets(thumbRadius.toFloat())
     }
 
+    fun setColors(startColor: Int = gradientColors[0], endColor: Int = gradientColors[1]) {
+        gradientColors[0] = startColor
+        gradientColors[1] = endColor
+        gradientDrawable.colors = gradientColors
+        invalidate()
+    }
+
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         val dimens = orientationStrategy.measure(this, widthMeasureSpec, heightMeasureSpec)
         setMeasuredDimension(dimens.width, dimens.height)
@@ -119,7 +115,7 @@ class AlphaSeekBar @JvmOverloads constructor(
 
     override fun onDraw(canvas: Canvas) {
         gradientDrawable.orientation = orientationStrategy.gradientOrientation
-        updateIndicatorColor()
+        thumbDrawable.indicatorColor = interpolateColorLinear(gradientColors[0], gradientColors[1], internalOffset)
         drawGradientRect(canvas)
         drawThumb(canvas)
     }
@@ -155,24 +151,20 @@ class AlphaSeekBar @JvmOverloads constructor(
         return super.onTouchEvent(event)
     }
 
-    private fun calculateAlphaOnMotionEvent(event: MotionEvent) {
-        internalAlpha = orientationStrategy.calculateAlphaOnMotionEvent(this, event, gradientDrawable.bounds)
-        fireListener()
-        invalidate()
-    }
-
-    private fun updateIndicatorColor() {
-        thumbDrawable.indicatorColor = setAlpha(gradientColors[1], internalAlpha)
-    }
-
     private fun isTap(event: MotionEvent): Boolean {
         val eventDuration = event.eventTime - event.downTime
         val eventTravelDistance = abs(event.x - motionEventDownX)
         return eventDuration < ViewConfiguration.getTapTimeout() && eventTravelDistance < viewConfig.scaledTouchSlop
     }
 
+    private fun calculateAlphaOnMotionEvent(event: MotionEvent) {
+        internalOffset = orientationStrategy.calculateOffsetOnMotionEvent(this, event, gradientDrawable.bounds)
+        fireListener()
+        invalidate()
+    }
+
     private fun fireListener() {
-        alphaChangeListener?.invoke(internalAlpha)
+        offsetChangeListener?.invoke(internalOffset)
     }
 
     override fun performClick() = super.performClick()
@@ -180,9 +172,14 @@ class AlphaSeekBar @JvmOverloads constructor(
     enum class Orientation { VERTICAL, HORIZONTAL }
 }
 
+private fun ensureOffsetWithinRange(offset: Float) = abs(offset % 1f)
+
 fun AlphaSeekBar.setAlphaSilently(alpha: Int) {
-    val listener = this.alphaChangeListener
-    this.alphaChangeListener = null
-    this.alphaValue = alpha
-    this.alphaChangeListener = listener
+//    val listener = this.alphaChangeListener
+
+//    this.alphaChangeListener = null
+
+//    this.alphaValue = alpha
+
+//    this.alphaChangeListener = listener
 }
