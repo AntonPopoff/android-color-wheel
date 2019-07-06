@@ -38,7 +38,7 @@ class TestAlphaSeekBarFragment : Fragment() {
 
         alphaSeekBarController.progress = alphaSeekBar.alphaValue
         alphaSeekBarController.setOnProgressChangeListener(this::onAlphaSeekBarControllerChanged)
-        alphaText.text = getString(R.string.alpha_template, alphaSeekBar.alphaValue)
+        alphaText.text = getString(R.string.alpha_with_value, alphaSeekBar.alphaValue)
 
         alphaSeekBar.alphaChangeListener = this::onAlphaSeekBarChange
 
@@ -62,12 +62,12 @@ class TestAlphaSeekBarFragment : Fragment() {
     }
 
     private fun onAlphaSeekBarControllerChanged(progress: Int) {
-        alphaText.text = getString(R.string.alpha_template, alphaSeekBar.alphaValue)
+        alphaText.text = getString(R.string.alpha_with_value, alphaSeekBar.alphaValue)
         alphaSeekBar.setAlphaSilently(progress)
     }
 
     private fun onAlphaSeekBarChange(alpha: Int) {
-        alphaText.text = getString(R.string.alpha_template, alphaSeekBar.alphaValue)
+        alphaText.text = getString(R.string.alpha_with_value, alphaSeekBar.alphaValue)
         alphaSeekBarController.progress = alpha
     }
 

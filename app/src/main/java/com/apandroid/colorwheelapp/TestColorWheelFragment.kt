@@ -36,7 +36,7 @@ class TestColorWheelFragment : Fragment() {
     private fun onColorWheelPaddingSeekBarChange(progress: Int) {
         val padding = (progress * density).roundToInt()
         colorWheel.setPadding(padding, padding, padding, padding)
-        colorWheelPadding.text = getString(R.string.color_wheel_padding, progress)
+        colorWheelPadding.text = getString(R.string.color_wheel_padding_with_value, progress)
     }
 
     private fun randomizeColorWheelColor() {

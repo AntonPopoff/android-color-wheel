@@ -4,8 +4,8 @@
     <string name="show_test_colorwheel_screen">Show Test ColorWheel Screen</string>
     <string name="show_test_alphaseekbar_screen">Show Test AlphaSeekBar Screen</string>
     <string name="randomize_color">Randomize Color</string>
-    <string name="thumb_radius">Thumb Radius - %d dp</string>
-    <string name="color_wheel_padding">Color Wheel Padding - %d dp</string>
+    <string name="thumb_radius_with_value">Thumb Radius - %d dp</string>
+    <string name="color_wheel_padding_with_value">Color Wheel Padding - %d dp</string>
     <string name="dp">dp</string>
     <string name="bar_size">Bar Size:</string>
     <string name="corner_radius">Corner Radius:</string>
@@ -15,5 +15,5 @@
     <string name="randomize_rgb">Randomize RGB</string>
     <string name="randomize_argb">Randomize ARGB</string>
     <string name="zero">0</string>
-    <string name="alpha_template">Alpha - %d</string>
+    <string name="alpha_with_value">Alpha - %d</string>
 </resources>
