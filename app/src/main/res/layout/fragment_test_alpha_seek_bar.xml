@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/barSizeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/bar_size"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/barSizeEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="3"
+            android:maxLength="2"
+            android:inputType="number"
+            android:textAlignment="center"
+            android:layout_marginStart="8dp"
+            android:hint="@string/zero"
+            app:layout_constraintBaseline_toBaselineOf="@id/barSizeText"
+            app:layout_constraintStart_toEndOf="@id/textViewBarrier" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:text="@string/dp"
+            android:layout_marginStart="4dp"
+            app:layout_constraintBaseline_toBaselineOf="@id/barSizeEdit"
+            app:layout_constraintStart_toEndOf="@id/barSizeEdit" />
+
+        <View
+            android:id="@+id/barSizeDivider"
+            android:layout_width="wrap_content"
+            android:layout_height="1px"
+            android:background="@android:color/darker_gray"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/barSizeEdit"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/cornerRadiusText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/corner_radius"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/barSizeDivider"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/cornerRadiusEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="3"
+            android:maxLength="2"
+            android:inputType="number"
+            android:textAlignment="center"
+            android:layout_marginStart="8dp"
+            android:hint="@string/zero"
+            app:layout_constraintBaseline_toBaselineOf="@id/cornerRadiusText"
+            app:layout_constraintStart_toEndOf="@id/textViewBarrier" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dp"
+            android:layout_marginStart="4dp"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@id/cornerRadiusEdit"
+            app:layout_constraintBaseline_toBaselineOf="@id/cornerRadiusEdit" />
+
+        <View
+            android:id="@+id/cornerRadiusDivider"
+            android:layout_width="wrap_content"
+            android:layout_height="1px"
+            android:background="@android:color/darker_gray"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/cornerRadiusEdit"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/thumbRadiusText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/thumb_radius_text"
+            android:layout_marginTop="8dp"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cornerRadiusDivider" />
+
+        <EditText
+            android:id="@+id/thumbRadiusEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="3"
+            android:maxLength="2"
+            android:inputType="number"
+            android:textAlignment="center"
+            android:layout_marginStart="8dp"
+            android:hint="@string/zero"
+            app:layout_constraintBaseline_toBaselineOf="@id/thumbRadiusText"
+            app:layout_constraintStart_toEndOf="@id/textViewBarrier" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dp"
+            android:layout_marginStart="4dp"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@id/thumbRadiusEdit"
+            app:layout_constraintBaseline_toBaselineOf="@id/thumbRadiusEdit" />
+
+        <View
+            android:id="@+id/thumbRadiusDivider"
+            android:layout_width="wrap_content"
+            android:layout_height="1px"
+            android:background="@android:color/darker_gray"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/thumbRadiusEdit"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/textViewBarrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="end"
+            app:constraint_referenced_ids="barSizeText,cornerRadiusText,thumbRadiusText"/>
+
+        <TextView
+            android:id="@+id/alphaText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            tools:text="Alpha - 255"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/thumbRadiusDivider" />
+
+        <SeekBar
+            android:id="@+id/alphaSeekBarController"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:max="255"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/alphaText"/>
+
+        <View
+            android:id="@+id/alphaDivider"
+            android:layout_width="wrap_content"
+            android:layout_height="1px"
+            android:background="@android:color/darker_gray"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/alphaSeekBarController"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <RadioGroup
+            android:id="@+id/orientationRadioGroup"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/alphaDivider"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <RadioButton
+                android:id="@+id/verticalOrientationButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/vertical"
+                android:checked="true"/>
+
+            <RadioButton
+                android:id="@+id/horizontalOrientationButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/horizontal" />
+
+        </RadioGroup>
+
+        <View
+            android:id="@+id/orientationDivider"
+            android:layout_width="wrap_content"
+            android:layout_height="1px"
+            android:background="@android:color/darker_gray"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/orientationRadioGroup"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <Button
+            android:id="@+id/randomizeRgbButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/randomize_rgb"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/orientationDivider"
+            app:layout_constraintEnd_toStartOf="@id/randomizeArgbButton"/>
+
+        <Button
+            android:id="@+id/randomizeArgbButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/randomize_argb"
+            app:layout_constraintStart_toEndOf="@id/randomizeRgbButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/randomizeRgbButton"
+            app:layout_constraintBottom_toBottomOf="@id/randomizeRgbButton"/>
+
+        <View
+            android:id="@+id/randomDivider"
+            android:layout_width="wrap_content"
+            android:layout_height="1px"
+            android:background="@android:color/darker_gray"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/randomizeRgbButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <com.colorwheelapp.colorwheel.alphaseekbar.AlphaSeekBar
+            android:id="@+id/alphaSeekBar"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:padding="1dp"
+            app:layout_constraintHeight_percent="0.4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/randomDivider"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

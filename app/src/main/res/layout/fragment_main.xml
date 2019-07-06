@@ -2,53 +2,43 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.colorwheelapp.colorwheel.alphaseekbar.AlphaSeekBar
-        android:id="@+id/alphaSeekBar"
+    <Button
+        android:id="@+id/previewScreenButton"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/colorWheel"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHeight_percent="0.55" />
-
-    <com.colorwheelapp.colorwheel.ColorWheel
-        android:id="@+id/colorWheel"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:padding="16dp"
-        app:layout_constraintWidth_percent="0.8"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/alphaSeekBar"
-        app:layout_constraintBottom_toBottomOf="@id/alphaSeekBar"/>
-
-    <View
-        android:id="@+id/colorIndicator"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/colorWheel"
-        app:layout_constraintHeight_percent="0.1"
-        android:background="@android:color/black"/>
-
-    <com.colorwheelapp.colorwheel.alphaseekbar.AlphaSeekBar
-        android:id="@+id/horizontalAlphaSeekBar"
-        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:asb_orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="@id/colorWheel"
-        app:layout_constraintStart_toStartOf="@id/colorWheel"
-        app:layout_constraintTop_toBottomOf="@id/colorWheel"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        android:text="@string/show_preview_screen"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/testColorWheelScreenButton"/>
+
+    <Button
+        android:id="@+id/testColorWheelScreenButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/show_test_colorwheel_screen"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/previewScreenButton"
+        app:layout_constraintBottom_toTopOf="@id/testAlphaSeekBarScreenButton"/>
+
+    <Button
+        android:id="@+id/testAlphaSeekBarScreenButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/show_test_alphaseekbar_screen"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/testColorWheelScreenButton"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
