@@ -33,9 +33,9 @@ class TestAlphaSeekBarFragment : Fragment() {
         thumbRadiusEdit.afterTextChanged(this::onThumbRadiusChanged)
         thumbRadiusEdit.setText((alphaSeekBar.thumbRadius / density).roundToInt().toString())
 
-//        alphaSeekBarController.progress = alphaSeekBar.alphaValue
+//        alphaSeekBarController.progress = alphaSeekBar.currentAlpha
 //        alphaSeekBarController.setOnProgressChangeListener(this::onAlphaSeekBarControllerChanged)
-//        alphaText.text = getString(R.string.alpha_with_value, alphaSeekBar.alphaValue)
+//        alphaText.text = getString(R.string.alpha_with_value, alphaSeekBar.currentAlpha)
 //
 //        alphaSeekBar.alphaChangeListener = this::onAlphaSeekBarChange
 
@@ -59,12 +59,12 @@ class TestAlphaSeekBarFragment : Fragment() {
     }
 
     private fun onAlphaSeekBarControllerChanged(progress: Int) {
-//        alphaText.text = getString(R.string.alpha_with_value, alphaSeekBar.alphaValue)
+//        alphaText.text = getString(R.string.alpha_with_value, alphaSeekBar.currentAlpha)
 //        alphaSeekBar.setAlphaSilently(progress)
     }
 
     private fun onAlphaSeekBarChange(alpha: Int) {
-//        alphaText.text = getString(R.string.alpha_with_value, alphaSeekBar.alphaValue)
+//        alphaText.text = getString(R.string.alpha_with_value, alphaSeekBar.currentAlpha)
 //        alphaSeekBarController.progress = alpha
     }
 

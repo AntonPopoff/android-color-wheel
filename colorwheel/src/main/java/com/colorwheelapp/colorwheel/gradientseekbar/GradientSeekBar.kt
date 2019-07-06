@@ -11,8 +11,11 @@ import android.view.View
 import android.view.ViewConfiguration
 import com.colorwheelapp.colorwheel.R
 import com.colorwheelapp.colorwheel.ThumbDrawable
+import com.colorwheelapp.colorwheel.utils.MAX_ALPHA
 import com.colorwheelapp.colorwheel.utils.interpolateColorLinear
+import com.colorwheelapp.colorwheel.utils.setAlphaComponent
 import kotlin.math.abs
+import kotlin.math.roundToInt
 
 class GradientSeekBar @JvmOverloads constructor(
     context: Context,
@@ -81,7 +84,7 @@ class GradientSeekBar @JvmOverloads constructor(
     var currentColor = 0
         private set
 
-    var changeListener: ((Float, Int) -> Unit)? = null
+    var listener: ((Float, Int) -> Unit)? = null
 
     var interceptTouchEvent = true
 
@@ -188,20 +191,44 @@ class GradientSeekBar @JvmOverloads constructor(
     }
 
     private fun fireListener() {
-        changeListener?.invoke(internalOffset, currentColor)
+        listener?.invoke(internalOffset, currentColor)
     }
 
     enum class Orientation { VERTICAL, HORIZONTAL }
 }
 
-private fun ensureOffsetWithinRange(offset: Float) = abs(offset % 1f)
+var GradientSeekBar.currentAlpha
+    get() = (this.offset * MAX_ALPHA).roundToInt()
+    set(alpha) { this.offset = ensureAlphaWithinRange(alpha) / MAX_ALPHA.toFloat() }
 
 fun GradientSeekBar.setAlphaSilently(alpha: Int) {
-//    val changeListener = this.alphaChangeListener
+    val listener = this.listener
+    this.listener = null
+    this.currentAlpha = alpha
+    this.listener = listener
+}
 
-//    this.alphaChangeListener = null
+fun GradientSeekBar.setAlphaArgb(argb: Int) {
+    this.offset = Color.alpha(argb) / MAX_ALPHA.toFloat()
+    this.setColors(setAlphaComponent(argb, 0), setAlphaComponent(argb, 255))
+}
 
-//    this.alphaValue = alpha
+fun GradientSeekBar.setAlphaRgb(rgb: Int) {
+    this.setColors(setAlphaComponent(rgb, 0), setAlphaComponent(rgb, 255))
+}
 
-//    this.alphaChangeListener = changeListener
+fun GradientSeekBar.setAlphaListener(listener: (Int) -> Unit) {
+    this.listener = { _, _ -> listener(this.currentAlpha) }
+}
+
+private fun ensureOffsetWithinRange(offset: Float) = when {
+    offset < 0f -> 0f
+    offset > 1f -> 1f
+    else -> offset
+}
+
+private fun ensureAlphaWithinRange(alpha: Int) = when {
+    alpha < 0 -> 0
+    alpha > MAX_ALPHA -> MAX_ALPHA
+    else -> alpha
 }
