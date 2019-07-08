@@ -11,7 +11,7 @@ import com.apandroid.colorwheelapp.extensions.density
 import com.colorwheelapp.colorwheel.gradientseekbar.currentAlpha
 import com.colorwheelapp.colorwheel.gradientseekbar.setAlphaListener
 import com.colorwheelapp.colorwheel.gradientseekbar.setAlphaRgb
-import com.colorwheelapp.colorwheel.gradientseekbar.setAlphaSilently
+import com.colorwheelapp.colorwheel.gradientseekbar.setValueColor
 import com.colorwheelapp.colorwheel.utils.setAlphaComponent
 import kotlinx.android.synthetic.main.fragment_preview.*
 
@@ -31,31 +31,29 @@ class PreviewFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        colorIndicator.background = colorIndicatorBackground
-        colorIndicatorBackground.setColor(alphaSeekBar.currentColor)
-
         colorWheel.colorChangeListener = this::onColorWheelUpdateListener
 
         alphaSeekBar.setAlphaRgb(colorWheel.rgb)
         alphaSeekBar.setAlphaListener(this::onAlphaSeekBarUpdate)
 
-        horizontalAlphaSeekBar.setAlphaRgb(colorWheel.rgb)
-        horizontalAlphaSeekBar.setAlphaListener(this::onHorizontalAlphaSeekBarUpdate)
+        valueSeekBar.setValueColor(colorWheel.rgb)
+        valueSeekBar.listener = this::onValueSeekBarUpdate
+
+        colorIndicator.background = colorIndicatorBackground
+        colorIndicatorBackground.setColor(setAlphaComponent(valueSeekBar.currentColor, alphaSeekBar.currentAlpha))
     }
 
     private fun onColorWheelUpdateListener(rgb: Int) {
         alphaSeekBar.setAlphaRgb(rgb)
-        horizontalAlphaSeekBar.setAlphaRgb(rgb)
-        colorIndicatorBackground.setColor(alphaSeekBar.currentColor)
+        valueSeekBar.setValueColor(rgb)
+        colorIndicatorBackground.setColor(setAlphaComponent(valueSeekBar.currentColor, alphaSeekBar.currentAlpha))
     }
 
     private fun onAlphaSeekBarUpdate(offset: Float, color: Int, alpha: Int) {
-        colorIndicatorBackground.setColor(color)
-        horizontalAlphaSeekBar.setAlphaSilently(alpha)
+        colorIndicatorBackground.setColor(setAlphaComponent(valueSeekBar.currentColor, alpha))
     }
 
-    private fun onHorizontalAlphaSeekBarUpdate(offset: Float, color: Int, alpha: Int) {
-        colorIndicatorBackground.setColor(color)
-        alphaSeekBar.setAlphaSilently(alpha)
+    private fun onValueSeekBarUpdate(offset: Float, color: Int) {
+        colorIndicatorBackground.setColor(setAlphaComponent(color, alphaSeekBar.currentAlpha))
     }
 }

@@ -41,7 +41,7 @@
         android:background="@android:color/black"/>
 
     <com.colorwheelapp.colorwheel.gradientseekbar.GradientSeekBar
-        android:id="@+id/horizontalAlphaSeekBar"
+        android:id="@+id/valueSeekBar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
