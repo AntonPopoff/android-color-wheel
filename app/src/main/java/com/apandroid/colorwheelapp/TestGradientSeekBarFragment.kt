@@ -1,5 +1,6 @@
 package com.apandroid.colorwheelapp
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,12 +9,13 @@ import android.widget.RadioGroup
 import androidx.fragment.app.Fragment
 import com.apandroid.colorwheelapp.extensions.density
 import com.apandroid.colorwheelapp.extensions.afterTextChanged
-import com.colorwheelapp.colorwheel.gradientseekbar.GradientSeekBar
+import com.apandroid.colorwheelapp.extensions.setOnProgressChangeListener
+import com.colorwheelapp.colorwheel.gradientseekbar.*
 import kotlinx.android.synthetic.main.fragment_test_alpha_seek_bar.*
 import java.util.*
 import kotlin.math.roundToInt
 
-class TestAlphaSeekBarFragment : Fragment() {
+class TestGradientSeekBarFragment : Fragment() {
 
     private val random by lazy { Random() }
 
@@ -33,11 +35,11 @@ class TestAlphaSeekBarFragment : Fragment() {
         thumbRadiusEdit.afterTextChanged(this::onThumbRadiusChanged)
         thumbRadiusEdit.setText((alphaSeekBar.thumbRadius / density).roundToInt().toString())
 
-//        alphaSeekBarController.progress = alphaSeekBar.currentAlpha
-//        alphaSeekBarController.setOnProgressChangeListener(this::onAlphaSeekBarControllerChanged)
-//        alphaText.text = getString(R.string.alpha_with_value, alphaSeekBar.currentAlpha)
-//
-//        alphaSeekBar.alphaChangeListener = this::onAlphaSeekBarChange
+        alphaSeekBarController.progress = alphaSeekBar.currentAlpha
+        alphaSeekBarController.setOnProgressChangeListener(this::onAlphaSeekBarControllerChanged)
+        alphaText.text = getString(R.string.alpha_with_value, alphaSeekBar.currentAlpha)
+
+        alphaSeekBar.setAlphaListener(this::onAlphaSeekBarChange)
 
         orientationRadioGroup.check(R.id.verticalOrientationButton)
         orientationRadioGroup.setOnCheckedChangeListener(this::onOrientationChange)
@@ -59,13 +61,13 @@ class TestAlphaSeekBarFragment : Fragment() {
     }
 
     private fun onAlphaSeekBarControllerChanged(progress: Int) {
-//        alphaText.text = getString(R.string.alpha_with_value, alphaSeekBar.currentAlpha)
-//        alphaSeekBar.setAlphaSilently(progress)
+        alphaText.text = getString(R.string.alpha_with_value, alphaSeekBar.currentAlpha)
+        alphaSeekBar.setAlphaSilently(progress)
     }
 
-    private fun onAlphaSeekBarChange(alpha: Int) {
-//        alphaText.text = getString(R.string.alpha_with_value, alphaSeekBar.currentAlpha)
-//        alphaSeekBarController.progress = alpha
+    private fun onAlphaSeekBarChange(offset: Float, color: Int, alpha: Int) {
+        alphaText.text = getString(R.string.alpha_with_value, alphaSeekBar.currentAlpha)
+        alphaSeekBarController.progress = alpha
     }
 
     private fun onOrientationChange(group: RadioGroup, checkedId: Int) {
@@ -77,10 +79,19 @@ class TestAlphaSeekBarFragment : Fragment() {
     }
 
     private fun randomizeRgb() {
-//        alphaSeekBar.rgb = Color.rgb(random.nextInt(255), random.nextInt(255), random.nextInt(255))
+        alphaSeekBar.setAlphaRgb(Color.rgb(
+            random.nextInt(255),
+            random.nextInt(255),
+            random.nextInt(255))
+        )
     }
 
     private fun randomizeArgb() {
-//        alphaSeekBar.argb = Color.argb(random.nextInt(255), random.nextInt(255), random.nextInt(255), random.nextInt(255))
+        alphaSeekBar.setAlphaArgb(Color.argb(
+            random.nextInt(255),
+            random.nextInt(255),
+            random.nextInt(255),
+            random.nextInt(255))
+        )
     }
 }
