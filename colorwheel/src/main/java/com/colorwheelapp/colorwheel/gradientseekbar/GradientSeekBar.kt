@@ -209,7 +209,7 @@ fun GradientSeekBar.setAlphaSilently(alpha: Int) {
 }
 
 fun GradientSeekBar.setAlphaArgb(argb: Int) {
-    this.offset = Color.alpha(argb) / MAX_ALPHA.toFloat()
+    this.currentAlpha = Color.alpha(argb)
     this.setColors(setAlphaComponent(argb, 0), setAlphaComponent(argb, 255))
 }
 
@@ -217,8 +217,8 @@ fun GradientSeekBar.setAlphaRgb(rgb: Int) {
     this.setColors(setAlphaComponent(rgb, 0), setAlphaComponent(rgb, 255))
 }
 
-fun GradientSeekBar.setAlphaListener(listener: (Int) -> Unit) {
-    this.listener = { _, _ -> listener(this.currentAlpha) }
+fun GradientSeekBar.setAlphaListener(listener: (Float, Int, Int) -> Unit) {
+    this.listener = { offset, color -> listener(offset, color, this.currentAlpha) }
 }
 
 private fun ensureOffsetWithinRange(offset: Float) = when {

@@ -30,28 +30,32 @@ class PreviewFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         colorIndicator.background = colorIndicatorBackground
-        colorIndicatorBackground.setColor(setAlphaComponent(colorWheel.rgb, alphaSeekBar.currentAlpha))
+        colorIndicatorBackground.setColor(alphaSeekBar.currentColor)
+
         colorWheel.colorChangeListener = this::onColorWheelUpdateListener
-        alphaSeekBar.setAlphaListener(this::onAlphaSeekBarUpdate)
-        horizontalAlphaSeekBar.setAlphaListener(this::onHorizontalAlphaSeekBarUpdate)
+
         alphaSeekBar.setAlphaRgb(colorWheel.rgb)
+        alphaSeekBar.setAlphaListener(this::onAlphaSeekBarUpdate)
+
         horizontalAlphaSeekBar.setAlphaRgb(colorWheel.rgb)
+        horizontalAlphaSeekBar.setAlphaListener(this::onHorizontalAlphaSeekBarUpdate)
     }
 
     private fun onColorWheelUpdateListener(rgb: Int) {
         alphaSeekBar.setAlphaRgb(rgb)
-        horizontalAlphaSeekBar.setAlphaRgb(colorWheel.rgb)
-        colorIndicatorBackground.setColor(setAlphaComponent(rgb, alphaSeekBar.currentAlpha))
+        horizontalAlphaSeekBar.setAlphaRgb(rgb)
+        colorIndicatorBackground.setColor(alphaSeekBar.currentColor)
     }
 
-    private fun onAlphaSeekBarUpdate(alpha: Int) {
-        colorIndicatorBackground.setColor(setAlphaComponent(colorWheel.rgb, alpha))
+    private fun onAlphaSeekBarUpdate(offset: Float, color: Int, alpha: Int) {
+        colorIndicatorBackground.setColor(color)
         horizontalAlphaSeekBar.setAlphaSilently(alpha)
     }
 
-    private fun onHorizontalAlphaSeekBarUpdate(alpha: Int) {
-        colorIndicatorBackground.setColor(setAlphaComponent(colorWheel.rgb, alpha))
+    private fun onHorizontalAlphaSeekBarUpdate(offset: Float, color: Int, alpha: Int) {
+        colorIndicatorBackground.setColor(color)
         alphaSeekBar.setAlphaSilently(alpha)
     }
 }
