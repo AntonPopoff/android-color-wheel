@@ -5,6 +5,7 @@ import android.graphics.drawable.GradientDrawable
 import android.view.MotionEvent
 import android.view.View
 import com.colorwheelapp.colorwheel.utils.ViewDimensions
+import com.colorwheelapp.colorwheel.utils.ensureNumberWithinRange
 import kotlin.math.roundToInt
 
 class HorizontalStrategy : OrientationStrategy {
@@ -44,13 +45,8 @@ class HorizontalStrategy : OrientationStrategy {
     }
 
     override fun calculateOffsetOnMotionEvent(view: GradientSeekBar, event: MotionEvent, barBounds: Rect): Float {
-        val relativeThumbX = (ensureMotionEventInBounds(event, barBounds) - barBounds.left).toFloat()
-        return relativeThumbX / barBounds.width()
-    }
-
-    private fun ensureMotionEventInBounds(event: MotionEvent, bounds: Rect) = when {
-        event.x > bounds.right -> bounds.right
-        event.x < bounds.left -> bounds.left
-        else -> event.x.roundToInt()
+        val checkedX = ensureNumberWithinRange(event.x.roundToInt(), barBounds.left, barBounds.right)
+        val relativeX = (checkedX - barBounds.left).toFloat()
+        return relativeX / barBounds.width()
     }
 }

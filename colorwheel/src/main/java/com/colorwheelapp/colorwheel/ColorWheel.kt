@@ -13,6 +13,7 @@ import com.colorwheelapp.colorwheel.utils.toRadians
 import kotlin.math.*
 
 private val HUE_COLORS = intArrayOf(Color.RED, Color.YELLOW, Color.GREEN, Color.CYAN, Color.BLUE, Color.MAGENTA, Color.RED)
+
 private val SATURATION_COLORS = intArrayOf(Color.WHITE, Color.TRANSPARENT)
 
 class ColorWheel @JvmOverloads constructor(
@@ -169,7 +170,7 @@ class ColorWheel @JvmOverloads constructor(
         val y = sin(angle) * r + wheelCenterY
         val dx = x - wheelCenterX
         val dy = y - wheelCenterY
-        val hue = toDegrees(atan2(dy, dx)) + 360
+        val hue = (toDegrees(atan2(dy, dx)) + 360) % 360
         val saturation = hypot(dx, dy) / wheelRadius
 
         hsvColor.set(hue, saturation, 1f)

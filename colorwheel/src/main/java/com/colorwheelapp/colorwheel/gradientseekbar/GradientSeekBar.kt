@@ -12,6 +12,7 @@ import android.view.ViewConfiguration
 import com.colorwheelapp.colorwheel.R
 import com.colorwheelapp.colorwheel.ThumbDrawable
 import com.colorwheelapp.colorwheel.utils.MAX_ALPHA
+import com.colorwheelapp.colorwheel.utils.ensureNumberWithinRange
 import com.colorwheelapp.colorwheel.utils.interpolateColorLinear
 import com.colorwheelapp.colorwheel.utils.setAlphaComponent
 import kotlin.math.abs
@@ -232,14 +233,6 @@ fun GradientSeekBar.setValueColor(color: Int) {
     this.setColors(color, Color.BLACK)
 }
 
-private fun ensureOffsetWithinRange(offset: Float) = when {
-    offset < 0f -> 0f
-    offset > 1f -> 1f
-    else -> offset
-}
+private fun ensureAlphaWithinRange(alpha: Int) = ensureNumberWithinRange(alpha, 0, MAX_ALPHA)
 
-private fun ensureAlphaWithinRange(alpha: Int) = when {
-    alpha < 0 -> 0
-    alpha > MAX_ALPHA -> MAX_ALPHA
-    else -> alpha
-}
+private fun ensureOffsetWithinRange(offset: Float) = ensureNumberWithinRange(offset, 0f, 1f)
