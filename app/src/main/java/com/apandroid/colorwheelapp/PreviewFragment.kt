@@ -33,20 +33,20 @@ class PreviewFragment : Fragment() {
 
         colorWheel.colorChangeListener = this::onColorWheelUpdateListener
 
-        alphaSeekBar.setAlphaRgb(colorWheel.rgb)
-        alphaSeekBar.setAlphaListener(this::onAlphaSeekBarUpdate)
+        gradientSeekBar.setAlphaRgb(colorWheel.rgb)
+        gradientSeekBar.setAlphaListener(this::onAlphaSeekBarUpdate)
 
         valueSeekBar.setValueColor(colorWheel.rgb)
         valueSeekBar.listener = this::onValueSeekBarUpdate
 
         colorIndicator.background = colorIndicatorBackground
-        colorIndicatorBackground.setColor(setAlphaComponent(valueSeekBar.currentColor, alphaSeekBar.currentAlpha))
+        colorIndicatorBackground.setColor(setAlphaComponent(valueSeekBar.currentColor, gradientSeekBar.currentAlpha))
     }
 
     private fun onColorWheelUpdateListener(rgb: Int) {
-        alphaSeekBar.setAlphaRgb(rgb)
+        gradientSeekBar.setAlphaRgb(rgb)
         valueSeekBar.setValueColor(rgb)
-        colorIndicatorBackground.setColor(setAlphaComponent(valueSeekBar.currentColor, alphaSeekBar.currentAlpha))
+        colorIndicatorBackground.setColor(setAlphaComponent(valueSeekBar.currentColor, gradientSeekBar.currentAlpha))
     }
 
     private fun onAlphaSeekBarUpdate(offset: Float, color: Int, alpha: Int) {
@@ -54,6 +54,6 @@ class PreviewFragment : Fragment() {
     }
 
     private fun onValueSeekBarUpdate(offset: Float, color: Int) {
-        colorIndicatorBackground.setColor(setAlphaComponent(color, alphaSeekBar.currentAlpha))
+        colorIndicatorBackground.setColor(setAlphaComponent(color, gradientSeekBar.currentAlpha))
     }
 }

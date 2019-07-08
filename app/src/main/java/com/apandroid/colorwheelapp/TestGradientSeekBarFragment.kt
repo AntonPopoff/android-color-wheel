@@ -27,19 +27,19 @@ class TestGradientSeekBarFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         barSizeEdit.afterTextChanged(this::onBarSizeChanged)
-        barSizeEdit.setText((alphaSeekBar.barSize / density).roundToInt().toString())
+        barSizeEdit.setText((gradientSeekBar.barSize / density).roundToInt().toString())
 
         cornerRadiusEdit.afterTextChanged(this::onCornerRadiusChanged)
-        cornerRadiusEdit.setText((alphaSeekBar.cornersRadius / density).roundToInt().toString())
+        cornerRadiusEdit.setText((gradientSeekBar.cornersRadius / density).roundToInt().toString())
 
         thumbRadiusEdit.afterTextChanged(this::onThumbRadiusChanged)
-        thumbRadiusEdit.setText((alphaSeekBar.thumbRadius / density).roundToInt().toString())
+        thumbRadiusEdit.setText((gradientSeekBar.thumbRadius / density).roundToInt().toString())
 
-        alphaSeekBarController.progress = alphaSeekBar.currentAlpha
-        alphaSeekBarController.setOnProgressChangeListener(this::onAlphaSeekBarControllerChanged)
-        alphaText.text = getString(R.string.alpha_with_value, alphaSeekBar.currentAlpha)
+        offsetSeekBar.progress = gradientSeekBar.currentAlpha
+        offsetSeekBar.setOnProgressChangeListener(this::onOffsetSeekBarChange)
+        alphaText.text = getString(R.string.offset_with_value, gradientSeekBar.offset)
 
-        alphaSeekBar.setAlphaListener(this::onAlphaSeekBarChange)
+        gradientSeekBar.listener = this::onGradientSeekBarChange
 
         orientationRadioGroup.check(R.id.verticalOrientationButton)
         orientationRadioGroup.setOnCheckedChangeListener(this::onOrientationChange)
@@ -49,37 +49,38 @@ class TestGradientSeekBarFragment : Fragment() {
     }
 
     private fun onBarSizeChanged(s: String) {
-        alphaSeekBar.barSize = ((s.toIntOrNull() ?: 0) * density).roundToInt()
+        gradientSeekBar.barSize = ((s.toIntOrNull() ?: 0) * density).roundToInt()
     }
 
     private fun onCornerRadiusChanged(s: String) {
-        alphaSeekBar.cornersRadius = (s.toIntOrNull() ?: 0) * density
+        gradientSeekBar.cornersRadius = (s.toIntOrNull() ?: 0) * density
     }
 
     private fun onThumbRadiusChanged(s: String) {
-        alphaSeekBar.thumbRadius = ((s.toIntOrNull() ?: 0) * density).roundToInt()
+        gradientSeekBar.thumbRadius = ((s.toIntOrNull() ?: 0) * density).roundToInt()
     }
 
-    private fun onAlphaSeekBarControllerChanged(progress: Int) {
-        alphaText.text = getString(R.string.alpha_with_value, alphaSeekBar.currentAlpha)
-        alphaSeekBar.setAlphaSilently(progress)
+    private fun onOffsetSeekBarChange(progress: Int) {
+        val offset = progress / 100f
+        gradientSeekBar.setOffsetSilently(offset)
+        alphaText.text = getString(R.string.offset_with_value, offset)
     }
 
-    private fun onAlphaSeekBarChange(offset: Float, color: Int, alpha: Int) {
-        alphaText.text = getString(R.string.alpha_with_value, alphaSeekBar.currentAlpha)
-        alphaSeekBarController.progress = alpha
+    private fun onGradientSeekBarChange(offset: Float, color: Int) {
+        offsetSeekBar.progress = (offset * 100f).roundToInt()
+        alphaText.text = getString(R.string.offset_with_value, offset)
     }
 
     private fun onOrientationChange(group: RadioGroup, checkedId: Int) {
         if (checkedId == R.id.verticalOrientationButton) {
-            alphaSeekBar.orientation = GradientSeekBar.Orientation.VERTICAL
+            gradientSeekBar.orientation = GradientSeekBar.Orientation.VERTICAL
         } else if (checkedId == R.id.horizontalOrientationButton) {
-            alphaSeekBar.orientation = GradientSeekBar.Orientation.HORIZONTAL
+            gradientSeekBar.orientation = GradientSeekBar.Orientation.HORIZONTAL
         }
     }
 
     private fun randomizeRgb() {
-        alphaSeekBar.setAlphaRgb(Color.rgb(
+        gradientSeekBar.setAlphaRgb(Color.rgb(
             random.nextInt(255),
             random.nextInt(255),
             random.nextInt(255))
@@ -87,7 +88,7 @@ class TestGradientSeekBarFragment : Fragment() {
     }
 
     private fun randomizeArgb() {
-        alphaSeekBar.setAlphaArgb(Color.argb(
+        gradientSeekBar.setAlphaArgb(Color.argb(
             random.nextInt(255),
             random.nextInt(255),
             random.nextInt(255),

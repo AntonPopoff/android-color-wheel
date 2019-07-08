@@ -208,6 +208,13 @@ fun GradientSeekBar.setAlphaSilently(alpha: Int) {
     this.listener = listener
 }
 
+fun GradientSeekBar.setOffsetSilently(offset: Float) {
+    val listener = this.listener
+    this.listener = null
+    this.offset = offset
+    this.listener = listener
+}
+
 fun GradientSeekBar.setAlphaArgb(argb: Int) {
     this.currentAlpha = Color.alpha(argb)
     this.setColors(setAlphaComponent(argb, 0), setAlphaComponent(argb, 255))
