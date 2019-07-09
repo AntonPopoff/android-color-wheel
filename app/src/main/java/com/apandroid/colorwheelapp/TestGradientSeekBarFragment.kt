@@ -62,8 +62,15 @@ class TestGradientSeekBarFragment : Fragment() {
 
     private fun onOffsetSeekBarChange(progress: Int) {
         val offset = progress / 100f
-        gradientSeekBar.setOffsetSilently(offset)
         alphaText.text = getString(R.string.offset_with_value, offset)
+        setOffsetSilently(gradientSeekBar, offset)
+    }
+
+    private fun setOffsetSilently(seekBar: GradientSeekBar, offset: Float) {
+        val listener = seekBar.listener
+        seekBar.listener = null
+        seekBar.offset = offset
+        seekBar.listener = listener
     }
 
     private fun onGradientSeekBarChange(offset: Float, color: Int) {

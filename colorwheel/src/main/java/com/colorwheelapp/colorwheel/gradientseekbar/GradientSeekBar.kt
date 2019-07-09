@@ -196,34 +196,20 @@ var GradientSeekBar.currentAlpha
     get() = (this.offset * MAX_ALPHA).roundToInt()
     set(alpha) { this.offset = ensureAlphaWithinRange(alpha) / MAX_ALPHA.toFloat() }
 
-fun GradientSeekBar.setAlphaSilently(alpha: Int) {
-    val listener = this.listener
-    this.listener = null
-    this.currentAlpha = alpha
-    this.listener = listener
-}
-
-fun GradientSeekBar.setOffsetSilently(offset: Float) {
-    val listener = this.listener
-    this.listener = null
-    this.offset = offset
-    this.listener = listener
-}
-
 fun GradientSeekBar.setAlphaArgb(argb: Int) {
     this.currentAlpha = Color.alpha(argb)
-    this.setColors(setAlphaComponent(argb, 0), setAlphaComponent(argb, 255))
+    this.setColors(setAlphaComponent(argb, 0), setAlphaComponent(argb, MAX_ALPHA))
 }
 
 fun GradientSeekBar.setAlphaRgb(rgb: Int) {
-    this.setColors(setAlphaComponent(rgb, 0), setAlphaComponent(rgb, 255))
+    this.setColors(setAlphaComponent(rgb, 0), setAlphaComponent(rgb, MAX_ALPHA))
 }
 
 fun GradientSeekBar.setAlphaListener(listener: (Float, Int, Int) -> Unit) {
     this.listener = { offset, color -> listener(offset, color, this.currentAlpha) }
 }
 
-fun GradientSeekBar.setValueColor(color: Int) {
+fun GradientSeekBar.setColorToBlack(color: Int) {
     this.setColors(color, Color.BLACK)
 }
 

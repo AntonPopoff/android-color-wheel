@@ -11,7 +11,7 @@ import com.apandroid.colorwheelapp.extensions.density
 import com.colorwheelapp.colorwheel.gradientseekbar.currentAlpha
 import com.colorwheelapp.colorwheel.gradientseekbar.setAlphaListener
 import com.colorwheelapp.colorwheel.gradientseekbar.setAlphaRgb
-import com.colorwheelapp.colorwheel.gradientseekbar.setValueColor
+import com.colorwheelapp.colorwheel.gradientseekbar.setColorToBlack
 import com.colorwheelapp.colorwheel.utils.setAlphaComponent
 import kotlinx.android.synthetic.main.fragment_preview.*
 
@@ -36,7 +36,7 @@ class PreviewFragment : Fragment() {
         gradientSeekBar.setAlphaRgb(colorWheel.rgb)
         gradientSeekBar.setAlphaListener(this::onAlphaSeekBarUpdate)
 
-        valueSeekBar.setValueColor(colorWheel.rgb)
+        valueSeekBar.setColorToBlack(colorWheel.rgb)
         valueSeekBar.listener = this::onValueSeekBarUpdate
 
         colorIndicator.background = colorIndicatorBackground
@@ -45,7 +45,7 @@ class PreviewFragment : Fragment() {
 
     private fun onColorWheelUpdateListener(rgb: Int) {
         gradientSeekBar.setAlphaRgb(rgb)
-        valueSeekBar.setValueColor(rgb)
+        valueSeekBar.setColorToBlack(rgb)
         colorIndicatorBackground.setColor(setAlphaComponent(valueSeekBar.currentColor, gradientSeekBar.currentAlpha))
     }
 
