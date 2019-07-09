@@ -51,17 +51,11 @@ class GradientSeekBar @JvmOverloads constructor(
 
     var startColor
         get() = gradientColors[0]
-        set(startColor) {
-            gradientColors[0] = startColor
-            updateCurrentColor()
-        }
+        set(startColor) { setColors(startColor = startColor) }
 
     var endColor
         get() = gradientColors[1]
-        set(endColor) {
-            gradientColors[1] = endColor
-            updateCurrentColor()
-        }
+        set(endColor) { setColors(endColor = endColor) }
 
     var barSize = 0
         set(width) {
