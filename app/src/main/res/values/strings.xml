@@ -12,8 +12,10 @@
     <string name="thumb_radius_text">Thumb Radius:</string>
     <string name="vertical">Vertical</string>
     <string name="horizontal">Horizontal</string>
-    <string name="randomize_rgb">Randomize RGB</string>
-    <string name="randomize_argb">Randomize ARGB</string>
+    <string name="randomize_rgb">RND RGB</string>
+    <string name="randomize_argb">RND ARGB</string>
     <string name="zero">0</string>
     <string name="offset_with_value">Offset - %.2f</string>
+    <string name="randomize_start_rgb">RND Start RGB</string>
+    <string name="randomize_end_rgb">RND End RGB</string>
 </resources>

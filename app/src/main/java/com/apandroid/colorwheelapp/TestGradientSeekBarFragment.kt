@@ -46,6 +46,8 @@ class TestGradientSeekBarFragment : Fragment() {
         
         randomizeRgbButton.setOnClickListener { randomizeRgb() }
         randomizeArgbButton.setOnClickListener { randomizeArgb() }
+        randomizeStartColor.setOnClickListener { gradientSeekBar.startColor = randomRgb() }
+        randomizeEndColor.setOnClickListener { gradientSeekBar.endColor = randomRgb() }
     }
 
     private fun onBarSizeChanged(s: String) {
@@ -87,12 +89,14 @@ class TestGradientSeekBarFragment : Fragment() {
     }
 
     private fun randomizeRgb() {
-        gradientSeekBar.setAlphaRgb(Color.rgb(
-            random.nextInt(255),
-            random.nextInt(255),
-            random.nextInt(255))
-        )
+        gradientSeekBar.setAlphaRgb(randomRgb())
     }
+
+    private fun randomRgb() = Color.rgb(
+        random.nextInt(255),
+        random.nextInt(255),
+        random.nextInt(255)
+    )
 
     private fun randomizeArgb() {
         gradientSeekBar.setAlphaArgb(Color.argb(
