@@ -1,14 +1,14 @@
-package com.colorwheelapp.colorwheel.alphaseekbar
+package com.colorwheelapp.colorwheel.gradientseekbar
 
 import android.graphics.Rect
 import android.graphics.drawable.GradientDrawable
 import android.view.MotionEvent
 import android.view.View
-import com.colorwheelapp.colorwheel.utils.MAX_ALPHA
 import com.colorwheelapp.colorwheel.utils.ViewDimensions
+import com.colorwheelapp.colorwheel.utils.ensureNumberWithinRange
 import kotlin.math.roundToInt
 
-class HorizontalAlphaSeekBar : AlphaSeekBarOrientationStrategy {
+class HorizontalStrategy : OrientationStrategy {
 
     private val rect = Rect()
 
@@ -16,7 +16,7 @@ class HorizontalAlphaSeekBar : AlphaSeekBarOrientationStrategy {
 
     override val gradientOrientation = GradientDrawable.Orientation.LEFT_RIGHT
 
-    override fun measure(view: AlphaSeekBar, widthSpec: Int, heightSpec: Int): ViewDimensions {
+    override fun measure(view: GradientSeekBar, widthSpec: Int, heightSpec: Int): ViewDimensions {
         val preferredWidth = View.MeasureSpec.getSize(widthSpec) + view.paddingStart + view.paddingEnd
         val preferredHeight = maxOf(view.barSize, view.thumbRadius * 2) + view.paddingTop + view.paddingBottom
 
@@ -26,7 +26,7 @@ class HorizontalAlphaSeekBar : AlphaSeekBarOrientationStrategy {
         }
     }
 
-    override fun calculateGradientBounds(view: AlphaSeekBar): Rect {
+    override fun calculateGradientBounds(view: GradientSeekBar): Rect {
         val left = view.paddingLeft + view.thumbRadius
         val right = view.width - view.paddingRight - view.thumbRadius
         val top = view.paddingTop + (view.height - view.paddingTop - view.paddingEnd - view.barSize) / 2
@@ -34,8 +34,8 @@ class HorizontalAlphaSeekBar : AlphaSeekBarOrientationStrategy {
         return rect.apply { set(left, top, right, bottom) }
     }
 
-    override fun calculateThumbBounds(view: AlphaSeekBar, barBounds: Rect): Rect {
-        val thumbX = convertAlphaToThumbPosition(barBounds, view.alphaValue)
+    override fun calculateThumbBounds(view: GradientSeekBar, barBounds: Rect): Rect {
+        val thumbX = (barBounds.left + view.offset * barBounds.width()).roundToInt()
         val cy = barBounds.centerY()
         val left = thumbX - view.thumbRadius
         val right = thumbX + view.thumbRadius
@@ -44,19 +44,9 @@ class HorizontalAlphaSeekBar : AlphaSeekBarOrientationStrategy {
         return rect.apply { set(left, top, right, bottom) }
     }
 
-    private fun convertAlphaToThumbPosition(bounds: Rect, alpha: Int): Int {
-        val alphaNormalized = (alpha.toFloat() / MAX_ALPHA)
-        return (bounds.left + alphaNormalized * bounds.width()).roundToInt()
-    }
-
-    override fun calculateAlphaOnMotionEvent(view: AlphaSeekBar, event: MotionEvent, barBounds: Rect): Int {
-        val relativeThumbX = (ensureMotionEventInBounds(event, barBounds) - barBounds.left).toFloat()
-        return ((relativeThumbX / barBounds.width()) * MAX_ALPHA).roundToInt()
-    }
-
-    private fun ensureMotionEventInBounds(event: MotionEvent, bounds: Rect) = when {
-        event.x > bounds.right -> bounds.right
-        event.x < bounds.left -> bounds.left
-        else -> event.x.roundToInt()
+    override fun calculateOffsetOnMotionEvent(view: GradientSeekBar, event: MotionEvent, barBounds: Rect): Float {
+        val checkedX = ensureNumberWithinRange(event.x.roundToInt(), barBounds.left, barBounds.right)
+        val relativeX = (checkedX - barBounds.left).toFloat()
+        return relativeX / barBounds.width()
     }
 }

@@ -30,7 +30,7 @@ class TestColorWheelFragment : Fragment() {
 
     private fun onThumbSeekBarChange(progress: Int) {
         colorWheel.thumbRadius = (progress * density).roundToInt()
-        thumbRadiusText.text = getString(R.string.thumb_radius, progress)
+        thumbRadiusText.text = getString(R.string.thumb_radius_with_value, progress)
     }
 
     private fun onColorWheelPaddingSeekBarChange(progress: Int) {

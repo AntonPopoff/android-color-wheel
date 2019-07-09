@@ -33,15 +33,8 @@ class HsvColor(hue: Float = 0f, saturation: Float = 0f, value: Float = 0f) {
     }
 }
 
-private fun ensureHueWithinRange(hue: Float) = when {
-    hue < 0f -> 0f
-    else -> hue % 360
-}
+private fun ensureHueWithinRange(hue: Float) = ensureNumberWithinRange(hue, 0f, 360f)
 
-private fun ensureValueWithinRange(value: Float) = when {
-    value < 0f -> 0f
-    value > 1f -> 1f
-    else -> value
-}
+private fun ensureValueWithinRange(value: Float) = ensureNumberWithinRange(value, 0f, 1f)
 
-private fun ensureSaturationWithinRange(saturation: Float) = ensureValueWithinRange(saturation)
+private fun ensureSaturationWithinRange(saturation: Float) = ensureNumberWithinRange(saturation, 0f, 1f)

@@ -15,5 +15,5 @@
     <string name="randomize_rgb">Randomize RGB</string>
     <string name="randomize_argb">Randomize ARGB</string>
     <string name="zero">0</string>
-    <string name="alpha_with_value">Alpha - %d</string>
+    <string name="offset_with_value">Offset - %.2f</string>
 </resources>

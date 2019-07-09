@@ -9,7 +9,6 @@
         <item name="asb_thumbRadius">@dimen/default_thumb_radius</item>
         <item name="asb_barSize">10dp</item>
         <item name="asb_barCornersRadius">5dp</item>
-        <item name="asb_orientation">vertical</item>
     </style>
 
 </resources>

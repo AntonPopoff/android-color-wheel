@@ -157,16 +157,16 @@
             android:layout_marginTop="16dp"
             android:textColor="@android:color/black"
             android:textSize="16sp"
-            tools:text="Alpha - 255"
+            tools:text="Offset - 1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/thumbRadiusDivider" />
 
         <SeekBar
-            android:id="@+id/alphaSeekBarController"
+            android:id="@+id/offsetSeekBar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:max="255"
+            android:max="100"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/alphaText"/>
@@ -177,7 +177,7 @@
             android:layout_height="1px"
             android:background="@android:color/darker_gray"
             android:layout_marginTop="10dp"
-            app:layout_constraintTop_toBottomOf="@id/alphaSeekBarController"
+            app:layout_constraintTop_toBottomOf="@id/offsetSeekBar"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -248,8 +248,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <com.colorwheelapp.colorwheel.alphaseekbar.AlphaSeekBar
-            android:id="@+id/alphaSeekBar"
+        <com.colorwheelapp.colorwheel.gradientseekbar.GradientSeekBar
+            android:id="@+id/gradientSeekBar"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_marginTop="16dp"
