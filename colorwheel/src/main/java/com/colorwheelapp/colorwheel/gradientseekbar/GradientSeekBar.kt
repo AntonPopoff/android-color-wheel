@@ -34,6 +34,14 @@ class GradientSeekBar @JvmOverloads constructor(
     private var internalOffset = 0f
     private var motionEventDownX = 0f
 
+    var startColor
+        get() = gradientColors[0]
+        set(startColor) { setColors(startColor = startColor) }
+
+    var endColor
+        get() = gradientColors[1]
+        set(endColor) { setColors(endColor = endColor) }
+
     var orientation
         get() = internalOrientation
         set(orientation) {
@@ -48,14 +56,6 @@ class GradientSeekBar @JvmOverloads constructor(
             internalOffset = ensureOffsetWithinRange(offset)
             updateCurrentColor()
         }
-
-    var startColor
-        get() = gradientColors[0]
-        set(startColor) { setColors(startColor = startColor) }
-
-    var endColor
-        get() = gradientColors[1]
-        set(endColor) { setColors(endColor = endColor) }
 
     var barSize = 0
         set(width) {
