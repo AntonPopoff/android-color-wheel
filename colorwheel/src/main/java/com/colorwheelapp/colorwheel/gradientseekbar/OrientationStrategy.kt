@@ -5,7 +5,7 @@ import android.graphics.drawable.GradientDrawable
 import android.view.MotionEvent
 import com.colorwheelapp.colorwheel.utils.ViewDimensions
 
-interface OrientationStrategy {
+internal interface OrientationStrategy {
 
     val gradientOrientation: GradientDrawable.Orientation
 

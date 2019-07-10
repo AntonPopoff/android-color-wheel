@@ -11,7 +11,7 @@ import com.apandroid.colorwheelapp.extensions.density
 import com.apandroid.colorwheelapp.extensions.afterTextChanged
 import com.apandroid.colorwheelapp.extensions.setOnProgressChangeListener
 import com.colorwheelapp.colorwheel.gradientseekbar.*
-import kotlinx.android.synthetic.main.fragment_test_alpha_seek_bar.*
+import kotlinx.android.synthetic.main.fragment_test_gradient_seek_bar.*
 import java.util.*
 import kotlin.math.roundToInt
 
@@ -20,7 +20,7 @@ class TestGradientSeekBarFragment : Fragment() {
     private val random by lazy { Random() }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_test_alpha_seek_bar, container, false)
+        return inflater.inflate(R.layout.fragment_test_gradient_seek_bar, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -46,6 +46,8 @@ class TestGradientSeekBarFragment : Fragment() {
         
         randomizeRgbButton.setOnClickListener { randomizeRgb() }
         randomizeArgbButton.setOnClickListener { randomizeArgb() }
+        randomizeStartColor.setOnClickListener { gradientSeekBar.startColor = randomRgb() }
+        randomizeEndColor.setOnClickListener { gradientSeekBar.endColor = randomRgb() }
     }
 
     private fun onBarSizeChanged(s: String) {
@@ -87,12 +89,14 @@ class TestGradientSeekBarFragment : Fragment() {
     }
 
     private fun randomizeRgb() {
-        gradientSeekBar.setAlphaRgb(Color.rgb(
-            random.nextInt(255),
-            random.nextInt(255),
-            random.nextInt(255))
-        )
+        gradientSeekBar.setAlphaRgb(randomRgb())
     }
+
+    private fun randomRgb() = Color.rgb(
+        random.nextInt(255),
+        random.nextInt(255),
+        random.nextInt(255)
+    )
 
     private fun randomizeArgb() {
         gradientSeekBar.setAlphaArgb(Color.argb(

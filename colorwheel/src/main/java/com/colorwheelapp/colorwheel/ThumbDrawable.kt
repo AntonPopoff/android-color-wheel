@@ -8,7 +8,7 @@ import android.graphics.drawable.LayerDrawable
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.OvalShape
 
-class ThumbDrawable {
+internal class ThumbDrawable {
 
     private val thumbCircle = GradientDrawable().apply {
         shape = GradientDrawable.OVAL

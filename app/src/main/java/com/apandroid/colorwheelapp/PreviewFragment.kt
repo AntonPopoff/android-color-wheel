@@ -12,7 +12,7 @@ import com.colorwheelapp.colorwheel.gradientseekbar.currentAlpha
 import com.colorwheelapp.colorwheel.gradientseekbar.setAlphaListener
 import com.colorwheelapp.colorwheel.gradientseekbar.setAlphaRgb
 import com.colorwheelapp.colorwheel.gradientseekbar.setColorToBlack
-import com.colorwheelapp.colorwheel.utils.setAlphaComponent
+import com.colorwheelapp.colorwheel.utils.setColorAlpha
 import kotlinx.android.synthetic.main.fragment_preview.*
 
 class PreviewFragment : Fragment() {
@@ -40,20 +40,20 @@ class PreviewFragment : Fragment() {
         valueSeekBar.listener = this::onValueSeekBarUpdate
 
         colorIndicator.background = colorIndicatorBackground
-        colorIndicatorBackground.setColor(setAlphaComponent(valueSeekBar.currentColor, gradientSeekBar.currentAlpha))
+        colorIndicatorBackground.setColor(setColorAlpha(valueSeekBar.currentColor, gradientSeekBar.currentAlpha))
     }
 
     private fun onColorWheelUpdateListener(rgb: Int) {
         gradientSeekBar.setAlphaRgb(rgb)
         valueSeekBar.setColorToBlack(rgb)
-        colorIndicatorBackground.setColor(setAlphaComponent(valueSeekBar.currentColor, gradientSeekBar.currentAlpha))
+        colorIndicatorBackground.setColor(setColorAlpha(valueSeekBar.currentColor, gradientSeekBar.currentAlpha))
     }
 
     private fun onAlphaSeekBarUpdate(offset: Float, color: Int, alpha: Int) {
-        colorIndicatorBackground.setColor(setAlphaComponent(valueSeekBar.currentColor, alpha))
+        colorIndicatorBackground.setColor(setColorAlpha(valueSeekBar.currentColor, alpha))
     }
 
     private fun onValueSeekBarUpdate(offset: Float, color: Int) {
-        colorIndicatorBackground.setColor(setAlphaComponent(color, gradientSeekBar.currentAlpha))
+        colorIndicatorBackground.setColor(setColorAlpha(color, gradientSeekBar.currentAlpha))
     }
 }
