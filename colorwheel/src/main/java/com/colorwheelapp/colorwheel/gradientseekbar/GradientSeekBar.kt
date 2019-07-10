@@ -14,7 +14,7 @@ import com.colorwheelapp.colorwheel.ThumbDrawable
 import com.colorwheelapp.colorwheel.utils.MAX_ALPHA
 import com.colorwheelapp.colorwheel.utils.ensureNumberWithinRange
 import com.colorwheelapp.colorwheel.utils.interpolateColorLinear
-import com.colorwheelapp.colorwheel.utils.setAlphaComponent
+import com.colorwheelapp.colorwheel.utils.setColorAlpha
 import kotlin.math.abs
 import kotlin.math.roundToInt
 
@@ -198,11 +198,11 @@ var GradientSeekBar.currentAlpha
 
 fun GradientSeekBar.setAlphaArgb(argb: Int) {
     this.currentAlpha = Color.alpha(argb)
-    this.setColors(setAlphaComponent(argb, 0), setAlphaComponent(argb, MAX_ALPHA))
+    this.setColors(setColorAlpha(argb, 0), setColorAlpha(argb, MAX_ALPHA))
 }
 
 fun GradientSeekBar.setAlphaRgb(rgb: Int) {
-    this.setColors(setAlphaComponent(rgb, 0), setAlphaComponent(rgb, MAX_ALPHA))
+    this.setColors(setColorAlpha(rgb, 0), setColorAlpha(rgb, MAX_ALPHA))
 }
 
 fun GradientSeekBar.setAlphaListener(listener: (Float, Int, Int) -> Unit) {

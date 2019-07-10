@@ -3,13 +3,13 @@ package com.colorwheelapp.colorwheel.utils
 import android.graphics.Color
 import kotlin.math.roundToInt
 
-const val MAX_ALPHA = 255
+internal const val MAX_ALPHA = 255
 
-fun clearAlpha(rgb: Int): Int = (rgb shl 8 ushr 8)
+fun setColorAlpha(argb: Int, alpha: Int) = clearColorAlpha(argb) or (alpha shl 24)
 
-fun setAlphaComponent(rgb: Int, alpha: Int) = clearAlpha(rgb) or (alpha shl 24)
+internal fun clearColorAlpha(argb: Int): Int = (argb shl 8 ushr 8)
 
-fun interpolateColorLinear(startColor: Int, endColor: Int, offset: Float) = Color.argb(
+internal fun interpolateColorLinear(startColor: Int, endColor: Int, offset: Float) = Color.argb(
     (Color.alpha(startColor) + offset * (Color.alpha(endColor) - Color.alpha(startColor))).roundToInt(),
     (Color.red(startColor) + offset * (Color.red(endColor) - Color.red(startColor))).roundToInt(),
     (Color.green(startColor) + offset * (Color.green(endColor) - Color.green(startColor))).roundToInt(),

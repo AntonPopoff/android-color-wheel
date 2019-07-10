@@ -8,7 +8,7 @@ import com.colorwheelapp.colorwheel.utils.ViewDimensions
 import com.colorwheelapp.colorwheel.utils.ensureNumberWithinRange
 import kotlin.math.roundToInt
 
-class HorizontalStrategy : OrientationStrategy {
+internal class HorizontalStrategy : OrientationStrategy {
 
     private val rect = Rect()
 
