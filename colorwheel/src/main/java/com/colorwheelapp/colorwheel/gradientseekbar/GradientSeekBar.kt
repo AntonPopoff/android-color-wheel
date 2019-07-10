@@ -18,7 +18,7 @@ import com.colorwheelapp.colorwheel.utils.setAlphaComponent
 import kotlin.math.abs
 import kotlin.math.roundToInt
 
-class GradientSeekBar @JvmOverloads constructor(
+open class GradientSeekBar @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
@@ -36,11 +36,11 @@ class GradientSeekBar @JvmOverloads constructor(
 
     var startColor
         get() = gradientColors[0]
-        set(startColor) { setColors(startColor = startColor) }
+        set(color) { setColors(startColor = color) }
 
     var endColor
         get() = gradientColors[1]
-        set(endColor) { setColors(endColor = endColor) }
+        set(color) { setColors(endColor = color) }
 
     var orientation
         get() = internalOrientation

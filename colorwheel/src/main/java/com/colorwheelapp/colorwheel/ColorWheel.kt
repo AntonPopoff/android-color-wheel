@@ -16,7 +16,7 @@ private val HUE_COLORS = intArrayOf(Color.RED, Color.YELLOW, Color.GREEN, Color.
 
 private val SATURATION_COLORS = intArrayOf(Color.WHITE, Color.TRANSPARENT)
 
-class ColorWheel @JvmOverloads constructor(
+open class ColorWheel @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
