@@ -129,13 +129,12 @@ class GradientSeekBar @JvmOverloads constructor(
     }
 
     override fun onDraw(canvas: Canvas) {
-        gradientDrawable.orientation = orientationStrategy.gradientOrientation
-        thumbDrawable.indicatorColor = currentColor
         drawGradientRect(canvas)
         drawThumb(canvas)
     }
 
     private fun drawGradientRect(canvas: Canvas) {
+        gradientDrawable.orientation = orientationStrategy.gradientOrientation
         gradientDrawable.bounds = orientationStrategy.calculateGradientBounds(this)
         gradientDrawable.cornerRadius = cornersRadius
         gradientDrawable.draw(canvas)
@@ -143,6 +142,7 @@ class GradientSeekBar @JvmOverloads constructor(
 
     private fun drawThumb(canvas: Canvas) {
         thumbDrawable.bounds = orientationStrategy.calculateThumbBounds(this, gradientDrawable.bounds)
+        thumbDrawable.indicatorColor = currentColor
         thumbDrawable.draw(canvas)
     }
 
