@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import com.apandroid.colorwheelapp.extensions.density
 import com.apandroid.colorwheelapp.extensions.afterTextChanged
 import com.apandroid.colorwheelapp.extensions.setOnProgressChangeListener
-import com.colorwheelapp.colorwheel.gradientseekbar.*
+import com.apandroid.colorwheel.gradientseekbar.*
 import kotlinx.android.synthetic.main.fragment_test_gradient_seek_bar.*
 import java.util.*
 import kotlin.math.roundToInt

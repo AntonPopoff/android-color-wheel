@@ -1,4 +1,4 @@
-package com.colorwheelapp.colorwheel.utils
+package com.apandroid.colorwheel.utils
 
 internal const val PI = Math.PI.toFloat()
 

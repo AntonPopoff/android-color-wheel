@@ -8,11 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.apandroid.colorwheelapp.extensions.density
-import com.colorwheelapp.colorwheel.gradientseekbar.currentAlpha
-import com.colorwheelapp.colorwheel.gradientseekbar.setAlphaListener
-import com.colorwheelapp.colorwheel.gradientseekbar.setAlphaRgb
-import com.colorwheelapp.colorwheel.gradientseekbar.setColorToBlack
-import com.colorwheelapp.colorwheel.utils.setColorAlpha
+import com.apandroid.colorwheel.gradientseekbar.currentAlpha
+import com.apandroid.colorwheel.gradientseekbar.setAlphaListener
+import com.apandroid.colorwheel.gradientseekbar.setAlphaRgb
+import com.apandroid.colorwheel.gradientseekbar.setColorToBlack
+import com.apandroid.colorwheel.utils.setColorAlpha
 import kotlinx.android.synthetic.main.fragment_preview.*
 
 class PreviewFragment : Fragment() {

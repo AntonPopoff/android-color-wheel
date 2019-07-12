@@ -1,11 +1,11 @@
-package com.colorwheelapp.colorwheel.gradientseekbar
+package com.apandroid.colorwheel.gradientseekbar
 
 import android.graphics.Rect
 import android.graphics.drawable.GradientDrawable
 import android.view.MotionEvent
 import android.view.View
-import com.colorwheelapp.colorwheel.utils.ViewDimensions
-import com.colorwheelapp.colorwheel.utils.ensureNumberWithinRange
+import com.apandroid.colorwheel.utils.ViewDimensions
+import com.apandroid.colorwheel.utils.ensureNumberWithinRange
 import kotlin.math.roundToInt
 
 internal class HorizontalStrategy : OrientationStrategy {

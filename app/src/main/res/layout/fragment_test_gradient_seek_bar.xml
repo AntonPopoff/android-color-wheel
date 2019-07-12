@@ -268,7 +268,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <com.colorwheelapp.colorwheel.gradientseekbar.GradientSeekBar
+        <com.apandroid.colorwheel.gradientseekbar.GradientSeekBar
             android:id="@+id/gradientSeekBar"
             android:layout_width="wrap_content"
             android:layout_height="0dp"

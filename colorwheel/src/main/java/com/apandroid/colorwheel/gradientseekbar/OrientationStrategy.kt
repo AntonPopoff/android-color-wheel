@@ -1,9 +1,9 @@
-package com.colorwheelapp.colorwheel.gradientseekbar
+package com.apandroid.colorwheel.gradientseekbar
 
 import android.graphics.Rect
 import android.graphics.drawable.GradientDrawable
 import android.view.MotionEvent
-import com.colorwheelapp.colorwheel.utils.ViewDimensions
+import com.apandroid.colorwheel.utils.ViewDimensions
 
 internal interface OrientationStrategy {
 

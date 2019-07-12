@@ -1,4 +1,4 @@
-package com.colorwheelapp.colorwheel.gradientseekbar
+package com.apandroid.colorwheel.gradientseekbar
 
 import android.content.Context
 import android.content.res.TypedArray
@@ -9,12 +9,12 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewConfiguration
-import com.colorwheelapp.colorwheel.R
-import com.colorwheelapp.colorwheel.ThumbDrawable
-import com.colorwheelapp.colorwheel.utils.MAX_ALPHA
-import com.colorwheelapp.colorwheel.utils.ensureNumberWithinRange
-import com.colorwheelapp.colorwheel.utils.interpolateColorLinear
-import com.colorwheelapp.colorwheel.utils.setColorAlpha
+import com.apandroid.colorwheel.R
+import com.apandroid.colorwheel.ThumbDrawable
+import com.apandroid.colorwheel.utils.MAX_ALPHA
+import com.apandroid.colorwheel.utils.ensureNumberWithinRange
+import com.apandroid.colorwheel.utils.interpolateColorLinear
+import com.apandroid.colorwheel.utils.setColorAlpha
 import kotlin.math.abs
 import kotlin.math.roundToInt
 
