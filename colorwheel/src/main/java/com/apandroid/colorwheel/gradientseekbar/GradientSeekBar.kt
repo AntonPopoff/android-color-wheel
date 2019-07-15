@@ -205,7 +205,7 @@ fun GradientSeekBar.setAlphaRgb(rgb: Int) {
     this.setColors(setColorAlpha(rgb, 0), setColorAlpha(rgb, MAX_ALPHA))
 }
 
-fun GradientSeekBar.setAlphaListener(listener: (Float, Int, Int) -> Unit) {
+inline fun GradientSeekBar.setAlphaListener(crossinline listener: (Float, Int, Int) -> Unit) {
     this.listener = { offset, color -> listener(offset, color, this.currentAlpha) }
 }
 
