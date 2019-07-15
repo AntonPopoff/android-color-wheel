@@ -84,7 +84,7 @@ open class GradientSeekBar @JvmOverloads constructor(
     var interceptTouchEvent = true
 
     init {
-        parseAttributes(context, attrs, R.style.AlphaSeekBarDefaultStyle)
+        parseAttributes(context, attrs, R.style.GradientSeekBarDefaultStyle)
         orientationStrategy = createOrientationStrategy()
         updateThumbInsets()
     }
