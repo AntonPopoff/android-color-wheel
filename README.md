@@ -9,9 +9,7 @@ and **Linear Gradient Seek Bar** views that can be used to pick an **ARGB** colo
 
 ## Screenshots
 
-<img src="screenshots/preview_gif_00.gif" width="270" height="480">
-<img src="screenshots/screenshot_00.png" width="270" height="480">
-<img src="screenshots/screenshot_01.png" width="270" height="480">
+<img src="screenshots/preview_gif_00.gif" width="270" height="480"> <img src="screenshots/screenshot_00.png" width="270" height="480"> <img src="screenshots/screenshot_01.png" width="270" height="480">
 
 ## Installation
 
