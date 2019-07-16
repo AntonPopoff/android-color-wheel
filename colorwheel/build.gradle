@@ -1,14 +1,26 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'com.novoda.bintray-release'
+
+buildscript {
+
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.novoda:bintray-release:0.9.1'
+    }
+}
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
 
     defaultConfig {
         minSdkVersion 19
-        targetSdkVersion 28
+        targetSdkVersion 29
+        versionName "1.0.0"
         versionCode 1
-        versionName "1.0"
     }
 
     buildTypes {
@@ -25,4 +37,14 @@ dependencies {
 
 repositories {
     mavenCentral()
+}
+
+publish {
+    userOrg = 'panton295'
+    repoName = 'com.apandroid'
+    groupId = 'com.apandroid'
+    artifactId = 'colorwheel'
+    publishVersion = '1.0.0'
+    desc = 'A color picker for Android'
+    website = 'https://github.com/AntonPopoff/android-color-wheel'
 }
