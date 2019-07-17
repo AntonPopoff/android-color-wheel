@@ -31,15 +31,15 @@ repositories {
 
 ## Getting Started
 
-To start using the views just add `ColorWheel` or `GradientSeekBar` to your xml layout file.
+To start using the views just add `ColorWheel` or `GradientSeekBar` to your xml layout file:
 
 ```xml
-<com.colorwheelapp.colorwheel.ColorWheel
+<com.apandroid.colorwheel.ColorWheel
     android:id="@+id/colorWheel"
     android:layout_width="match_parent"
     android:layout_height="match_parent" />
 
-<com.colorwheelapp.colorwheel.gradientseekbar.GradientSeekBar
+<com.apandroid.colorwheel.gradientseekbar.GradientSeekBar
     android:id="@+id/gradientSeekBar"
     android:layout_width="match_parent"
     android:layout_height="match_parent" />
