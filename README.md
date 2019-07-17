@@ -47,16 +47,30 @@ To start using the views just add `ColorWheel` or `GradientSeekBar` to your xml 
 
 ## Basic Usage
 
-To **get** or **set** color from `ColorWheel` you can use `ColorWheel.rgb` property. This property returns you current RGB color that is an
-equivavelent of a HSV color that is selected on ColorWheel.
+### ColorWheel
+
+To **set** or **get** an RGB color to/from `ColorWheel` you can use `ColorWheel.rgb` property:
 
 ```kotlin
 val colorWheel = findViewById<ColorWheel>(R.id.colorWheel)
+
 colorWheel.rgb = Color.rgb(13, 37, 42)
+
+val currentColor = colorWheel.rgb
 ```
 
-Also you can register a listener that will notify you when selected color is changed either by a gesture or by the setter.
+**Note**: when you **set** an RGB or ARGB color it is transformed to the closest 
+**HSV** color with **value** component set to 1 so the color can be correctly displayed 
+on the color wheel. Therefore currently selected color on `ColorWheel` may differ from 
+the original color you have set. To allow a user to change brightness or alpha component
+of a color picked from `ColorWheel` you can use `GradientSeekBar`.
+
+Also you can set `colorChangeListener` that will be called every time when currently
+selected color is changed:
 
 ```kotlin
-
+colorWheel.colorChangeListener = { rgb: Int ->
+    // Listener Code
+}
 ```
+### GradientSeekBar
