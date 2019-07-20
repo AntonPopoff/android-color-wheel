@@ -76,7 +76,7 @@ open class GradientSeekBar @JvmOverloads constructor(
             requestLayout()
         }
 
-    var currentColor = 0
+    var argb = 0
         private set
 
     var listener: ((Float, Int) -> Unit)? = null
@@ -142,7 +142,7 @@ open class GradientSeekBar @JvmOverloads constructor(
 
     private fun drawThumb(canvas: Canvas) {
         thumbDrawable.bounds = orientationStrategy.calculateThumbBounds(this, gradientDrawable.bounds)
-        thumbDrawable.indicatorColor = currentColor
+        thumbDrawable.indicatorColor = argb
         thumbDrawable.draw(canvas)
     }
 
@@ -180,13 +180,13 @@ open class GradientSeekBar @JvmOverloads constructor(
     }
 
     private fun updateCurrentColor() {
-        currentColor = interpolateColorLinear(gradientColors[0], gradientColors[1], internalOffset)
+        argb = interpolateColorLinear(gradientColors[0], gradientColors[1], internalOffset)
         fireListener()
         invalidate()
     }
 
     private fun fireListener() {
-        listener?.invoke(internalOffset, currentColor)
+        listener?.invoke(internalOffset, argb)
     }
 
     enum class Orientation { VERTICAL, HORIZONTAL }
