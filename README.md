@@ -74,3 +74,39 @@ colorWheel.colorChangeListener = { rgb: Int ->
 }
 ```
 ### GradientSeekBar
+
+`GradientSeekBar` draws a **vertical** or **horizontal** bar filled with linear
+gradient of two colors. You can use it to pick an intermediate color between
+those two.
+
+#### Color
+
+To pick a current selected **ARGB** color you can use `GradientSeekBar.currentColor` property:
+
+```kotlin
+val color = gradientSeekBar.currentColor
+```
+
+To set/get `start` or `end` colors to/from `GradientSeekBar` you can you the following properties and methods:
+
+```kotlin
+val startColor = Color.argb(0, 0, 0, 0)
+val endColor = Color.argb(0xff, 0xff, 0xff, 0xff)
+
+gradientSeekBar.startColor = startColor
+gradientSeekBar.endColor = endColor
+gradientSeekBar.setColors(startColor, endColor)
+```
+
+Also you can set a `listener` that will be called every time a current selected color is changed:
+
+```kotlin
+gradientSeekBar.currentColor = { offset: Float, argb: Int ->
+    // Listener code
+}
+```
+
+If you want to change an intermediate color programmatically you can use
+`GradientSeekBar.offset` property. This value is always within
+range from `0f` to `1f` and shows how close an intermediate color to
+a start or an end color.
