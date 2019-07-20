@@ -49,7 +49,7 @@ To start using the views just add `ColorWheel` or `GradientSeekBar` to your xml 
 
 ### ColorWheel
 
-To **set** or **get** an RGB color to/from `ColorWheel` you can use `ColorWheel.rgb` property:
+To **set** or **get** an RGB color you can use `ColorWheel.rgb` property:
 
 ```kotlin
 val colorWheel = findViewById<ColorWheel>(R.id.colorWheel)
@@ -81,13 +81,15 @@ those two.
 
 #### Color
 
-To pick a current selected **ARGB** color you can use `GradientSeekBar.currentColor` property:
+To pick an intermediate **ARGB** color you can use `GradientSeekBar.currentColor` 
+property:
 
 ```kotlin
 val color = gradientSeekBar.currentColor
 ```
 
-To set/get `start` or `end` colors to/from `GradientSeekBar` you can you the following properties and methods:
+To **set** or **get** `start` or `end` colors to or from `GradientSeekBar` you can 
+use the following properties and methods:
 
 ```kotlin
 val startColor = Color.argb(0, 0, 0, 0)
@@ -98,7 +100,8 @@ gradientSeekBar.endColor = endColor
 gradientSeekBar.setColors(startColor, endColor)
 ```
 
-Also you can set a `listener` that will be called every time a current selected color is changed:
+Also you can set a `listener` that will be called every time an intermediate color is 
+changed:
 
 ```kotlin
 gradientSeekBar.currentColor = { offset: Float, argb: Int ->
