@@ -206,8 +206,8 @@ inline fun GradientSeekBar.setAlphaListener(crossinline listener: (Float, Int, I
     this.listener = { offset, color -> listener(offset, color, this.argbAlpha) }
 }
 
-fun GradientSeekBar.setColorToBlack(color: Int) {
-    this.setColors(color, Color.BLACK)
+fun GradientSeekBar.setBlackToColor(color: Int) {
+    this.setColors(Color.BLACK, color)
 }
 
 private fun ensureOffsetWithinRange(offset: Float) = ensureNumberWithinRange(offset, 0f, 1f)
