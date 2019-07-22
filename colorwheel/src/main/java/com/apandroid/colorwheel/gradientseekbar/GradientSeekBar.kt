@@ -16,7 +16,6 @@ import com.apandroid.colorwheel.utils.ensureNumberWithinRange
 import com.apandroid.colorwheel.utils.interpolateColorLinear
 import com.apandroid.colorwheel.utils.setColorAlpha
 import kotlin.math.abs
-import kotlin.math.roundToInt
 
 open class GradientSeekBar @JvmOverloads constructor(
     context: Context,
@@ -192,12 +191,10 @@ open class GradientSeekBar @JvmOverloads constructor(
     enum class Orientation { VERTICAL, HORIZONTAL }
 }
 
-var GradientSeekBar.currentAlpha
-    get() = (this.offset * MAX_ALPHA).roundToInt()
-    set(alpha) { this.offset = ensureAlphaWithinRange(alpha) / MAX_ALPHA.toFloat() }
+val GradientSeekBar.argbAlpha get() = Color.alpha(argb)
 
 fun GradientSeekBar.setAlphaArgb(argb: Int) {
-    this.currentAlpha = Color.alpha(argb)
+    this.offset = Color.alpha(argb) / MAX_ALPHA.toFloat()
     this.setColors(setColorAlpha(argb, 0), setColorAlpha(argb, MAX_ALPHA))
 }
 
@@ -206,13 +203,11 @@ fun GradientSeekBar.setAlphaRgb(rgb: Int) {
 }
 
 inline fun GradientSeekBar.setAlphaListener(crossinline listener: (Float, Int, Int) -> Unit) {
-    this.listener = { offset, color -> listener(offset, color, this.currentAlpha) }
+    this.listener = { offset, color -> listener(offset, color, this.argbAlpha) }
 }
 
 fun GradientSeekBar.setColorToBlack(color: Int) {
     this.setColors(color, Color.BLACK)
 }
-
-private fun ensureAlphaWithinRange(alpha: Int) = ensureNumberWithinRange(alpha, 0, MAX_ALPHA)
 
 private fun ensureOffsetWithinRange(offset: Float) = ensureNumberWithinRange(offset, 0f, 1f)
