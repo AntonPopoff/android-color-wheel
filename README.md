@@ -16,7 +16,7 @@ views that can be used to pick an **ARGB** color.
 To add the library to your project simply add the following line to your app module `build.gradle` file:
 
 ```groovy
-implementation 'com.apandroid:colorwheel:1.0.1'
+implementation 'com.apandroid:colorwheel:1.0.2'
 ```
 
 In case of problems make sure that **jCenter** repository is specified in your `build.gradle` file:
@@ -112,15 +112,12 @@ you can use the following extensions of `GradientSeekBar`:
 * `GradientSeekBar.setAlphaArgb(argb)`
 * `GradientSeekBar.setAlphaRgb(rgb)`
 
-Both of these methods take RGB color and set fully transparent version of it as a `start` color
-and completely opaque as an `end` color.
+Both of these methods take RGB color and set transparent version of it as a `start` color and opaque as an `end` color.
 
 The only difference between these two methods is that `GradientSeekBar.setAlphaArgb(argb)` also adjusts
-position of the thumb based on the alpha value of the parameter while `GradientSeekBar.setAlphaRgb(rgb)`
-only sets `start` and `end` colors without adjusting position of the thumb.
+position of the thumb based on the alpha value of the parameter while `GradientSeekBar.setAlphaRgb(rgb)` doesn't.
 
-To get or set current alpha value you can use `GradientSeekBar.currentAlpha` extensions property. Basically
-it is just `GradientSeekBar.offset` property transformed to be within the range from `0` to `255`.
+To get alpha component of the current intermediate color you can use `GradientSeekBar.argbAlpha` extension property.
 
 Also you can use `GradientSeekBar.setAlphaListener` method to set a listener that will be called when
 alpha value is changed.
@@ -130,7 +127,5 @@ gradientSeekBar.setAlphaListener { offset: Float, color: Int, alpha: Int ->
     // Listener code
 }
 ```
-
-It is not required to mix usage of those extensions with basic `GradientSeekBar` methods like `setColor(startColor, endColor)` etc.
 
 #### Brightness
