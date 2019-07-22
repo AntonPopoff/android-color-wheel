@@ -35,7 +35,7 @@ class TestGradientSeekBarFragment : Fragment() {
         thumbRadiusEdit.afterTextChanged(this::onThumbRadiusChanged)
         thumbRadiusEdit.setText((gradientSeekBar.thumbRadius / density).roundToInt().toString())
 
-        offsetSeekBar.progress = gradientSeekBar.currentAlpha
+        offsetSeekBar.progress = gradientSeekBar.argbAlpha
         offsetSeekBar.setOnProgressChangeListener(this::onOffsetSeekBarChange)
         alphaText.text = getString(R.string.offset_with_value, gradientSeekBar.offset)
 

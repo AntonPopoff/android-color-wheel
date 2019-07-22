@@ -7,8 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.apandroid.colorwheel.gradientseekbar.argbAlpha
 import com.apandroid.colorwheelapp.extensions.density
-import com.apandroid.colorwheel.gradientseekbar.currentAlpha
 import com.apandroid.colorwheel.gradientseekbar.setAlphaListener
 import com.apandroid.colorwheel.gradientseekbar.setAlphaRgb
 import com.apandroid.colorwheel.gradientseekbar.setColorToBlack
@@ -40,20 +40,20 @@ class PreviewFragment : Fragment() {
         valueSeekBar.listener = this::onValueSeekBarUpdate
 
         colorIndicator.background = colorIndicatorBackground
-        colorIndicatorBackground.setColor(setColorAlpha(valueSeekBar.currentColor, gradientSeekBar.currentAlpha))
+        colorIndicatorBackground.setColor(setColorAlpha(valueSeekBar.argb, gradientSeekBar.argbAlpha))
     }
 
     private fun onColorWheelUpdateListener(rgb: Int) {
         gradientSeekBar.setAlphaRgb(rgb)
         valueSeekBar.setColorToBlack(rgb)
-        colorIndicatorBackground.setColor(setColorAlpha(valueSeekBar.currentColor, gradientSeekBar.currentAlpha))
+        colorIndicatorBackground.setColor(setColorAlpha(valueSeekBar.argb, gradientSeekBar.argbAlpha))
     }
 
     private fun onAlphaSeekBarUpdate(offset: Float, color: Int, alpha: Int) {
-        colorIndicatorBackground.setColor(setColorAlpha(valueSeekBar.currentColor, alpha))
+        colorIndicatorBackground.setColor(setColorAlpha(valueSeekBar.argb, alpha))
     }
 
     private fun onValueSeekBarUpdate(offset: Float, color: Int) {
-        colorIndicatorBackground.setColor(setColorAlpha(color, gradientSeekBar.currentAlpha))
+        colorIndicatorBackground.setColor(setColorAlpha(color, gradientSeekBar.argbAlpha))
     }
 }
