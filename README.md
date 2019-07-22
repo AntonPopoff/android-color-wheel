@@ -134,6 +134,6 @@ It is impossible to pick all different colors from HSV Color Wheel since it is 2
 is always set to `1f`.
 
 To compensate it you can use `GradientSeekBar` and it's `setBlackToColor(color)` extensions. This method sets black color as a
-`start` color and provided color as an end color. This gives you a possibility to pick additional shades of the color selected from `ColorWheel`.
+`start` color and provided color as an `end` color. This gives you a possibility to pick additional shades of the color selected from `ColorWheel`.
 
 ### Additional Customazing
