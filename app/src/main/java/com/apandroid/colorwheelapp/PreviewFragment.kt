@@ -7,11 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.apandroid.colorwheel.gradientseekbar.argbAlpha
+import com.apandroid.colorwheel.gradientseekbar.*
 import com.apandroid.colorwheelapp.extensions.density
-import com.apandroid.colorwheel.gradientseekbar.setAlphaListener
-import com.apandroid.colorwheel.gradientseekbar.setAlphaRgb
-import com.apandroid.colorwheel.gradientseekbar.setColorToBlack
 import com.apandroid.colorwheel.utils.setColorAlpha
 import kotlinx.android.synthetic.main.fragment_preview.*
 
@@ -36,7 +33,7 @@ class PreviewFragment : Fragment() {
         gradientSeekBar.setAlphaRgb(colorWheel.rgb)
         gradientSeekBar.setAlphaListener(this::onAlphaSeekBarUpdate)
 
-        valueSeekBar.setColorToBlack(colorWheel.rgb)
+        valueSeekBar.setBlackToColor(colorWheel.rgb)
         valueSeekBar.listener = this::onValueSeekBarUpdate
 
         colorIndicator.background = colorIndicatorBackground
@@ -45,7 +42,7 @@ class PreviewFragment : Fragment() {
 
     private fun onColorWheelUpdateListener(rgb: Int) {
         gradientSeekBar.setAlphaRgb(rgb)
-        valueSeekBar.setColorToBlack(rgb)
+        valueSeekBar.setBlackToColor(rgb)
         colorIndicatorBackground.setColor(setColorAlpha(valueSeekBar.argb, gradientSeekBar.argbAlpha))
     }
 
