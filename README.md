@@ -137,3 +137,27 @@ To compensate it you can use `GradientSeekBar` and it's `setBlackToColor(color)`
 `start` color and provided color as an `end` color. This gives you a possibility to pick additional shades of the color selected from `ColorWheel`.
 
 ### Additional Customazing
+
+You can use the following XML attributes to additionally customize `ColorWheel` and `GradientSeekBar`.
+
+#### ColorWheel
+
+| XML Attribute    | Property      | Description                              |
+|------------------|---------------|------------------------------------------|
+| `cw_thumbRadius` | `thumbRadius` | Sets the radius of `ColorWheel`'s thumb. |
+
+#### GradientSeekBar
+
+| XML Attribute          | Property       | Description                                                                                                          |
+|------------------------|----------------|----------------------------------------------------------------------------------------------------------------------|
+| `asb_thumbRadius`      | `thumbRadius`  | Sets the radius of the `GradientSeekBar`'s thumb.                                                                    |
+| `asb_barSize`          | `barSize`      | Sets width(vertical)/height(horizontal) of the `GradientSeekBar`'s gradient bar depending on it's orientation.       |
+| `asb_barCornersRadius` | `cornerRadius` | Sets `GradientSeekBar`'s gradient bar corners radius.                                                                |
+| `asb_startColor`       | `startColor`   | Sets `GradientSeekBar`'s startColor.                                                                                 |
+| `asb_endColor`         | `endColor`     | Sets `GradientSeekBar`'s endColor.                                                                                   |
+| `asb_offset`           | `offset`       | Sets `GradientSeekBar`'s offset.                                                                                     |
+| `asb_orientation`      | `orientation`  | Sets `GradientSeekBar`'s orientation. Possible values: `vertical`/`horizontal`.                                      |
+
+## License
+
+MIT
