@@ -16,7 +16,7 @@ views that can be used to pick an **ARGB** color.
 To add the library to your project simply add the following line to your app module `build.gradle` file:
 
 ```groovy
-implementation 'com.apandroid:colorwheel:1.0.2'
+implementation 'com.apandroid:colorwheel:1.0.3'
 ```
 
 In case of problems make sure that **jCenter** repository is specified in your `build.gradle` file:
@@ -79,7 +79,7 @@ You can use it to pick an intermediate color between those two.
 To pick an intermediate ARGB color you can use `GradientSeekBar.argb` property:
 
 ```kotlin
-val color = gradientSeekBar.currentColor
+val color = gradientSeekBar.argb
 ```
 
 To set or get `start` or `end` colors to or from `GradientSeekBar` you can use the following properties and methods:
