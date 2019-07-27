@@ -1,7 +1,7 @@
 # ColorWheel
 
 **ColorWheel** is a library for Android that provides **HSV Color Wheel** and **Linear Gradient Seek Bar**
-views that can be used to pick an **ARGB** color.
+UI elements that can be used to pick **ARGB** color.
 
 ## Requirements
 
@@ -47,7 +47,7 @@ To start using the views just add `ColorWheel` or `GradientSeekBar` to your xml 
 
 ### ColorWheel
 
-To set or get an RGB color you can use `ColorWheel.rgb` property:
+To set or get RGB color you can use `ColorWheel.rgb` property:
 
 ```kotlin
 val colorWheel = findViewById<ColorWheel>(R.id.colorWheel)
@@ -57,10 +57,10 @@ colorWheel.rgb = Color.rgb(13, 37, 42)
 val currentColor = colorWheel.rgb
 ```
 
-**Note**: when you set an RGB or ARGB color it is transformed to the closest HSV color with value(brightness) component of it set to 1
-so the color can be correctly selected on the `ColorWheel` because it is only 2 dimensional. Therefore currently displayed color
+**Note**: when you set RGB or ARGB color it is transformed to the closest HSV color with value(brightness) component of it set to 1
+so the color can be correctly displayed on the `ColorWheel` because it is only 2 dimensional. Therefore currently displayed color
 on the `ColorWheel` may differ from the original color that you have set. To allow a user to change brightness or alpha component
-of a color picked from `ColorWheel` you can use `GradientSeekBar`.
+of a color picked from `ColorWheel` you can use `GradientSeekBar` view.
 
 Also you can set `colorChangeListener` that will be called every time when currently selected color is changed:
 
@@ -72,11 +72,11 @@ colorWheel.colorChangeListener = { rgb: Int ->
 ### GradientSeekBar
 
 `GradientSeekBar` draws a vertical or horizontal bar filled with linear gradient of two colors.
-You can use it to pick an intermediate color between those two.
+You can use it to pick an intermediate color between these two.
 
 #### Color
 
-To pick an intermediate ARGB color you can use `GradientSeekBar.argb` property:
+To pick intermediate ARGB color you can use `GradientSeekBar.argb` property:
 
 ```kotlin
 val color = gradientSeekBar.argb
@@ -93,7 +93,7 @@ gradientSeekBar.endColor = endColor
 gradientSeekBar.setColors(startColor, endColor)
 ```
 
-Also you can set a `listener` that will be called every time an intermediate color is changed:
+Also you can use `listener` property to set a listener that will be called every time an intermediate color is changed:
 
 ```kotlin
 gradientSeekBar.currentColor = { offset: Float, argb: Int ->
@@ -102,7 +102,7 @@ gradientSeekBar.currentColor = { offset: Float, argb: Int ->
 ```
 
 If you want to change an intermediate color programmatically you can use `GradientSeekBar.offset` property. This value is always within
-the range from `0f` to `1f` and shows how close an intermediate color to a start or an end color.
+the range from `0f` to `1f` and shows how close an intermediate color to a start or end color.
 
 #### Alpha
 
@@ -112,12 +112,12 @@ you can use the following extensions of `GradientSeekBar`:
 * `GradientSeekBar.setAlphaArgb(argb)`
 * `GradientSeekBar.setAlphaRgb(rgb)`
 
-Both of these methods take RGB color and set transparent version of it as a `start` color and opaque as an `end` color.
+Both of these methods take RGB color and set transparent version of it as `start` color and opaque as `end` color.
 
 The only difference between these two methods is that `GradientSeekBar.setAlphaArgb(argb)` also adjusts
 position of the thumb based on the alpha value of the parameter while `GradientSeekBar.setAlphaRgb(rgb)` doesn't.
 
-To get alpha component of the current intermediate color you can use `GradientSeekBar.argbAlpha` extension property.
+To get alpha component of a current intermediate color you can use `GradientSeekBar.argbAlpha` extension property.
 
 Also you can use `GradientSeekBar.setAlphaListener` method to set a listener that will be called when
 alpha value is changed.
@@ -133,8 +133,8 @@ gradientSeekBar.setAlphaListener { offset: Float, color: Int, alpha: Int ->
 It is impossible to pick all different colors from HSV Color Wheel since it is 2 dimensional and value(brightness) component of it
 is always set to `1f`.
 
-To compensate it you can use `GradientSeekBar` and it's `setBlackToColor(color)` extensions. This method sets black color as a
-`start` color and provided color as an `end` color. This gives you a possibility to pick additional shades of the color selected from `ColorWheel`.
+To compensate it you can use `GradientSeekBar` and it's `setBlackToColor(color)` extensions. This method sets black color as
+`start` color and provided color as `end` color. This gives you a possibility to pick additional shades of a color selected from `ColorWheel`.
 
 ### Additional Customazing
 
