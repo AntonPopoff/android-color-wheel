@@ -102,7 +102,7 @@ open class GradientSeekBar @JvmOverloads constructor(
 
     private fun readGradientColors(array: TypedArray) {
         val start = array.getColor(R.styleable.GradientSeekBar_asb_startColor, Color.TRANSPARENT)
-        val end = array.getColor(R.styleable.GradientSeekBar_asb_startColor, Color.BLACK)
+        val end = array.getColor(R.styleable.GradientSeekBar_asb_endColor, Color.BLACK)
         setColors(start, end)
     }
 
