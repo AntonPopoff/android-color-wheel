@@ -16,7 +16,7 @@ class PreviewFragment : Fragment() {
 
     private lateinit var colorIndicatorBackground: GradientDrawable
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         colorIndicatorBackground = GradientDrawable().apply { cornerRadius = density * 16 }
     }
