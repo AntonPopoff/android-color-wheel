@@ -84,9 +84,14 @@ open class ColorWheel @JvmOverloads constructor(
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        val minDimension = minOf(
+            MeasureSpec.getSize(widthMeasureSpec),
+            MeasureSpec.getSize(heightMeasureSpec)
+        )
+
         setMeasuredDimension(
-            resolveSize(MeasureSpec.getSize(widthMeasureSpec), widthMeasureSpec),
-            resolveSize(MeasureSpec.getSize(heightMeasureSpec), heightMeasureSpec)
+            resolveSize(minDimension, widthMeasureSpec),
+            resolveSize(minDimension, heightMeasureSpec)
         )
     }
 
