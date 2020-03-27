@@ -96,7 +96,7 @@ gradientSeekBar.setColors(startColor, endColor)
 Also you can use `listener` property to set a listener that will be called every time an intermediate color is changed:
 
 ```kotlin
-gradientSeekBar.currentColor = { offset: Float, argb: Int ->
+gradientSeekBar.listener = { offset: Float, argb: Int ->
     // Listener code
 }
 ```
