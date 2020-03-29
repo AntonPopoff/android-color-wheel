@@ -27,6 +27,14 @@ internal class ThumbDrawable {
         get() = thumbDrawable.bounds
         set(bounds) { thumbDrawable.bounds = bounds }
 
+    fun setStrokeColor(argb: Int) {
+        thumbCircle.setStroke(1, argb)
+    }
+
+    fun setThumbColor(argb: Int) {
+        thumbCircle.setColor(argb)
+    }
+
     fun applyInsets(thumbRadius: Float) {
         val colorHInset = (thumbRadius * 0.3f).toInt()
         val colorVInset = (thumbRadius * 0.3f).toInt()
