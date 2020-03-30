@@ -9,12 +9,7 @@ import android.graphics.drawable.shapes.OvalShape
 
 internal class ThumbDrawable {
 
-    private val thumbCircleDrawable = GradientDrawable().apply {
-        shape = GradientDrawable.OVAL
-        setStroke(1, Color.GRAY)
-        setColor(Color.WHITE)
-    }
-
+    private val thumbCircleDrawable = GradientDrawable().apply { shape = GradientDrawable.OVAL }
     private val colorIndicatorDrawable = ShapeDrawable(OvalShape())
 
     var indicatorColor

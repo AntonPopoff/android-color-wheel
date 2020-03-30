@@ -3,6 +3,8 @@
 
     <style name="ColorWheelDefaultStyle">
         <item name="cw_thumbRadius">@dimen/default_thumb_radius</item>
+        <item name="cw_thumbColor">@color/default_thumb_color</item>
+        <item name="cw_thumbStrokeColor">@color/default_thumb_stroke_color</item>
     </style>
 
     <style name="GradientSeekBarDefaultStyle">

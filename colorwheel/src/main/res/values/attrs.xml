@@ -3,6 +3,8 @@
 
     <declare-styleable name="ColorWheel">
         <attr name="cw_thumbRadius" format="dimension" />
+        <attr name="cw_thumbColor" format="color" />
+        <attr name="cw_thumbStrokeColor" format="color" />
     </declare-styleable>
 
     <declare-styleable name="GradientSeekBar">

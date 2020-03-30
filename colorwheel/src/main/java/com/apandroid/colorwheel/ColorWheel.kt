@@ -58,6 +58,20 @@ open class ColorWheel @JvmOverloads constructor(
             invalidate()
         }
 
+    var thumbColor = 0
+        set(value) {
+            field = value
+            thumbDrawable.setThumbColor(value)
+            invalidate()
+        }
+
+    var thumbStrokeColor = 0
+        set(value) {
+            field = value
+            thumbDrawable.setStrokeColor(value)
+            invalidate()
+        }
+
     var colorChangeListener: ((Int) -> Unit)? = null
 
     var interceptTouchEvent = true
@@ -69,16 +83,10 @@ open class ColorWheel @JvmOverloads constructor(
     private fun parseAttributes(context: Context, attrs: AttributeSet?) {
         context.obtainStyledAttributes(attrs, R.styleable.ColorWheel, 0, R.style.ColorWheelDefaultStyle).apply {
             thumbRadius = getDimensionPixelSize(R.styleable.ColorWheel_cw_thumbRadius, 0)
+            thumbColor = getColor(R.styleable.ColorWheel_cw_thumbColor, 0)
+            thumbStrokeColor = getColor(R.styleable.ColorWheel_cw_thumbStrokeColor, 0)
             recycle()
         }
-    }
-
-    fun setThumbStrokeColor(argb: Int) {
-        thumbDrawable.setStrokeColor(argb)
-    }
-
-    fun setThumbColor(argb: Int) {
-        thumbDrawable.setThumbColor(argb)
     }
 
     fun setRgb(r: Int, g: Int, b: Int) {
