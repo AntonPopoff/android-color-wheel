@@ -71,7 +71,6 @@ open class GradientSeekBar @JvmOverloads constructor(
     var thumbRadius = 0
         set(radius) {
             field = radius
-            updateThumbInsets()
             requestLayout()
         }
 
@@ -85,7 +84,6 @@ open class GradientSeekBar @JvmOverloads constructor(
     init {
         parseAttributes(context, attrs, R.style.GradientSeekBarDefaultStyle)
         orientationStrategy = createOrientationStrategy()
-        updateThumbInsets()
     }
 
     private fun parseAttributes(context: Context, attrs: AttributeSet?, defStyle: Int) {
@@ -109,10 +107,6 @@ open class GradientSeekBar @JvmOverloads constructor(
     private fun createOrientationStrategy() = when (orientation) {
         Orientation.VERTICAL -> VerticalStrategy()
         Orientation.HORIZONTAL -> HorizontalStrategy()
-    }
-
-    private fun updateThumbInsets() {
-        thumbDrawable.calculateThumbInset(thumbRadius.toFloat())
     }
 
     fun setColors(startColor: Int = gradientColors[0], endColor: Int = gradientColors[1]) {
@@ -140,8 +134,8 @@ open class GradientSeekBar @JvmOverloads constructor(
     }
 
     private fun drawThumb(canvas: Canvas) {
-        thumbDrawable.bounds = orientationStrategy.calculateThumbBounds(this, gradientDrawable.bounds)
         thumbDrawable.indicatorColor = argb
+        thumbDrawable.setBounds(orientationStrategy.calculateThumbBounds(this, gradientDrawable.bounds), thumbRadius)
         thumbDrawable.draw(canvas)
     }
 

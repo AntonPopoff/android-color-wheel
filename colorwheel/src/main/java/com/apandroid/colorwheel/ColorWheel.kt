@@ -55,7 +55,6 @@ open class ColorWheel @JvmOverloads constructor(
     var thumbRadius = 0
         set(value) {
             field = value
-            updateThumbInsets()
             invalidate()
         }
 
@@ -65,7 +64,6 @@ open class ColorWheel @JvmOverloads constructor(
 
     init {
         parseAttributes(context, attrs)
-        updateThumbInsets()
     }
 
     private fun parseAttributes(context: Context, attrs: AttributeSet?) {
@@ -73,10 +71,6 @@ open class ColorWheel @JvmOverloads constructor(
             thumbRadius = getDimensionPixelSize(R.styleable.ColorWheel_cw_thumbRadius, 0)
             recycle()
         }
-    }
-
-    private fun updateThumbInsets() {
-        thumbDrawable.calculateThumbInset(thumbRadius.toFloat())
     }
 
     fun setRgb(r: Int, g: Int, b: Int) {
@@ -127,14 +121,8 @@ open class ColorWheel @JvmOverloads constructor(
         val thumbX = (cos(hueRadians) * r + wheelCenterX).toInt()
         val thumbY = (sin(hueRadians) * r + wheelCenterY).toInt()
 
-        thumbDrawable.setBounds(
-            thumbX - thumbRadius,
-            thumbY - thumbRadius,
-            thumbX + thumbRadius,
-            thumbY + thumbRadius
-        )
-
         thumbDrawable.indicatorColor = hsvColor.rgb
+        thumbDrawable.setBounds(thumbX, thumbY, thumbRadius)
         thumbDrawable.draw(canvas)
     }
 
