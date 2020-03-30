@@ -73,6 +73,14 @@ open class ColorWheel @JvmOverloads constructor(
         }
     }
 
+    fun setThumbStrokeColor(argb: Int) {
+        thumbDrawable.setStrokeColor(argb)
+    }
+
+    fun setThumbColor(argb: Int) {
+        thumbDrawable.setThumbColor(argb)
+    }
+
     fun setRgb(r: Int, g: Int, b: Int) {
         rgb = Color.rgb(r, g, b)
     }
