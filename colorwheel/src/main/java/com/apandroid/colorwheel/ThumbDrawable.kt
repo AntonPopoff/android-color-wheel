@@ -3,7 +3,6 @@ package com.apandroid.colorwheel
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
-import android.graphics.drawable.LayerDrawable
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.OvalShape
 
@@ -17,15 +16,15 @@ internal class ThumbDrawable {
 
     private val colorIndicatorDrawable = ShapeDrawable(OvalShape())
 
-    private val thumbDrawable = LayerDrawable(arrayOf(thumbCircle, colorIndicatorDrawable))
+    private var inset = 0
 
     var indicatorColor
         get() = colorIndicatorDrawable.paint.color
         set(value) { colorIndicatorDrawable.paint.color = value }
 
     var bounds
-        get() = thumbDrawable.bounds
-        set(bounds) { thumbDrawable.bounds = bounds }
+        get() = thumbCircle.bounds
+        set(bounds) { setBounds(bounds.left, bounds.top, bounds.right, bounds.bottom) }
 
     fun setStrokeColor(argb: Int) {
         thumbCircle.setStroke(1, argb)
@@ -35,15 +34,17 @@ internal class ThumbDrawable {
         thumbCircle.setColor(argb)
     }
 
-    fun applyInsets(thumbRadius: Float) {
-        val colorHInset = (thumbRadius * 0.3f).toInt()
-        val colorVInset = (thumbRadius * 0.3f).toInt()
-        thumbDrawable.setLayerInset(1, colorHInset, colorVInset, colorHInset, colorVInset)
+    fun calculateThumbInset(radius: Float) {
+        inset = (radius * 0.3f).toInt()
     }
 
     fun setBounds(left: Int, top: Int, right: Int, bottom: Int) {
-        thumbDrawable.setBounds(left, top, right, bottom)
+        thumbCircle.setBounds(left, top, right, bottom)
+        colorIndicatorDrawable.setBounds(left + inset, top + inset, right - inset, bottom - inset)
     }
 
-    fun draw(canvas: Canvas) = thumbDrawable.draw(canvas)
+    fun draw(canvas: Canvas) {
+        thumbCircle.draw(canvas)
+        colorIndicatorDrawable.draw(canvas)
+    }
 }

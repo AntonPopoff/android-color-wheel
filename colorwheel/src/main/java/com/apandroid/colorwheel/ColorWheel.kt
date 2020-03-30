@@ -76,7 +76,7 @@ open class ColorWheel @JvmOverloads constructor(
     }
 
     private fun updateThumbInsets() {
-        thumbDrawable.applyInsets(thumbRadius.toFloat())
+        thumbDrawable.calculateThumbInset(thumbRadius.toFloat())
     }
 
     fun setRgb(r: Int, g: Int, b: Int) {

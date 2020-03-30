@@ -112,7 +112,7 @@ open class GradientSeekBar @JvmOverloads constructor(
     }
 
     private fun updateThumbInsets() {
-        thumbDrawable.applyInsets(thumbRadius.toFloat())
+        thumbDrawable.calculateThumbInset(thumbRadius.toFloat())
     }
 
     fun setColors(startColor: Int = gradientColors[0], endColor: Int = gradientColors[1]) {
