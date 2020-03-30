@@ -8,6 +8,8 @@
     </declare-styleable>
 
     <declare-styleable name="GradientSeekBar">
+        <attr name="asb_thumbColor" format="color" />
+        <attr name="asb_thumbStrokeColor" format="color" />
         <attr name="asb_thumbRadius" format="dimension" />
         <attr name="asb_barSize" format="dimension" />
         <attr name="asb_barCornersRadius" format="dimension" />
