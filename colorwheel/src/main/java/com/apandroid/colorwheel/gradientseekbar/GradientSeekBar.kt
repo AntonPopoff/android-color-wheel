@@ -33,6 +33,20 @@ open class GradientSeekBar @JvmOverloads constructor(
     private var internalOffset = 0f
     private var motionEventDownX = 0f
 
+    var thumbColor = 0
+        set(value) {
+            field = value
+            thumbDrawable.setThumbColor(value)
+            invalidate()
+        }
+
+    var thumbStrokeColor = 0
+        set(value) {
+            field = value
+            thumbDrawable.setStrokeColor(value)
+            invalidate()
+        }
+
     var startColor
         get() = gradientColors[0]
         set(color) { setColors(startColor = color) }
