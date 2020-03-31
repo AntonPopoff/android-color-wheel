@@ -72,6 +72,13 @@ open class ColorWheel @JvmOverloads constructor(
             invalidate()
         }
 
+    var thumbColorCircleScale
+        get() = thumbDrawable.colorCircleScale
+        set(value) {
+            thumbDrawable.colorCircleScale = value
+            invalidate()
+        }
+
     var colorChangeListener: ((Int) -> Unit)? = null
 
     var interceptTouchEvent = true
@@ -85,6 +92,7 @@ open class ColorWheel @JvmOverloads constructor(
             thumbRadius = getDimensionPixelSize(R.styleable.ColorWheel_cw_thumbRadius, 0)
             thumbColor = getColor(R.styleable.ColorWheel_cw_thumbColor, 0)
             thumbStrokeColor = getColor(R.styleable.ColorWheel_cw_thumbStrokeColor, 0)
+            thumbColorCircleScale = getFloat(R.styleable.ColorWheel_cw_thumbColorCircleScale, 0f)
             recycle()
         }
     }

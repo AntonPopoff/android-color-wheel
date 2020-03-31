@@ -13,7 +13,7 @@ internal class ThumbDrawable {
 
     private val colorCircleDrawable = ShapeDrawable(OvalShape())
 
-    var colorCircleScale = 0.7f
+    var colorCircleScale = 0f
         set(value) { field = ensureNumberWithinRange(value, 0f, 1f) }
 
     var indicatorColor
