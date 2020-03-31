@@ -11,6 +11,7 @@
     <style name="GradientSeekBarDefaultStyle">
         <item name="asb_thumbColor">@color/default_thumb_color</item>
         <item name="asb_thumbStrokeColor">@color/default_thumb_stroke_color</item>
+        <item name="asb_thumbColorCircleScale">@dimen/default_thumb_color_circle_scale</item>
         <item name="asb_thumbRadius">@dimen/default_thumb_radius</item>
         <item name="asb_barSize">10dp</item>
         <item name="asb_barCornersRadius">5dp</item>
