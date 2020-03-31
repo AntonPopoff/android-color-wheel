@@ -8,26 +8,26 @@ import android.graphics.drawable.shapes.OvalShape
 
 internal class ThumbDrawable {
 
-    private val thumbCircleDrawable = GradientDrawable().apply { shape = GradientDrawable.OVAL }
-    private val colorIndicatorDrawable = ShapeDrawable(OvalShape())
+    private val backingCircleDrawable = GradientDrawable().apply { shape = GradientDrawable.OVAL }
+    private val colorCircleDrawable = ShapeDrawable(OvalShape())
 
     var indicatorColor
-        get() = colorIndicatorDrawable.paint.color
-        set(value) { colorIndicatorDrawable.paint.color = value }
+        get() = colorCircleDrawable.paint.color
+        set(value) { colorCircleDrawable.paint.color = value }
 
     fun setStrokeColor(argb: Int) {
-        thumbCircleDrawable.setStroke(1, argb)
+        backingCircleDrawable.setStroke(1, argb)
     }
 
     fun setThumbColor(argb: Int) {
-        thumbCircleDrawable.setColor(argb)
+        backingCircleDrawable.setColor(argb)
     }
 
     fun setBounds(bounds: Rect, thumbRadius: Int) {
         val inset = (thumbRadius * 0.3f).toInt()
 
-        thumbCircleDrawable.bounds = bounds
-        colorIndicatorDrawable.bounds = bounds.also { it.inset(inset, inset) }
+        backingCircleDrawable.bounds = bounds
+        colorCircleDrawable.bounds = bounds.also { it.inset(inset, inset) }
     }
 
     fun setBounds(thumbX: Int, thumbY: Int, thumbRadius: Int) {
@@ -37,12 +37,12 @@ internal class ThumbDrawable {
         val bottom = thumbY + thumbRadius
         val inset = (thumbRadius * 0.3f).toInt()
 
-        thumbCircleDrawable.setBounds(left, top, right, bottom)
-        colorIndicatorDrawable.setBounds(left + inset, top + inset, right - inset, bottom - inset)
+        backingCircleDrawable.setBounds(left, top, right, bottom)
+        colorCircleDrawable.setBounds(left + inset, top + inset, right - inset, bottom - inset)
     }
 
     fun draw(canvas: Canvas) {
-        thumbCircleDrawable.draw(canvas)
-        colorIndicatorDrawable.draw(canvas)
+        backingCircleDrawable.draw(canvas)
+        colorCircleDrawable.draw(canvas)
     }
 }
