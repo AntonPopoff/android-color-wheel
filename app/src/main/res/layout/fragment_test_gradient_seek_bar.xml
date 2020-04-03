@@ -151,6 +151,25 @@
             app:constraint_referenced_ids="barSizeText,cornerRadiusText,thumbRadiusText"/>
 
         <TextView
+            android:id="@+id/colorCircleScale"
+            android:layout_width="wrap_content"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:layout_marginTop="16dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/thumbRadiusDivider"
+            tools:text="Color Circle Scale - 0.7"/>
+
+        <SeekBar
+            android:id="@+id/colorCircleScaleSeekBar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/colorCircleScale"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
             android:id="@+id/alphaText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -159,7 +178,7 @@
             android:textSize="16sp"
             tools:text="Offset - 1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/thumbRadiusDivider" />
+            app:layout_constraintTop_toBottomOf="@id/colorCircleScaleSeekBar" />
 
         <SeekBar
             android:id="@+id/offsetSeekBar"
@@ -258,13 +277,32 @@
             app:layout_constraintTop_toTopOf="@id/randomizeStartColor"
             app:layout_constraintBottom_toBottomOf="@id/randomizeStartColor"/>
 
+        <Button
+            android:id="@+id/randomizeThumbColorButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rnd_thumb_color"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/randomizeStartColor"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <Button
+            android:id="@+id/randomizeThumbStrokeColorButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rnd_thumb_stroke_color"
+            app:layout_constraintStart_toEndOf="@id/randomizeThumbColorButton"
+            app:layout_constraintTop_toBottomOf="@id/randomizeThumbColorButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
         <View
             android:id="@+id/randomDivider"
             android:layout_width="wrap_content"
             android:layout_height="1px"
             android:background="@android:color/darker_gray"
             android:layout_marginTop="10dp"
-            app:layout_constraintTop_toBottomOf="@id/randomizeStartColor"
+            app:layout_constraintTop_toBottomOf="@id/randomizeThumbStrokeColorButton"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
