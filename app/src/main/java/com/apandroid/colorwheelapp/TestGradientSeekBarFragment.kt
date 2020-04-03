@@ -1,16 +1,18 @@
 package com.apandroid.colorwheelapp
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioGroup
 import androidx.fragment.app.Fragment
-import com.apandroid.colorwheelapp.extensions.density
+import com.apandroid.colorwheel.gradientseekbar.GradientSeekBar
+import com.apandroid.colorwheel.gradientseekbar.argbAlpha
+import com.apandroid.colorwheel.gradientseekbar.setAlphaArgb
+import com.apandroid.colorwheel.gradientseekbar.setAlphaRgb
 import com.apandroid.colorwheelapp.extensions.afterTextChanged
+import com.apandroid.colorwheelapp.extensions.density
 import com.apandroid.colorwheelapp.extensions.setOnProgressChangeListener
-import com.apandroid.colorwheel.gradientseekbar.*
 import com.apandroid.colorwheelapp.utils.randomArgb
 import com.apandroid.colorwheelapp.utils.randomRgb
 import kotlinx.android.synthetic.main.fragment_test_gradient_seek_bar.*
