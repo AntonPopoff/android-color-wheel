@@ -239,19 +239,21 @@
 
         <Button
             android:id="@+id/randomizeRgbButton"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/randomize_rgb"
             android:layout_marginTop="10dp"
+            app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/orientationDivider"
             app:layout_constraintEnd_toStartOf="@id/randomizeArgbButton"/>
 
         <Button
             android:id="@+id/randomizeArgbButton"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/randomize_argb"
+            app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toEndOf="@id/randomizeRgbButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/randomizeRgbButton"
@@ -259,19 +261,20 @@
 
         <Button
             android:id="@+id/randomizeStartColor"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/randomize_start_rgb"
-            android:layout_marginTop="10dp"
+            app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/randomizeRgbButton"
             app:layout_constraintEnd_toStartOf="@id/randomizeArgbButton"/>
 
         <Button
             android:id="@+id/randomizeEndColor"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/randomize_end_rgb"
+            app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toEndOf="@id/randomizeRgbButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/randomizeStartColor"
@@ -279,7 +282,7 @@
 
         <Button
             android:id="@+id/randomizeThumbColorButton"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/rnd_thumb_color"
             app:layout_constraintStart_toStartOf="parent"
@@ -288,7 +291,7 @@
 
         <Button
             android:id="@+id/randomizeThumbStrokeColorButton"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/rnd_thumb_stroke_color"
             app:layout_constraintStart_toEndOf="@id/randomizeThumbColorButton"
