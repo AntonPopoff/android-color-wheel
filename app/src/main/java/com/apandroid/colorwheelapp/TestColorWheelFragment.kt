@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.apandroid.colorwheelapp.extensions.density
 import com.apandroid.colorwheelapp.extensions.setOnProgressChangeListener
+import com.apandroid.colorwheelapp.utils.randomArgb
 import kotlinx.android.synthetic.main.fragment_test_color_wheel.*
 import java.util.*
 import kotlin.math.roundToInt
@@ -22,10 +23,14 @@ class TestColorWheelFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         randomizeColorButton.setOnClickListener { randomizeColorWheelColor() }
+        randomizeThumbColorButton.setOnClickListener { randomizeThumbColor() }
+        randomizeStrokeColorButton.setOnClickListener { randomizeThumbStrokeColor() }
         colorWheelPaddingSeekBar.setOnProgressChangeListener(this::onColorWheelPaddingSeekBarChange)
         thumbRadiusSeekBar.setOnProgressChangeListener(this::onThumbSeekBarChange)
+        colorCircleScaleSeekBar.setOnProgressChangeListener(this::onColorCircleScaleSeekBarChange)
         colorWheelPaddingSeekBar.progress = (colorWheel.paddingTop / density).roundToInt()
         thumbRadiusSeekBar.progress = (colorWheel.thumbRadius / density).roundToInt()
+        colorCircleScaleSeekBar.progress = (colorWheel.thumbColorCircleScale * 100).toInt()
     }
 
     private fun onThumbSeekBarChange(progress: Int) {
@@ -39,7 +44,21 @@ class TestColorWheelFragment : Fragment() {
         colorWheelPadding.text = getString(R.string.color_wheel_padding_with_value, progress)
     }
 
+    private fun onColorCircleScaleSeekBarChange(progress: Int) {
+        val scale = progress / 100f
+        colorWheel.thumbColorCircleScale = scale
+        colorCircleScale.text = getString(R.string.color_circle_scale_with_value, scale)
+    }
+
     private fun randomizeColorWheelColor() {
         colorWheel.setRgb(random.nextInt(256), random.nextInt(256), random.nextInt(256))
+    }
+
+    private fun randomizeThumbColor() {
+        colorWheel.thumbColor = randomArgb(random)
+    }
+
+    private fun randomizeThumbStrokeColor() {
+        colorWheel.thumbStrokeColor = randomArgb(random)
     }
 }

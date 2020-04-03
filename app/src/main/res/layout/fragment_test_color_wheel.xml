@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -13,27 +14,32 @@
         android:layout_marginStart="16dp"
         android:textColor="@android:color/black"
         android:textSize="16sp"
-        android:layout_marginTop="20dp"
-        tools:text="Thumb Radius - 13dp"/>
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Thumb Radius - 13dp" />
 
     <SeekBar
         android:id="@+id/thumbRadiusSeekBar"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:max="64"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/thumbRadiusText"
+        android:max="64" />
 
     <View
-        android:layout_width="wrap_content"
+        android:id="@+id/thumbRadiusDivider"
+        android:layout_width="0dp"
         android:layout_height="1px"
         android:background="@android:color/darker_gray"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"/>
+        android:layout_marginEnd="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/thumbRadiusSeekBar" />
 
     <TextView
         android:id="@+id/colorWheelPadding"
@@ -42,27 +48,66 @@
         android:layout_marginStart="16dp"
         android:textColor="@android:color/black"
         android:textSize="16sp"
-        android:layout_marginTop="20dp"
-        tools:text="Color Wheel Padding - 13dp"/>
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/thumbRadiusDivider"
+        tools:text="Color Wheel Padding - 13dp" />
 
     <SeekBar
         android:id="@+id/colorWheelPaddingSeekBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:max="128"/>
+        android:max="128"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/colorWheelPadding" />
 
     <View
-        android:layout_width="wrap_content"
+        android:id="@+id/colorWheelPaddingDivider"
+        android:layout_width="0dp"
         android:layout_height="1px"
         android:background="@android:color/darker_gray"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"/>
+        android:layout_marginEnd="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/colorWheelPaddingSeekBar" />
+
+    <TextView
+        android:id="@+id/colorCircleScale"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/colorWheelPaddingDivider"
+        tools:text="Color Circle Scale - 0.7" />
+
+    <SeekBar
+        android:id="@+id/colorCircleScaleSeekBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:max="100"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/colorCircleScale" />
+
+    <View
+        android:id="@+id/colorCircleScaleDivider"
+        android:layout_width="0dp"
+        android:layout_height="1px"
+        android:background="@android:color/darker_gray"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/colorCircleScaleSeekBar" />
 
     <Button
         android:id="@+id/randomizeColorButton"
@@ -70,21 +115,50 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/randomize_color"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/colorCircleScaleDivider" />
+
+    <Button
+        android:id="@+id/randomizeThumbColorButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/rnd_thumb_color"
+        android:layout_marginStart="16dp"
+        app:layout_constraintTop_toBottomOf="@id/randomizeColorButton"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/randomizeStrokeColorButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/rnd_thumb_stroke_color"
+        android:layout_marginStart="16dp"
+        app:layout_constraintTop_toBottomOf="@id/randomizeThumbColorButton"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <View
-        android:layout_width="wrap_content"
+        android:id="@+id/randomizeColorDivider"
+        android:layout_width="0dp"
         android:layout_height="1px"
         android:background="@android:color/darker_gray"
         android:layout_marginTop="10dp"
         android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp" />
+        android:layout_marginEnd="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/randomizeStrokeColorButton" />
 
     <com.apandroid.colorwheel.ColorWheel
         android:id="@+id/colorWheel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginTop="8dp"
-        android:padding="16dp"/>
+        android:padding="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/randomizeColorDivider" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
