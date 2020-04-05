@@ -3,9 +3,10 @@
     <string name="show_preview_screen">Show Preview Screen</string>
     <string name="show_test_colorwheel_screen">Show Test ColorWheel Screen</string>
     <string name="show_test_alphaseekbar_screen">Show Test AlphaSeekBar Screen</string>
-    <string name="randomize_color">Randomize Color</string>
+    <string name="randomize_color">RND Color</string>
     <string name="thumb_radius_with_value">Thumb Radius - %d dp</string>
     <string name="color_wheel_padding_with_value">Color Wheel Padding - %d dp</string>
+    <string name="color_circle_scale_with_value">Color Circle Scale - %.2f</string>
     <string name="dp">dp</string>
     <string name="bar_size">Bar Size:</string>
     <string name="corner_radius">Corner Radius:</string>
@@ -18,4 +19,6 @@
     <string name="offset_with_value">Offset - %.2f</string>
     <string name="randomize_start_rgb">RND Start RGB</string>
     <string name="randomize_end_rgb">RND End RGB</string>
+    <string name="rnd_thumb_color">RND Thumb Color</string>
+    <string name="rnd_thumb_stroke_color">RND Thumb Stroke Color</string>
 </resources>

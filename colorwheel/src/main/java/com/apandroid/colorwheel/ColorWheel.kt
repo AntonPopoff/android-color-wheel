@@ -55,7 +55,27 @@ open class ColorWheel @JvmOverloads constructor(
     var thumbRadius = 0
         set(value) {
             field = value
-            updateThumbInsets()
+            invalidate()
+        }
+
+    var thumbColor = 0
+        set(value) {
+            field = value
+            thumbDrawable.setThumbColor(value)
+            invalidate()
+        }
+
+    var thumbStrokeColor = 0
+        set(value) {
+            field = value
+            thumbDrawable.setStrokeColor(value)
+            invalidate()
+        }
+
+    var thumbColorCircleScale
+        get() = thumbDrawable.colorCircleScale
+        set(value) {
+            thumbDrawable.colorCircleScale = value
             invalidate()
         }
 
@@ -65,18 +85,16 @@ open class ColorWheel @JvmOverloads constructor(
 
     init {
         parseAttributes(context, attrs)
-        updateThumbInsets()
     }
 
     private fun parseAttributes(context: Context, attrs: AttributeSet?) {
         context.obtainStyledAttributes(attrs, R.styleable.ColorWheel, 0, R.style.ColorWheelDefaultStyle).apply {
             thumbRadius = getDimensionPixelSize(R.styleable.ColorWheel_cw_thumbRadius, 0)
+            thumbColor = getColor(R.styleable.ColorWheel_cw_thumbColor, 0)
+            thumbStrokeColor = getColor(R.styleable.ColorWheel_cw_thumbStrokeColor, 0)
+            thumbColorCircleScale = getFloat(R.styleable.ColorWheel_cw_thumbColorCircleScale, 0f)
             recycle()
         }
-    }
-
-    private fun updateThumbInsets() {
-        thumbDrawable.applyInsets(thumbRadius.toFloat())
     }
 
     fun setRgb(r: Int, g: Int, b: Int) {
@@ -127,14 +145,8 @@ open class ColorWheel @JvmOverloads constructor(
         val thumbX = (cos(hueRadians) * r + wheelCenterX).toInt()
         val thumbY = (sin(hueRadians) * r + wheelCenterY).toInt()
 
-        thumbDrawable.setBounds(
-            thumbX - thumbRadius,
-            thumbY - thumbRadius,
-            thumbX + thumbRadius,
-            thumbY + thumbRadius
-        )
-
         thumbDrawable.indicatorColor = hsvColor.rgb
+        thumbDrawable.setBounds(thumbX, thumbY, thumbRadius)
         thumbDrawable.draw(canvas)
     }
 

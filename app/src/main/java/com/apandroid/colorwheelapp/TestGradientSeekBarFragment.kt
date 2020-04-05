@@ -1,16 +1,20 @@
 package com.apandroid.colorwheelapp
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioGroup
 import androidx.fragment.app.Fragment
-import com.apandroid.colorwheelapp.extensions.density
+import com.apandroid.colorwheel.gradientseekbar.GradientSeekBar
+import com.apandroid.colorwheel.gradientseekbar.argbAlpha
+import com.apandroid.colorwheel.gradientseekbar.setAlphaArgb
+import com.apandroid.colorwheel.gradientseekbar.setAlphaRgb
 import com.apandroid.colorwheelapp.extensions.afterTextChanged
+import com.apandroid.colorwheelapp.extensions.density
 import com.apandroid.colorwheelapp.extensions.setOnProgressChangeListener
-import com.apandroid.colorwheel.gradientseekbar.*
+import com.apandroid.colorwheelapp.utils.randomArgb
+import com.apandroid.colorwheelapp.utils.randomRgb
 import kotlinx.android.synthetic.main.fragment_test_gradient_seek_bar.*
 import java.util.*
 import kotlin.math.roundToInt
@@ -35,8 +39,12 @@ class TestGradientSeekBarFragment : Fragment() {
         thumbRadiusEdit.afterTextChanged(this::onThumbRadiusChanged)
         thumbRadiusEdit.setText((gradientSeekBar.thumbRadius / density).roundToInt().toString())
 
-        offsetSeekBar.progress = gradientSeekBar.argbAlpha
         offsetSeekBar.setOnProgressChangeListener(this::onOffsetSeekBarChange)
+        offsetSeekBar.progress = gradientSeekBar.argbAlpha
+
+        colorCircleScaleSeekBar.setOnProgressChangeListener(this::onColorCircleScaleSeekBarChange)
+        colorCircleScaleSeekBar.progress = (gradientSeekBar.thumbColorCircleScale * 100).toInt()
+
         alphaText.text = getString(R.string.offset_with_value, gradientSeekBar.offset)
 
         gradientSeekBar.listener = this::onGradientSeekBarChange
@@ -44,10 +52,12 @@ class TestGradientSeekBarFragment : Fragment() {
         orientationRadioGroup.check(R.id.verticalOrientationButton)
         orientationRadioGroup.setOnCheckedChangeListener(this::onOrientationChange)
         
-        randomizeRgbButton.setOnClickListener { randomizeRgb() }
-        randomizeArgbButton.setOnClickListener { randomizeArgb() }
-        randomizeStartColor.setOnClickListener { gradientSeekBar.startColor = randomRgb() }
-        randomizeEndColor.setOnClickListener { gradientSeekBar.endColor = randomRgb() }
+        randomizeRgbButton.setOnClickListener { gradientSeekBar.setAlphaRgb(randomRgb(random)) }
+        randomizeArgbButton.setOnClickListener { gradientSeekBar.setAlphaArgb(randomArgb(random)) }
+        randomizeStartColor.setOnClickListener { gradientSeekBar.startColor = randomRgb(random) }
+        randomizeEndColor.setOnClickListener { gradientSeekBar.endColor = randomRgb(random) }
+        randomizeThumbColorButton.setOnClickListener { gradientSeekBar.thumbColor = randomArgb(random) }
+        randomizeThumbStrokeColorButton.setOnClickListener { gradientSeekBar.thumbStrokeColor = randomArgb(random) }
     }
 
     private fun onBarSizeChanged(s: String) {
@@ -60,6 +70,12 @@ class TestGradientSeekBarFragment : Fragment() {
 
     private fun onThumbRadiusChanged(s: String) {
         gradientSeekBar.thumbRadius = ((s.toIntOrNull() ?: 0) * density).roundToInt()
+    }
+
+    private fun onColorCircleScaleSeekBarChange(progress: Int) {
+        val scale = progress / 100f
+        gradientSeekBar.thumbColorCircleScale = scale
+        colorCircleScale.text = getString(R.string.color_circle_scale_with_value, scale)
     }
 
     private fun onOffsetSeekBarChange(progress: Int) {
@@ -86,24 +102,5 @@ class TestGradientSeekBarFragment : Fragment() {
         } else if (checkedId == R.id.horizontalOrientationButton) {
             gradientSeekBar.orientation = GradientSeekBar.Orientation.HORIZONTAL
         }
-    }
-
-    private fun randomizeRgb() {
-        gradientSeekBar.setAlphaRgb(randomRgb())
-    }
-
-    private fun randomRgb() = Color.rgb(
-        random.nextInt(255),
-        random.nextInt(255),
-        random.nextInt(255)
-    )
-
-    private fun randomizeArgb() {
-        gradientSeekBar.setAlphaArgb(Color.argb(
-            random.nextInt(255),
-            random.nextInt(255),
-            random.nextInt(255),
-            random.nextInt(255))
-        )
     }
 }

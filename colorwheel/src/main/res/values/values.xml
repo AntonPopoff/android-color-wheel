@@ -3,4 +3,6 @@
 
     <dimen name="default_thumb_radius">13dp</dimen>
 
+    <item name="default_thumb_color_circle_scale" type="dimen" format="float">0.7</item>
+
 </resources>
