@@ -22,12 +22,15 @@ class TestColorWheelFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        randomizeColorButton.setOnClickListener { randomizeColorWheelColor() }
-        randomizeThumbColorButton.setOnClickListener { randomizeThumbColor() }
-        randomizeStrokeColorButton.setOnClickListener { randomizeThumbStrokeColor() }
+
+        randomizeColorButton.setOnClickListener { colorWheel.setRgb(random.nextInt(256), random.nextInt(256), random.nextInt(256)) }
+        randomizeThumbColorButton.setOnClickListener { colorWheel.thumbColor = randomArgb(random) }
+        randomizeStrokeColorButton.setOnClickListener { colorWheel.thumbStrokeColor = randomArgb(random) }
+
         colorWheelPaddingSeekBar.setOnProgressChangeListener(this::onColorWheelPaddingSeekBarChange)
         thumbRadiusSeekBar.setOnProgressChangeListener(this::onThumbSeekBarChange)
         colorCircleScaleSeekBar.setOnProgressChangeListener(this::onColorCircleScaleSeekBarChange)
+
         colorWheelPaddingSeekBar.progress = (colorWheel.paddingTop / density).roundToInt()
         thumbRadiusSeekBar.progress = (colorWheel.thumbRadius / density).roundToInt()
         colorCircleScaleSeekBar.progress = (colorWheel.thumbColorCircleScale * 100).toInt()
@@ -48,17 +51,5 @@ class TestColorWheelFragment : Fragment() {
         val scale = progress / 100f
         colorWheel.thumbColorCircleScale = scale
         colorCircleScale.text = getString(R.string.color_circle_scale_with_value, scale)
-    }
-
-    private fun randomizeColorWheelColor() {
-        colorWheel.setRgb(random.nextInt(256), random.nextInt(256), random.nextInt(256))
-    }
-
-    private fun randomizeThumbColor() {
-        colorWheel.thumbColor = randomArgb(random)
-    }
-
-    private fun randomizeThumbStrokeColor() {
-        colorWheel.thumbStrokeColor = randomArgb(random)
     }
 }
