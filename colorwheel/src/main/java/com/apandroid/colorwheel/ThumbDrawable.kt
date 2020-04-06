@@ -20,13 +20,17 @@ internal class ThumbDrawable {
         get() = colorCircleDrawable.paint.color
         set(value) { colorCircleDrawable.paint.color = value }
 
-    fun setStrokeColor(argb: Int) {
-        backingCircleDrawable.setStroke(1, argb)
-    }
+    var strokeColor = 0
+        set(value) {
+            field = value
+            backingCircleDrawable.setStroke(1, value)
+        }
 
-    fun setThumbColor(argb: Int) {
-        backingCircleDrawable.setColor(argb)
-    }
+    var thumbColor = 0
+        set(value) {
+            field = value
+            backingCircleDrawable.setColor(value)
+        }
 
     fun setBounds(bounds: Rect, thumbRadius: Int) {
         val inset = calculateColorCircleInset(thumbRadius)
