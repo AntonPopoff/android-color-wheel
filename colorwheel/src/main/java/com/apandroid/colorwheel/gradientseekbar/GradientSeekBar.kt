@@ -29,7 +29,6 @@ open class GradientSeekBar @JvmOverloads constructor(
     private val gradientDrawable = GradientDrawable()
 
     private lateinit var orientationStrategy: OrientationStrategy
-    private var internalOffset = 0f
     private var motionEventDownX = 0f
 
     var thumbColor
@@ -68,10 +67,9 @@ open class GradientSeekBar @JvmOverloads constructor(
             requestLayout()
         }
 
-    var offset
-        get() = internalOffset
+    var offset = 0f
         set(offset) {
-            internalOffset = ensureOffsetWithinRange(offset)
+            field = ensureOffsetWithinRange(offset)
             updateCurrentColor()
         }
 
@@ -106,15 +104,15 @@ open class GradientSeekBar @JvmOverloads constructor(
 
     private fun parseAttributes(context: Context, attrs: AttributeSet?, defStyle: Int) {
         context.obtainStyledAttributes(attrs, R.styleable.GradientSeekBar, 0, defStyle).apply {
+            readGradientColors(this)
             thumbColor = getColor(R.styleable.GradientSeekBar_asb_thumbColor, 0)
             thumbStrokeColor = getColor(R.styleable.GradientSeekBar_asb_thumbStrokeColor, 0)
             thumbColorCircleScale = getFloat(R.styleable.GradientSeekBar_asb_thumbColorCircleScale, 0f)
             thumbRadius = getDimensionPixelSize(R.styleable.GradientSeekBar_asb_thumbRadius, 0)
             barSize = getDimensionPixelSize(R.styleable.GradientSeekBar_asb_barSize, 0)
             cornersRadius = getDimension(R.styleable.GradientSeekBar_asb_barCornersRadius, 0f)
-            internalOffset = ensureOffsetWithinRange(getFloat(R.styleable.GradientSeekBar_asb_offset, 0f))
+            offset = ensureOffsetWithinRange(getFloat(R.styleable.GradientSeekBar_asb_offset, 0f))
             orientation = Orientation.values()[getInt(R.styleable.GradientSeekBar_asb_orientation, 0)]
-            readGradientColors(this)
             recycle()
         }
     }
@@ -189,18 +187,17 @@ open class GradientSeekBar @JvmOverloads constructor(
     }
 
     private fun calculateOffsetOnMotionEvent(event: MotionEvent) {
-        internalOffset = orientationStrategy.calculateOffsetOnMotionEvent(this, event, gradientDrawable.bounds)
-        updateCurrentColor()
+        offset = orientationStrategy.calculateOffsetOnMotionEvent(this, event, gradientDrawable.bounds)
     }
 
     private fun updateCurrentColor() {
-        argb = interpolateColorLinear(gradientColors[0], gradientColors[1], internalOffset)
+        argb = interpolateColorLinear(gradientColors[0], gradientColors[1], offset)
         fireListener()
         invalidate()
     }
 
     private fun fireListener() {
-        listener?.invoke(internalOffset, argb)
+        listener?.invoke(offset, argb)
     }
 
     enum class Orientation { VERTICAL, HORIZONTAL }
