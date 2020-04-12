@@ -28,8 +28,7 @@ open class GradientSeekBar @JvmOverloads constructor(
     private val thumbDrawable = ThumbDrawable()
     private val gradientDrawable = GradientDrawable()
 
-    private var orientationStrategy: OrientationStrategy
-    private var internalOrientation = Orientation.VERTICAL
+    private lateinit var orientationStrategy: OrientationStrategy
     private var internalOffset = 0f
     private var motionEventDownX = 0f
 
@@ -62,10 +61,9 @@ open class GradientSeekBar @JvmOverloads constructor(
         get() = gradientColors[1]
         set(color) { setColors(endColor = color) }
 
-    var orientation
-        get() = internalOrientation
+    var orientation = Orientation.VERTICAL
         set(orientation) {
-            internalOrientation = orientation
+            field = orientation
             orientationStrategy = createOrientationStrategy()
             requestLayout()
         }
@@ -104,7 +102,6 @@ open class GradientSeekBar @JvmOverloads constructor(
 
     init {
         parseAttributes(context, attrs, R.style.GradientSeekBarDefaultStyle)
-        orientationStrategy = createOrientationStrategy()
     }
 
     private fun parseAttributes(context: Context, attrs: AttributeSet?, defStyle: Int) {
@@ -116,7 +113,7 @@ open class GradientSeekBar @JvmOverloads constructor(
             barSize = getDimensionPixelSize(R.styleable.GradientSeekBar_asb_barSize, 0)
             cornersRadius = getDimension(R.styleable.GradientSeekBar_asb_barCornersRadius, 0f)
             internalOffset = ensureOffsetWithinRange(getFloat(R.styleable.GradientSeekBar_asb_offset, 0f))
-            internalOrientation = Orientation.values()[getInt(R.styleable.GradientSeekBar_asb_orientation, 0)]
+            orientation = Orientation.values()[getInt(R.styleable.GradientSeekBar_asb_orientation, 0)]
             readGradientColors(this)
             recycle()
         }
