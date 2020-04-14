@@ -32,25 +32,27 @@ internal class ThumbDrawable {
             backingCircleDrawable.setColor(value)
         }
 
-    fun setBounds(bounds: Rect, thumbRadius: Int) {
-        val inset = calculateColorCircleInset(thumbRadius)
+    var radius = 0
+
+    fun setBounds(bounds: Rect) {
+        val inset = calculateColorCircleInset()
 
         backingCircleDrawable.bounds = bounds
         colorCircleDrawable.bounds = bounds.also { it.inset(inset, inset) }
     }
 
-    fun setBounds(thumbX: Int, thumbY: Int, thumbRadius: Int) {
-        val left = thumbX - thumbRadius
-        val top = thumbY - thumbRadius
-        val right = thumbX + thumbRadius
-        val bottom = thumbY + thumbRadius
-        val inset = calculateColorCircleInset(thumbRadius)
+    fun setBounds(thumbX: Int, thumbY: Int) {
+        val left = thumbX - radius
+        val top = thumbY - radius
+        val right = thumbX + radius
+        val bottom = thumbY + radius
+        val inset = calculateColorCircleInset()
 
         backingCircleDrawable.setBounds(left, top, right, bottom)
         colorCircleDrawable.setBounds(left + inset, top + inset, right - inset, bottom - inset)
     }
 
-    private fun calculateColorCircleInset(thumbRadius: Int) = (thumbRadius - thumbRadius * colorCircleScale).toInt()
+    private fun calculateColorCircleInset() = (radius - radius * colorCircleScale).toInt()
 
     fun draw(canvas: Canvas) {
         backingCircleDrawable.draw(canvas)
