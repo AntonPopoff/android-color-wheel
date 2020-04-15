@@ -7,9 +7,7 @@ import com.apandroid.colorwheel.utils.ensureNumberWithinRange
 
 internal class ThumbDrawable {
 
-    private val paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        strokeWidth = 1f
-    }
+    private val paint = Paint(Paint.ANTI_ALIAS_FLAG).apply { strokeWidth = 1f }
 
     var bounds = Rect()
         set(value) { field.set(value) }
