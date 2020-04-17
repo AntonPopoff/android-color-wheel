@@ -52,9 +52,10 @@ open class ColorWheel @JvmOverloads constructor(
             invalidate()
         }
 
-    var thumbRadius = 0
+    var thumbRadius
+        get() = thumbDrawable.radius
         set(value) {
-            field = value
+            thumbDrawable.radius = value
             invalidate()
         }
 
@@ -146,7 +147,7 @@ open class ColorWheel @JvmOverloads constructor(
         val thumbY = (sin(hueRadians) * r + wheelCenterY).toInt()
 
         thumbDrawable.indicatorColor = hsvColor.rgb
-        thumbDrawable.setBounds(thumbX, thumbY, thumbRadius)
+        thumbDrawable.setBounds(thumbX, thumbY)
         thumbDrawable.draw(canvas)
     }
 

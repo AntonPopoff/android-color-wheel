@@ -85,9 +85,10 @@ open class GradientSeekBar @JvmOverloads constructor(
             invalidate()
         }
 
-    var thumbRadius = 0
+    var thumbRadius
+        get() = thumbDrawable.radius
         set(radius) {
-            field = radius
+            thumbDrawable.radius = radius
             requestLayout()
         }
 
@@ -155,7 +156,7 @@ open class GradientSeekBar @JvmOverloads constructor(
 
     private fun drawThumb(canvas: Canvas) {
         thumbDrawable.indicatorColor = argb
-        thumbDrawable.setBounds(orientationStrategy.calculateThumbBounds(this, gradientDrawable.bounds), thumbRadius)
+        thumbDrawable.bounds = orientationStrategy.calculateThumbBounds(this, gradientDrawable.bounds)
         thumbDrawable.draw(canvas)
     }
 

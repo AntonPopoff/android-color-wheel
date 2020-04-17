@@ -1,59 +1,60 @@
 package com.apandroid.colorwheel
 
 import android.graphics.Canvas
+import android.graphics.Paint
 import android.graphics.Rect
-import android.graphics.drawable.GradientDrawable
-import android.graphics.drawable.ShapeDrawable
-import android.graphics.drawable.shapes.OvalShape
 import com.apandroid.colorwheel.utils.ensureNumberWithinRange
 
 internal class ThumbDrawable {
 
-    private val backingCircleDrawable = GradientDrawable().apply { shape = GradientDrawable.OVAL }
+    private val paint = Paint(Paint.ANTI_ALIAS_FLAG).apply { strokeWidth = 1f }
 
-    private val colorCircleDrawable = ShapeDrawable(OvalShape())
+    var indicatorColor = 0
+
+    var strokeColor = 0
+
+    var thumbColor = 0
+
+    var radius = 0
+
+    var bounds = Rect()
+        set(value) { field.set(value) }
 
     var colorCircleScale = 0f
         set(value) { field = ensureNumberWithinRange(value, 0f, 1f) }
 
-    var indicatorColor
-        get() = colorCircleDrawable.paint.color
-        set(value) { colorCircleDrawable.paint.color = value }
-
-    var strokeColor = 0
-        set(value) {
-            field = value
-            backingCircleDrawable.setStroke(1, value)
-        }
-
-    var thumbColor = 0
-        set(value) {
-            field = value
-            backingCircleDrawable.setColor(value)
-        }
-
-    fun setBounds(bounds: Rect, thumbRadius: Int) {
-        val inset = calculateColorCircleInset(thumbRadius)
-
-        backingCircleDrawable.bounds = bounds
-        colorCircleDrawable.bounds = bounds.also { it.inset(inset, inset) }
+    fun setBounds(thumbX: Int, thumbY: Int) {
+        bounds.set(thumbX - radius, thumbY - radius, thumbX + radius, thumbY + radius)
     }
-
-    fun setBounds(thumbX: Int, thumbY: Int, thumbRadius: Int) {
-        val left = thumbX - thumbRadius
-        val top = thumbY - thumbRadius
-        val right = thumbX + thumbRadius
-        val bottom = thumbY + thumbRadius
-        val inset = calculateColorCircleInset(thumbRadius)
-
-        backingCircleDrawable.setBounds(left, top, right, bottom)
-        colorCircleDrawable.setBounds(left + inset, top + inset, right - inset, bottom - inset)
-    }
-
-    private fun calculateColorCircleInset(thumbRadius: Int) = (thumbRadius - thumbRadius * colorCircleScale).toInt()
 
     fun draw(canvas: Canvas) {
-        backingCircleDrawable.draw(canvas)
-        colorCircleDrawable.draw(canvas)
+        val cx = bounds.exactCenterX()
+        val cy = bounds.exactCenterY()
+
+        drawThumb(canvas, cx, cy)
+        drawStroke(canvas, cx, cy)
+        drawColorIndicator(canvas, cx, cy)
+    }
+
+    private fun drawThumb(canvas: Canvas, cx: Float, cy: Float) {
+        paint.color = thumbColor
+        paint.style = Paint.Style.FILL
+        canvas.drawCircle(cx, cy, radius.toFloat(), paint)
+    }
+
+    private fun drawStroke(canvas: Canvas, cx: Float, cy: Float) {
+        val strokeCircleRadius = radius - paint.strokeWidth / 2f
+
+        paint.color = strokeColor
+        paint.style = Paint.Style.STROKE
+        canvas.drawCircle(cx, cy, strokeCircleRadius, paint)
+    }
+
+    private fun drawColorIndicator(canvas: Canvas, cx: Float, cy: Float) {
+        val colorIndicatorCircleRadius = radius * colorCircleScale
+
+        paint.color = indicatorColor
+        paint.style = Paint.Style.FILL
+        canvas.drawCircle(cx, cy, colorIndicatorCircleRadius, paint)
     }
 }
