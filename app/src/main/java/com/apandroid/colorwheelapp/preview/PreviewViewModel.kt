@@ -1,4 +1,10 @@
 package com.apandroid.colorwheelapp.preview
 
-class PreviewViewModel {
+import androidx.databinding.ObservableInt
+import androidx.lifecycle.ViewModel
+
+class PreviewViewModel : ViewModel() {
+
+    val colorWheelRgb = ObservableInt()
+
 }
