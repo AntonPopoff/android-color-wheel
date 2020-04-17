@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import com.apandroid.colorwheelapp.preview.PreviewFragment
 import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment : Fragment() {

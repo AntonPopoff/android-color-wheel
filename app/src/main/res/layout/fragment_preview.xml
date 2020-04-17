@@ -1,54 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout>
 
-    <com.apandroid.colorwheel.gradientseekbar.GradientSeekBar
-        android:id="@+id/gradientSeekBar"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/colorWheel"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHeight_percent="0.55" />
+    <data>
+        <variable
+            name="viewModel"
+            type="com.apandroid.colorwheelapp.preview.PreviewViewModel" />
+    </data>
 
-    <com.apandroid.colorwheel.ColorWheel
-        android:id="@+id/colorWheel"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:padding="16dp"
-        app:layout_constraintWidth_percent="0.8"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/gradientSeekBar"
-        app:layout_constraintBottom_toBottomOf="@id/gradientSeekBar"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <View
-        android:id="@+id/colorIndicator"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/colorWheel"
-        app:layout_constraintHeight_percent="0.1"
-        android:background="@android:color/black"/>
+        <com.apandroid.colorwheel.gradientseekbar.GradientSeekBar
+            android:id="@+id/gradientSeekBar"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/colorWheel"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHeight_percent="0.55" />
 
-    <com.apandroid.colorwheel.gradientseekbar.GradientSeekBar
-        android:id="@+id/valueSeekBar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:asb_orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="@id/colorWheel"
-        app:layout_constraintStart_toStartOf="@id/colorWheel"
-        app:layout_constraintTop_toBottomOf="@id/colorWheel"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        <com.apandroid.colorwheel.ColorWheel
+            android:id="@+id/colorWheel"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:padding="16dp"
+            app:layout_constraintWidth_percent="0.8"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/gradientSeekBar"
+            app:layout_constraintBottom_toBottomOf="@id/gradientSeekBar"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <View
+            android:id="@+id/colorIndicator"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/colorWheel"
+            app:layout_constraintHeight_percent="0.1"
+            android:background="@android:color/black"/>
+
+        <com.apandroid.colorwheel.gradientseekbar.GradientSeekBar
+            android:id="@+id/valueSeekBar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:asb_orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="@id/colorWheel"
+            app:layout_constraintStart_toStartOf="@id/colorWheel"
+            app:layout_constraintTop_toBottomOf="@id/colorWheel"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

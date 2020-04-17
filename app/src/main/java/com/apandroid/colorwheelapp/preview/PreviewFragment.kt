@@ -1,4 +1,4 @@
-package com.apandroid.colorwheelapp
+package com.apandroid.colorwheelapp.preview
 
 import android.content.Context
 import android.graphics.drawable.GradientDrawable
@@ -10,19 +10,16 @@ import androidx.fragment.app.Fragment
 import com.apandroid.colorwheel.gradientseekbar.*
 import com.apandroid.colorwheelapp.extensions.density
 import com.apandroid.colorwheel.utils.setColorAlpha
+import com.apandroid.colorwheelapp.R
 import kotlinx.android.synthetic.main.fragment_preview.*
 
-class PreviewFragment : Fragment() {
+class PreviewFragment : Fragment(R.layout.fragment_preview) {
 
     private lateinit var colorIndicatorBackground: GradientDrawable
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         colorIndicatorBackground = GradientDrawable().apply { cornerRadius = density * 16 }
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_preview, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
