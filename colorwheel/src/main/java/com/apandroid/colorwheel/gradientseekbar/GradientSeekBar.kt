@@ -139,7 +139,7 @@ open class GradientSeekBar @JvmOverloads constructor(
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         val dimens = orientationStrategy.measure(this, widthMeasureSpec, heightMeasureSpec)
-        setMeasuredDimension(dimens.width, dimens.height)
+        setMeasuredDimension(dimens.width(), dimens.height())
     }
 
     override fun onDraw(canvas: Canvas) {
