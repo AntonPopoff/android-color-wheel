@@ -3,13 +3,12 @@ package com.apandroid.colorwheel.gradientseekbar
 import android.graphics.Rect
 import android.graphics.drawable.GradientDrawable
 import android.view.MotionEvent
-import com.apandroid.colorwheel.utils.ViewDimensions
 
 internal interface OrientationStrategy {
 
     val gradientOrientation: GradientDrawable.Orientation
 
-    fun measure(view: GradientSeekBar, widthSpec: Int, heightSpec: Int): ViewDimensions
+    fun measure(view: GradientSeekBar, widthSpec: Int, heightSpec: Int): Rect
 
     fun calculateGradientBounds(view: GradientSeekBar): Rect
 

@@ -4,7 +4,6 @@ import android.graphics.Rect
 import android.graphics.drawable.GradientDrawable
 import android.view.MotionEvent
 import android.view.View
-import com.apandroid.colorwheel.utils.ViewDimensions
 import com.apandroid.colorwheel.utils.ensureNumberWithinRange
 import kotlin.math.roundToInt
 
@@ -12,18 +11,14 @@ internal class HorizontalStrategy : OrientationStrategy {
 
     private val rect = Rect()
 
-    private val dimens = ViewDimensions()
-
     override val gradientOrientation = GradientDrawable.Orientation.LEFT_RIGHT
 
-    override fun measure(view: GradientSeekBar, widthSpec: Int, heightSpec: Int): ViewDimensions {
+    override fun measure(view: GradientSeekBar, widthSpec: Int, heightSpec: Int): Rect {
         val preferredWidth = View.MeasureSpec.getSize(widthSpec) + view.paddingStart + view.paddingEnd
         val preferredHeight = maxOf(view.barSize, view.thumbRadius * 2) + view.paddingTop + view.paddingBottom
-
-        return dimens.apply {
-            width = View.resolveSize(preferredWidth, widthSpec)
-            height = View.resolveSize(preferredHeight, heightSpec)
-        }
+        val finalWidth = View.resolveSize(preferredWidth, widthSpec)
+        val finalHeight = View.resolveSize(preferredHeight, heightSpec)
+        return rect.apply { set(0, 0, finalWidth, finalHeight) }
     }
 
     override fun calculateGradientBounds(view: GradientSeekBar): Rect {

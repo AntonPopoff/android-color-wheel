@@ -31,6 +31,39 @@ open class GradientSeekBar @JvmOverloads constructor(
     private lateinit var orientationStrategy: OrientationStrategy
     private var motionEventDownX = 0f
 
+    var startColor
+        get() = gradientColors[0]
+        set(color) { setColors(startColor = color) }
+
+    var endColor
+        get() = gradientColors[1]
+        set(color) { setColors(endColor = color) }
+
+    var offset = 0f
+        set(offset) {
+            field = ensureOffsetWithinRange(offset)
+            updateCurrentColor()
+        }
+
+    var barSize = 0
+        set(width) {
+            field = width
+            requestLayout()
+        }
+
+    var cornersRadius = 0f
+        set(radius) {
+            field = radius
+            invalidate()
+        }
+
+    var orientation = Orientation.VERTICAL
+        set(orientation) {
+            field = orientation
+            orientationStrategy = createOrientationStrategy()
+            requestLayout()
+        }
+
     var thumbColor
         get() = thumbDrawable.thumbColor
         set(value) {
@@ -49,39 +82,6 @@ open class GradientSeekBar @JvmOverloads constructor(
         get() = thumbDrawable.colorCircleScale
         set(value) {
             thumbDrawable.colorCircleScale = value
-            invalidate()
-        }
-
-    var startColor
-        get() = gradientColors[0]
-        set(color) { setColors(startColor = color) }
-
-    var endColor
-        get() = gradientColors[1]
-        set(color) { setColors(endColor = color) }
-
-    var orientation = Orientation.VERTICAL
-        set(orientation) {
-            field = orientation
-            orientationStrategy = createOrientationStrategy()
-            requestLayout()
-        }
-
-    var offset = 0f
-        set(offset) {
-            field = ensureOffsetWithinRange(offset)
-            updateCurrentColor()
-        }
-
-    var barSize = 0
-        set(width) {
-            field = width
-            requestLayout()
-        }
-
-    var cornersRadius = 0f
-        set(radius) {
-            field = radius
             invalidate()
         }
 
@@ -139,7 +139,7 @@ open class GradientSeekBar @JvmOverloads constructor(
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         val dimens = orientationStrategy.measure(this, widthMeasureSpec, heightMeasureSpec)
-        setMeasuredDimension(dimens.width, dimens.height)
+        setMeasuredDimension(dimens.width(), dimens.height())
     }
 
     override fun onDraw(canvas: Canvas) {
