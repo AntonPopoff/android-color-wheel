@@ -31,7 +31,7 @@ internal class VerticalStrategy : OrientationStrategy {
 
     override fun calculateThumbBounds(view: GradientSeekBar, barBounds: Rect): Rect {
         val thumbY = (barBounds.top + (1f - view.offset) * barBounds.height()).roundToInt()
-        val cx = barBounds.centerX()
+        val cx = view.width / 2
         val left = cx - view.thumbRadius
         val right = cx + view.thumbRadius
         val top = thumbY - view.thumbRadius
