@@ -14,8 +14,8 @@ buildscript {
 }
 
 ext {
-    verCode = 11
-    verName = '1.1.4'
+    verCode = 12
+    verName = '1.1.5'
 }
 
 android {
