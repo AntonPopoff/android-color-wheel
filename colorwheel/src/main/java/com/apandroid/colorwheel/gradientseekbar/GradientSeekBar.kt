@@ -161,7 +161,7 @@ open class GradientSeekBar @JvmOverloads constructor(
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
-        when (event.action) {
+        when (event.actionMasked) {
             MotionEvent.ACTION_DOWN -> {
                 motionEventDownX = event.x
                 parent.requestDisallowInterceptTouchEvent(interceptTouchEvent)
