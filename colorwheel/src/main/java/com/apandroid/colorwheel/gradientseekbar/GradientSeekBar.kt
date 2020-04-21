@@ -156,7 +156,7 @@ open class GradientSeekBar @JvmOverloads constructor(
 
     private fun drawThumb(canvas: Canvas) {
         thumbDrawable.indicatorColor = argb
-        thumbDrawable.bounds = orientationStrategy.calculateThumbBounds(this, gradientDrawable.bounds)
+        orientationStrategy.calculateThumbBounds(this, thumbDrawable, gradientDrawable.bounds)
         thumbDrawable.draw(canvas)
     }
 

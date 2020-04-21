@@ -4,6 +4,7 @@ import android.graphics.Rect
 import android.graphics.drawable.GradientDrawable
 import android.view.MotionEvent
 import android.view.View
+import com.apandroid.colorwheel.ThumbDrawable
 import com.apandroid.colorwheel.utils.ensureNumberWithinRange
 import kotlin.math.roundToInt
 
@@ -29,14 +30,11 @@ internal class VerticalStrategy : OrientationStrategy {
         return rect.apply { set(left, top, right, bottom) }
     }
 
-    override fun calculateThumbBounds(view: GradientSeekBar, barBounds: Rect): Rect {
-        val thumbX = (barBounds.top + (1f - view.offset) * barBounds.height()).roundToInt()
-        val thumbY = view.width / 2
-        val left = thumbY - view.thumbRadius
-        val right = thumbY + view.thumbRadius
-        val top = thumbX - view.thumbRadius
-        val bottom = thumbX + view.thumbRadius
-        return rect.apply { set(left, top, right, bottom) }
+    override fun calculateThumbBounds(view: GradientSeekBar, thumbDrawable: ThumbDrawable, barBounds: Rect) {
+        val thumbY = (barBounds.top + (1f - view.offset) * barBounds.height())
+        val thumbX = view.width / 2f
+
+        thumbDrawable.setBounds(thumbX, thumbY)
     }
 
     override fun calculateOffsetOnMotionEvent(view: GradientSeekBar, event: MotionEvent, barBounds: Rect): Float {
