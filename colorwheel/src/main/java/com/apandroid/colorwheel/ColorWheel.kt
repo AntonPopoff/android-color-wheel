@@ -143,11 +143,11 @@ open class ColorWheel @JvmOverloads constructor(
     private fun drawThumb(canvas: Canvas) {
         val r = hsvColor.saturation * wheelRadius
         val hueRadians = toRadians(hsvColor.hue)
-        val thumbX = cos(hueRadians) * r + wheelCenterX
-        val thumbY = sin(hueRadians) * r + wheelCenterY
+        val x = cos(hueRadians) * r + wheelCenterX
+        val y = sin(hueRadians) * r + wheelCenterY
 
         thumbDrawable.indicatorColor = hsvColor.rgb
-        thumbDrawable.setBounds(thumbX, thumbY)
+        thumbDrawable.setCoordinates(x, y)
         thumbDrawable.draw(canvas)
     }
 

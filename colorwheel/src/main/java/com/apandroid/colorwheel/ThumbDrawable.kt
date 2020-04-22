@@ -18,7 +18,7 @@ internal class ThumbDrawable {
     var colorCircleScale = 0f
         set(value) { field = ensureNumberWithinRange(value, 0f, 1f) }
 
-    fun setBounds(x: Float, y: Float) {
+    fun setCoordinates(x: Float, y: Float) {
         this.x = x
         this.y = y
     }

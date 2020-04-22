@@ -155,8 +155,10 @@ open class GradientSeekBar @JvmOverloads constructor(
     }
 
     private fun drawThumb(canvas: Canvas) {
+        val coordinates = orientationStrategy.calculateThumbCoordinates(this, gradientDrawable.bounds)
+
         thumbDrawable.indicatorColor = argb
-        orientationStrategy.calculateThumbBounds(this, thumbDrawable, gradientDrawable.bounds)
+        thumbDrawable.setCoordinates(coordinates.x, coordinates.y)
         thumbDrawable.draw(canvas)
     }
 

@@ -1,16 +1,17 @@
 package com.apandroid.colorwheel.gradientseekbar
 
+import android.graphics.PointF
 import android.graphics.Rect
 import android.graphics.drawable.GradientDrawable
 import android.view.MotionEvent
 import android.view.View
-import com.apandroid.colorwheel.ThumbDrawable
 import com.apandroid.colorwheel.utils.ensureNumberWithinRange
 import kotlin.math.roundToInt
 
 internal class VerticalStrategy : OrientationStrategy {
 
     private val rect = Rect()
+    private val point = PointF()
 
     override val gradientOrientation = GradientDrawable.Orientation.BOTTOM_TOP
 
@@ -30,11 +31,10 @@ internal class VerticalStrategy : OrientationStrategy {
         return rect.apply { set(left, top, right, bottom) }
     }
 
-    override fun calculateThumbBounds(view: GradientSeekBar, thumbDrawable: ThumbDrawable, barBounds: Rect) {
-        val thumbY = (barBounds.top + (1f - view.offset) * barBounds.height())
-        val thumbX = view.width / 2f
-
-        thumbDrawable.setBounds(thumbX, thumbY)
+    override fun calculateThumbCoordinates(view: GradientSeekBar, barBounds: Rect): PointF {
+        val y = (barBounds.top + (1f - view.offset) * barBounds.height())
+        val x = view.width / 2f
+        return point.apply { set(x, y) }
     }
 
     override fun calculateOffsetOnMotionEvent(view: GradientSeekBar, event: MotionEvent, barBounds: Rect): Float {
