@@ -42,6 +42,7 @@ open class ColorWheel @JvmOverloads constructor(
     private var wheelCenterY = 0
     private var wheelRadius = 0
     private var motionEventDownX = 0f
+    private var motionEventDownY = 0f
 
     var rgb
         get() = hsvColor.rgb
@@ -154,10 +155,10 @@ open class ColorWheel @JvmOverloads constructor(
     override fun onTouchEvent(event: MotionEvent): Boolean {
         when (event.actionMasked) {
             MotionEvent.ACTION_DOWN -> {
-                motionEventDownX = event.x
                 parent.requestDisallowInterceptTouchEvent(interceptTouchEvent)
                 updateColorOnMotionEvent(event)
-                return true
+                motionEventDownX = event.x
+                motionEventDownY = event.y
             }
             MotionEvent.ACTION_MOVE -> {
                 updateColorOnMotionEvent(event)
@@ -168,7 +169,7 @@ open class ColorWheel @JvmOverloads constructor(
             }
         }
 
-        return super.onTouchEvent(event)
+        return true
     }
 
     override fun performClick() = super.performClick()
@@ -201,8 +202,8 @@ open class ColorWheel @JvmOverloads constructor(
 
     private fun isTap(event: MotionEvent): Boolean {
         val eventDuration = event.eventTime - event.downTime
-        val eventTravelDistance = abs(event.x - motionEventDownX)
-        return eventDuration < ViewConfiguration.getTapTimeout() && eventTravelDistance < viewConfig.scaledTouchSlop
+        val travelDistance = hypot(event.x - motionEventDownX, event.y - motionEventDownY)
+        return eventDuration < ViewConfiguration.getTapTimeout() && travelDistance < viewConfig.scaledTouchSlop
     }
 
     private fun fireColorListener() {

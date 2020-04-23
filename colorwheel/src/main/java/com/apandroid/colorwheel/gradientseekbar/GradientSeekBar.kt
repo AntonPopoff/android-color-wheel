@@ -16,6 +16,7 @@ import com.apandroid.colorwheel.utils.ensureNumberWithinRange
 import com.apandroid.colorwheel.utils.interpolateColorLinear
 import com.apandroid.colorwheel.utils.setColorAlpha
 import kotlin.math.abs
+import kotlin.math.hypot
 
 open class GradientSeekBar @JvmOverloads constructor(
     context: Context,
@@ -30,6 +31,7 @@ open class GradientSeekBar @JvmOverloads constructor(
 
     private lateinit var orientationStrategy: OrientationStrategy
     private var motionEventDownX = 0f
+    private var motionEventDownY = 0f
 
     var startColor
         get() = gradientColors[0]
@@ -165,10 +167,10 @@ open class GradientSeekBar @JvmOverloads constructor(
     override fun onTouchEvent(event: MotionEvent): Boolean {
         when (event.actionMasked) {
             MotionEvent.ACTION_DOWN -> {
-                motionEventDownX = event.x
                 parent.requestDisallowInterceptTouchEvent(interceptTouchEvent)
                 calculateOffsetOnMotionEvent(event)
-                return true
+                motionEventDownX = event.x
+                motionEventDownY = event.y
             }
             MotionEvent.ACTION_MOVE -> {
                 calculateOffsetOnMotionEvent(event)
@@ -179,15 +181,15 @@ open class GradientSeekBar @JvmOverloads constructor(
             }
         }
 
-        return super.onTouchEvent(event)
+        return true
     }
 
     override fun performClick() = super.performClick()
 
     private fun isTap(event: MotionEvent): Boolean {
         val eventDuration = event.eventTime - event.downTime
-        val eventTravelDistance = abs(event.x - motionEventDownX)
-        return eventDuration < ViewConfiguration.getTapTimeout() && eventTravelDistance < viewConfig.scaledTouchSlop
+        val travelDistance = hypot(motionEventDownX - event.x, motionEventDownY - event.y)
+        return eventDuration < ViewConfiguration.getTapTimeout() && travelDistance < viewConfig.scaledTouchSlop
     }
 
     private fun calculateOffsetOnMotionEvent(event: MotionEvent) {
