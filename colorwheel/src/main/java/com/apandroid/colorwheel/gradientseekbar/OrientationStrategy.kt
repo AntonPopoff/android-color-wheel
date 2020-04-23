@@ -1,6 +1,8 @@
 package com.apandroid.colorwheel.gradientseekbar
 
+import android.graphics.PointF
 import android.graphics.Rect
+import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.view.MotionEvent
 
@@ -12,7 +14,7 @@ internal interface OrientationStrategy {
 
     fun calculateGradientBounds(view: GradientSeekBar): Rect
 
-    fun calculateThumbBounds(view: GradientSeekBar, barBounds: Rect): Rect
-
     fun calculateOffsetOnMotionEvent(view: GradientSeekBar, event: MotionEvent, barBounds: Rect): Float
+
+    fun calculateThumbCoordinates(view: GradientSeekBar, barBounds: Rect): PointF
 }

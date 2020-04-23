@@ -155,13 +155,15 @@ open class GradientSeekBar @JvmOverloads constructor(
     }
 
     private fun drawThumb(canvas: Canvas) {
+        val coordinates = orientationStrategy.calculateThumbCoordinates(this, gradientDrawable.bounds)
+
         thumbDrawable.indicatorColor = argb
-        thumbDrawable.bounds = orientationStrategy.calculateThumbBounds(this, gradientDrawable.bounds)
+        thumbDrawable.setCoordinates(coordinates.x, coordinates.y)
         thumbDrawable.draw(canvas)
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
-        when (event.action) {
+        when (event.actionMasked) {
             MotionEvent.ACTION_DOWN -> {
                 motionEventDownX = event.x
                 parent.requestDisallowInterceptTouchEvent(interceptTouchEvent)
