@@ -6,14 +6,14 @@ import androidx.databinding.InverseBindingListener
 import com.apandroid.colorwheel.ColorWheel
 
 @BindingAdapter("rgb")
-fun ColorWheel.setRgb(rgb: Int) {
+fun ColorWheel.bindRgb(rgb: Int) {
     this.rgb = rgb
 }
 
 @InverseBindingAdapter(attribute = "rgb")
-fun ColorWheel.getRgb() = this.rgb
+fun ColorWheel.receiveRgb() = this.rgb
 
 @BindingAdapter("rgbAttrChanged")
-fun ColorWheel.setRgbAttributeListener(listener: InverseBindingListener) {
+fun ColorWheel.bindRgbAttributeListener(listener: InverseBindingListener) {
     this.colorChangeListener = { listener.onChange() }
 }
