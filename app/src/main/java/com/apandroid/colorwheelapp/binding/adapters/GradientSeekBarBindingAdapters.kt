@@ -3,8 +3,8 @@ package com.apandroid.colorwheelapp.binding.adapters
 import androidx.databinding.BindingAdapter
 import com.apandroid.colorwheel.gradientseekbar.GradientSeekBar
 import com.apandroid.colorwheel.gradientseekbar.setAlphaListener
-import com.apandroid.colorwheel.gradientseekbar.setAlphaRgb
 import com.apandroid.colorwheel.gradientseekbar.setBlackToColor
+import com.apandroid.colorwheel.gradientseekbar.setTransparentToColor
 
 interface GradientSeekBarOnColorChangedListener {
 
@@ -16,19 +16,19 @@ interface GradientSeekBarOnAlphaChangedListener {
     fun onAlphaChanged(alpha: Int)
 }
 
-@BindingAdapter("alpha")
-fun GradientSeekBar.bindAlpha(argb: Int) {
-    this.setAlphaRgb(argb)
+@BindingAdapter("transparentToColor")
+fun GradientSeekBar.bindTransparentToColor(argb: Int) {
+    this.setTransparentToColor(argb, false)
 }
 
-@BindingAdapter("black")
-fun GradientSeekBar.bindBlack(argb: Int) {
+@BindingAdapter("blackToColor")
+fun GradientSeekBar.bindBlackToColor(argb: Int) {
     this.setBlackToColor(argb)
 }
 
 @BindingAdapter("colorListener")
 fun GradientSeekBar.bindOnColorChangedListener(listener: GradientSeekBarOnColorChangedListener) {
-    this.listener = { _, argb -> listener.onColorChanged(argb) }
+    this.colorListener = { _, argb -> listener.onColorChanged(argb) }
 }
 
 @BindingAdapter("alphaListener")
