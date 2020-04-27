@@ -111,8 +111,8 @@ you can use the following extension of `GradientSeekBar`:
 
 * `GradientSeekBar.setTransparentToColor(color: Int, respectAlpha: Boolean = true)`
 
-This method takes ARGB color and sets transparent version of it as `start` color and opaque as `end` color,
-`respectAlpha` parameter determines if thumb position will be adjusted based on alpha value of a color you supplied.
+This method takes an ARGB color and sets transparent version of it as `start` color and opaque as `end` color,
+`respectAlpha` parameter determines if the thumb's position will be adjusted based on an alpha value of a color you supplied.
 
 To get an alpha value of a current intermediate color you can use `GradientSeekBar.currentColorAlpha` extension property.
 
