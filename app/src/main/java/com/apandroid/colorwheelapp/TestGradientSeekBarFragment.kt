@@ -47,7 +47,7 @@ class TestGradientSeekBarFragment : Fragment() {
 
         alphaText.text = getString(R.string.offset_with_value, gradientSeekBar.offset)
 
-        gradientSeekBar.listener = this::onGradientSeekBarChange
+        gradientSeekBar.colorListener = this::onGradientSeekBarChange
 
         orientationRadioGroup.check(R.id.verticalOrientationButton)
         orientationRadioGroup.setOnCheckedChangeListener(this::onOrientationChange)
@@ -85,10 +85,10 @@ class TestGradientSeekBarFragment : Fragment() {
     }
 
     private fun setOffsetSilently(seekBar: GradientSeekBar, offset: Float) {
-        val listener = seekBar.listener
-        seekBar.listener = null
+        val listener = seekBar.colorListener
+        seekBar.colorListener = null
         seekBar.offset = offset
-        seekBar.listener = listener
+        seekBar.colorListener = listener
     }
 
     private fun onGradientSeekBarChange(offset: Float, color: Int) {

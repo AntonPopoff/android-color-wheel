@@ -15,7 +15,6 @@ import com.apandroid.colorwheel.utils.MAX_ALPHA
 import com.apandroid.colorwheel.utils.ensureNumberWithinRange
 import com.apandroid.colorwheel.utils.interpolateColorLinear
 import com.apandroid.colorwheel.utils.setColorAlpha
-import kotlin.math.abs
 import kotlin.math.hypot
 
 open class GradientSeekBar @JvmOverloads constructor(
@@ -97,7 +96,7 @@ open class GradientSeekBar @JvmOverloads constructor(
     var argb = 0
         private set
 
-    var listener: ((Float, Int) -> Unit)? = null
+    var colorListener: ((Float, Int) -> Unit)? = null
 
     var interceptTouchEvent = true
 
@@ -203,7 +202,7 @@ open class GradientSeekBar @JvmOverloads constructor(
     }
 
     private fun fireListener() {
-        listener?.invoke(offset, argb)
+        colorListener?.invoke(offset, argb)
     }
 
     enum class Orientation { VERTICAL, HORIZONTAL }
@@ -221,7 +220,7 @@ fun GradientSeekBar.setAlphaRgb(rgb: Int) {
 }
 
 inline fun GradientSeekBar.setAlphaListener(crossinline listener: (Float, Int, Int) -> Unit) {
-    this.listener = { offset, color -> listener(offset, color, this.argbAlpha) }
+    this.colorListener = { offset, color -> listener(offset, color, this.argbAlpha) }
 }
 
 fun GradientSeekBar.setBlackToColor(color: Int) {

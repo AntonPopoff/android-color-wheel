@@ -34,7 +34,7 @@ class PreviewFragment : Fragment() {
         gradientSeekBar.setAlphaListener(this::onAlphaSeekBarUpdate)
 
         valueSeekBar.setBlackToColor(colorWheel.rgb)
-        valueSeekBar.listener = this::onValueSeekBarUpdate
+        valueSeekBar.colorListener = this::onValueSeekBarUpdate
 
         colorIndicator.background = colorIndicatorBackground
         colorIndicatorBackground.setColor(setColorAlpha(valueSeekBar.argb, gradientSeekBar.argbAlpha))
