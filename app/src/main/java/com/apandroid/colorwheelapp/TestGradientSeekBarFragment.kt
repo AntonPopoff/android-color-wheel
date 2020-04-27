@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.RadioGroup
 import androidx.fragment.app.Fragment
 import com.apandroid.colorwheel.gradientseekbar.GradientSeekBar
-import com.apandroid.colorwheel.gradientseekbar.argbAlpha
+import com.apandroid.colorwheel.gradientseekbar.currentColorAlpha
 import com.apandroid.colorwheel.gradientseekbar.setAlphaArgb
 import com.apandroid.colorwheel.gradientseekbar.setAlphaRgb
 import com.apandroid.colorwheelapp.extensions.afterTextChanged
@@ -40,7 +40,7 @@ class TestGradientSeekBarFragment : Fragment() {
         thumbRadiusEdit.setText((gradientSeekBar.thumbRadius / density).roundToInt().toString())
 
         offsetSeekBar.setOnProgressChangeListener(this::onOffsetSeekBarChange)
-        offsetSeekBar.progress = gradientSeekBar.argbAlpha
+        offsetSeekBar.progress = gradientSeekBar.currentColorAlpha
 
         colorCircleScaleSeekBar.setOnProgressChangeListener(this::onColorCircleScaleSeekBarChange)
         colorCircleScaleSeekBar.progress = (gradientSeekBar.thumbColorCircleScale * 100).toInt()

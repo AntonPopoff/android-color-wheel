@@ -208,7 +208,7 @@ open class GradientSeekBar @JvmOverloads constructor(
     enum class Orientation { VERTICAL, HORIZONTAL }
 }
 
-val GradientSeekBar.argbAlpha get() = Color.alpha(argb)
+val GradientSeekBar.currentColorAlpha get() = Color.alpha(argb)
 
 fun GradientSeekBar.setAlphaArgb(argb: Int) {
     this.offset = Color.alpha(argb) / MAX_ALPHA.toFloat()
@@ -220,7 +220,7 @@ fun GradientSeekBar.setAlphaRgb(rgb: Int) {
 }
 
 inline fun GradientSeekBar.setAlphaListener(crossinline listener: (Float, Int, Int) -> Unit) {
-    this.colorListener = { offset, color -> listener(offset, color, this.argbAlpha) }
+    this.colorListener = { offset, color -> listener(offset, color, this.currentColorAlpha) }
 }
 
 fun GradientSeekBar.setBlackToColor(color: Int) {
