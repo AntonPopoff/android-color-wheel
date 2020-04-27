@@ -6,10 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioGroup
 import androidx.fragment.app.Fragment
-import com.apandroid.colorwheel.gradientseekbar.GradientSeekBar
-import com.apandroid.colorwheel.gradientseekbar.argbAlpha
-import com.apandroid.colorwheel.gradientseekbar.setAlphaArgb
-import com.apandroid.colorwheel.gradientseekbar.setAlphaRgb
+import com.apandroid.colorwheel.gradientseekbar.*
 import com.apandroid.colorwheelapp.extensions.afterTextChanged
 import com.apandroid.colorwheelapp.extensions.density
 import com.apandroid.colorwheelapp.extensions.setOnProgressChangeListener
@@ -40,20 +37,20 @@ class TestGradientSeekBarFragment : Fragment() {
         thumbRadiusEdit.setText((gradientSeekBar.thumbRadius / density).roundToInt().toString())
 
         offsetSeekBar.setOnProgressChangeListener(this::onOffsetSeekBarChange)
-        offsetSeekBar.progress = gradientSeekBar.argbAlpha
+        offsetSeekBar.progress = gradientSeekBar.currentColorAlpha
 
         colorCircleScaleSeekBar.setOnProgressChangeListener(this::onColorCircleScaleSeekBarChange)
         colorCircleScaleSeekBar.progress = (gradientSeekBar.thumbColorCircleScale * 100).toInt()
 
         alphaText.text = getString(R.string.offset_with_value, gradientSeekBar.offset)
 
-        gradientSeekBar.listener = this::onGradientSeekBarChange
+        gradientSeekBar.colorListener = this::onGradientSeekBarChange
 
         orientationRadioGroup.check(R.id.verticalOrientationButton)
         orientationRadioGroup.setOnCheckedChangeListener(this::onOrientationChange)
         
-        randomizeRgbButton.setOnClickListener { gradientSeekBar.setAlphaRgb(randomRgb(random)) }
-        randomizeArgbButton.setOnClickListener { gradientSeekBar.setAlphaArgb(randomArgb(random)) }
+        randomizeRgbButton.setOnClickListener { gradientSeekBar.setTransparentToColor(randomRgb(random), false) }
+        randomizeArgbButton.setOnClickListener { gradientSeekBar.setTransparentToColor(randomArgb(random)) }
         randomizeStartColor.setOnClickListener { gradientSeekBar.startColor = randomRgb(random) }
         randomizeEndColor.setOnClickListener { gradientSeekBar.endColor = randomRgb(random) }
         randomizeThumbColorButton.setOnClickListener { gradientSeekBar.thumbColor = randomArgb(random) }
@@ -85,10 +82,10 @@ class TestGradientSeekBarFragment : Fragment() {
     }
 
     private fun setOffsetSilently(seekBar: GradientSeekBar, offset: Float) {
-        val listener = seekBar.listener
-        seekBar.listener = null
+        val listener = seekBar.colorListener
+        seekBar.colorListener = null
         seekBar.offset = offset
-        seekBar.listener = listener
+        seekBar.colorListener = listener
     }
 
     private fun onGradientSeekBarChange(offset: Float, color: Int) {

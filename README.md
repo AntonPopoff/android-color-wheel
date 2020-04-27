@@ -15,7 +15,7 @@
 To add the library to your project simply add the following line to your app module `build.gradle` file:
 
 ```groovy
-implementation 'com.apandroid:colorwheel:1.1.7'
+implementation 'com.apandroid:colorwheel:1.1.8'
 ```
 
 In case of problems make sure that **jCenter** repository is specified in your `build.gradle` file:
@@ -93,10 +93,10 @@ gradientSeekBar.endColor = endColor
 gradientSeekBar.setColors(startColor, endColor)
 ```
 
-You can set a color listener via `GradientSeekBar.listener`:
+You can set a color listener via `GradientSeekBar.colorListener`:
 
 ```kotlin
-gradientSeekBar.listener = { offset: Float, argb: Int ->
+gradientSeekBar.colorListener = { offset: Float, argb: Int ->
     // Listener code
 }
 ```
@@ -106,18 +106,15 @@ the range from `0f` to `1f` and shows how close an intermediate color to a start
 
 #### Alpha
 
-If you want to use `GradientSeekBar` to pick alpha component of a color in range from `0` to `255`
-you can use the following extensions of `GradientSeekBar`:
+If you want to use `GradientSeekBar` to pick an alpha value of a color in range from `0` to `255`
+you can use the following extension of `GradientSeekBar`:
 
-* `GradientSeekBar.setAlphaArgb(argb)`
-* `GradientSeekBar.setAlphaRgb(rgb)`
+* `GradientSeekBar.setTransparentToColor(color: Int, respectAlpha: Boolean = true)`
 
-Both of these methods take RGB color and set transparent version of it as `start` color and opaque as `end` color.
+This method takes an ARGB color and sets transparent version of it as `start` color and opaque as `end` color,
+`respectAlpha` parameter determines if the thumb's position will be adjusted based on an alpha value of a color you supplied.
 
-The only difference between these two methods is that `GradientSeekBar.setAlphaArgb(argb)` also adjusts
-position of the thumb based on the alpha value of the parameter while `GradientSeekBar.setAlphaRgb(rgb)` doesn't.
-
-To get alpha component of a current intermediate color you can use `GradientSeekBar.argbAlpha` extension property.
+To get an alpha value of a current intermediate color you can use `GradientSeekBar.currentColorAlpha` extension property.
 
 Also you can use `GradientSeekBar.setAlphaListener` method to set a listener that will be called when
 alpha value is changed.
