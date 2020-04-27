@@ -30,7 +30,7 @@ class PreviewFragment : Fragment() {
 
         colorWheel.colorChangeListener = this::onColorWheelUpdateListener
 
-        gradientSeekBar.setAlphaRgb(colorWheel.rgb)
+        gradientSeekBar.setTransparentToColor(colorWheel.rgb, false)
         gradientSeekBar.setAlphaListener(this::onAlphaSeekBarUpdate)
 
         valueSeekBar.setBlackToColor(colorWheel.rgb)
@@ -41,7 +41,7 @@ class PreviewFragment : Fragment() {
     }
 
     private fun onColorWheelUpdateListener(rgb: Int) {
-        gradientSeekBar.setAlphaRgb(rgb)
+        gradientSeekBar.setTransparentToColor(rgb, false)
         valueSeekBar.setBlackToColor(rgb)
         colorIndicatorBackground.setColor(setColorAlpha(valueSeekBar.argb, gradientSeekBar.currentColorAlpha))
     }

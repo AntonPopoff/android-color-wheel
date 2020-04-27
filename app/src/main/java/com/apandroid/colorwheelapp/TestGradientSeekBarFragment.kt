@@ -6,10 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioGroup
 import androidx.fragment.app.Fragment
-import com.apandroid.colorwheel.gradientseekbar.GradientSeekBar
-import com.apandroid.colorwheel.gradientseekbar.currentColorAlpha
-import com.apandroid.colorwheel.gradientseekbar.setAlphaArgb
-import com.apandroid.colorwheel.gradientseekbar.setAlphaRgb
+import com.apandroid.colorwheel.gradientseekbar.*
 import com.apandroid.colorwheelapp.extensions.afterTextChanged
 import com.apandroid.colorwheelapp.extensions.density
 import com.apandroid.colorwheelapp.extensions.setOnProgressChangeListener
@@ -52,8 +49,8 @@ class TestGradientSeekBarFragment : Fragment() {
         orientationRadioGroup.check(R.id.verticalOrientationButton)
         orientationRadioGroup.setOnCheckedChangeListener(this::onOrientationChange)
         
-        randomizeRgbButton.setOnClickListener { gradientSeekBar.setAlphaRgb(randomRgb(random)) }
-        randomizeArgbButton.setOnClickListener { gradientSeekBar.setAlphaArgb(randomArgb(random)) }
+        randomizeRgbButton.setOnClickListener { gradientSeekBar.setTransparentToColor(randomRgb(random), false) }
+        randomizeArgbButton.setOnClickListener { gradientSeekBar.setTransparentToColor(randomArgb(random)) }
         randomizeStartColor.setOnClickListener { gradientSeekBar.startColor = randomRgb(random) }
         randomizeEndColor.setOnClickListener { gradientSeekBar.endColor = randomRgb(random) }
         randomizeThumbColorButton.setOnClickListener { gradientSeekBar.thumbColor = randomArgb(random) }

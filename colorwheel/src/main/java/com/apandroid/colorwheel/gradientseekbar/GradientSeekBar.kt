@@ -210,13 +210,9 @@ open class GradientSeekBar @JvmOverloads constructor(
 
 val GradientSeekBar.currentColorAlpha get() = Color.alpha(argb)
 
-fun GradientSeekBar.setAlphaArgb(argb: Int) {
-    this.offset = Color.alpha(argb) / MAX_ALPHA.toFloat()
-    this.setColors(setColorAlpha(argb, 0), setColorAlpha(argb, MAX_ALPHA))
-}
-
-fun GradientSeekBar.setAlphaRgb(rgb: Int) {
-    this.setColors(setColorAlpha(rgb, 0), setColorAlpha(rgb, MAX_ALPHA))
+fun GradientSeekBar.setTransparentToColor(color: Int, respectAlpha: Boolean = true) {
+    if (respectAlpha) this.offset = Color.alpha(color) / MAX_ALPHA.toFloat()
+    this.setColors(setColorAlpha(color, 0), setColorAlpha(color, MAX_ALPHA))
 }
 
 inline fun GradientSeekBar.setAlphaListener(crossinline listener: (Float, Int, Int) -> Unit) {
