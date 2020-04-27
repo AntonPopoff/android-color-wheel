@@ -15,7 +15,6 @@ import com.apandroid.colorwheel.utils.MAX_ALPHA
 import com.apandroid.colorwheel.utils.ensureNumberWithinRange
 import com.apandroid.colorwheel.utils.interpolateColorLinear
 import com.apandroid.colorwheel.utils.setColorAlpha
-import kotlin.math.abs
 import kotlin.math.hypot
 
 open class GradientSeekBar @JvmOverloads constructor(
@@ -97,7 +96,7 @@ open class GradientSeekBar @JvmOverloads constructor(
     var argb = 0
         private set
 
-    var listener: ((Float, Int) -> Unit)? = null
+    var colorListener: ((Float, Int) -> Unit)? = null
 
     var interceptTouchEvent = true
 
@@ -203,25 +202,21 @@ open class GradientSeekBar @JvmOverloads constructor(
     }
 
     private fun fireListener() {
-        listener?.invoke(offset, argb)
+        colorListener?.invoke(offset, argb)
     }
 
     enum class Orientation { VERTICAL, HORIZONTAL }
 }
 
-val GradientSeekBar.argbAlpha get() = Color.alpha(argb)
+val GradientSeekBar.currentColorAlpha get() = Color.alpha(argb)
 
-fun GradientSeekBar.setAlphaArgb(argb: Int) {
-    this.offset = Color.alpha(argb) / MAX_ALPHA.toFloat()
-    this.setColors(setColorAlpha(argb, 0), setColorAlpha(argb, MAX_ALPHA))
-}
-
-fun GradientSeekBar.setAlphaRgb(rgb: Int) {
-    this.setColors(setColorAlpha(rgb, 0), setColorAlpha(rgb, MAX_ALPHA))
+fun GradientSeekBar.setTransparentToColor(color: Int, respectAlpha: Boolean = true) {
+    if (respectAlpha) this.offset = Color.alpha(color) / MAX_ALPHA.toFloat()
+    this.setColors(setColorAlpha(color, 0), setColorAlpha(color, MAX_ALPHA))
 }
 
 inline fun GradientSeekBar.setAlphaListener(crossinline listener: (Float, Int, Int) -> Unit) {
-    this.listener = { offset, color -> listener(offset, color, this.argbAlpha) }
+    this.colorListener = { offset, color -> listener(offset, color, this.currentColorAlpha) }
 }
 
 fun GradientSeekBar.setBlackToColor(color: Int) {
