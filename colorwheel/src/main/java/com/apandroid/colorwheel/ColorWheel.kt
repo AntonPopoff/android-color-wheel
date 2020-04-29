@@ -3,10 +3,18 @@ package com.apandroid.colorwheel
 import android.content.Context
 import android.graphics.*
 import android.graphics.drawable.GradientDrawable
+import android.os.Parcel
+import android.os.Parcelable
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewConfiguration
+import com.apandroid.colorwheel.extensions.readBooleanCompat
+import com.apandroid.colorwheel.extensions.writeBooleanCompat
+import com.apandroid.colorwheel.thumb.*
+import com.apandroid.colorwheel.thumb.ThumbDrawable
+import com.apandroid.colorwheel.thumb.ThumbDrawableState
+import com.apandroid.colorwheel.thumb.writeThumbState
 import com.apandroid.colorwheel.utils.HsvColor
 import com.apandroid.colorwheel.utils.toDegrees
 import com.apandroid.colorwheel.utils.toRadians
@@ -208,5 +216,53 @@ open class ColorWheel @JvmOverloads constructor(
 
     private fun fireColorListener() {
         colorChangeListener?.invoke(hsvColor.rgb)
+    }
+
+    override fun onSaveInstanceState(): Parcelable = ColorWheelState(
+        super.onSaveInstanceState(),
+        thumbDrawable.saveState(),
+        interceptTouchEvent,
+        rgb
+    )
+
+    override fun onRestoreInstanceState(state: Parcelable) {
+        if (state is ColorWheelState) {
+            super.onRestoreInstanceState(state.superState)
+            readColorWheelState(state)
+        } else {
+            super.onRestoreInstanceState(state)
+        }
+    }
+
+    private fun readColorWheelState(state: ColorWheelState) {
+        thumbDrawable.restoreState(state.thumbState)
+        interceptTouchEvent = state.interceptTouchEvent
+        rgb = state.rgb
+    }
+}
+
+private class ColorWheelState : View.BaseSavedState {
+
+    val thumbState: ThumbDrawableState
+    val interceptTouchEvent: Boolean
+    val rgb: Int
+
+    constructor(superState: Parcelable?, thumbState: ThumbDrawableState, interceptTouchEvent: Boolean, rgb: Int) : super(superState) {
+        this.thumbState = thumbState
+        this.interceptTouchEvent = interceptTouchEvent
+        this.rgb = rgb
+    }
+
+    constructor(source: Parcel) : super(source) {
+        thumbState = source.readThumbState()
+        interceptTouchEvent = source.readBooleanCompat()
+        rgb = source.readInt()
+    }
+
+    override fun writeToParcel(out: Parcel, flags: Int) {
+        super.writeToParcel(out, flags)
+        out.writeThumbState(thumbState, flags)
+        out.writeBooleanCompat(interceptTouchEvent)
+        out.writeInt(rgb)
     }
 }

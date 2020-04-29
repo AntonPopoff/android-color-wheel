@@ -1,9 +1,7 @@
-package com.apandroid.colorwheel
+package com.apandroid.colorwheel.thumb
 
 import android.graphics.Canvas
 import android.graphics.Paint
-import android.os.Parcel
-import android.os.Parcelable
 import com.apandroid.colorwheel.utils.ensureNumberWithinRange
 
 internal class ThumbDrawable {
@@ -53,7 +51,7 @@ internal class ThumbDrawable {
         canvas.drawCircle(x, y, colorIndicatorCircleRadius, paint)
     }
 
-    fun restoreState(parcelable: Parcelable) {
+    fun restoreState(parcelable: ThumbDrawableState) {
         (parcelable as? ThumbDrawableState)?.let {
             radius = it.radius
             thumbColor = it.thumbColor
@@ -62,43 +60,5 @@ internal class ThumbDrawable {
         }
     }
 
-    fun saveState(): Parcelable = ThumbDrawableState(this)
-}
-
-private class ThumbDrawableState(
-    val radius: Int,
-    val thumbColor: Int,
-    val strokeColor: Int,
-    val colorCircleScale: Float
-) : Parcelable {
-
-    constructor(thumbDrawable: ThumbDrawable) : this(
-        thumbDrawable.radius,
-        thumbDrawable.thumbColor,
-        thumbDrawable.strokeColor,
-        thumbDrawable.colorCircleScale
-    )
-
-    constructor(parcel: Parcel) : this(
-        parcel.readInt(),
-        parcel.readInt(),
-        parcel.readInt(),
-        parcel.readFloat()
-    )
-
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeInt(radius)
-        parcel.writeInt(thumbColor)
-        parcel.writeInt(strokeColor)
-        parcel.writeFloat(colorCircleScale)
-    }
-
-    override fun describeContents() = 0
-
-    companion object CREATOR : Parcelable.Creator<ThumbDrawableState> {
-
-        override fun createFromParcel(parcel: Parcel) = ThumbDrawableState(parcel)
-
-        override fun newArray(size: Int) = arrayOfNulls<ThumbDrawableState>(size)
-    }
+    fun saveState() = ThumbDrawableState(this)
 }

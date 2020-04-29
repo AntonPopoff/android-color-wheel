@@ -10,7 +10,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewConfiguration
 import com.apandroid.colorwheel.R
-import com.apandroid.colorwheel.ThumbDrawable
+import com.apandroid.colorwheel.thumb.ThumbDrawable
 import com.apandroid.colorwheel.utils.MAX_ALPHA
 import com.apandroid.colorwheel.utils.ensureNumberWithinRange
 import com.apandroid.colorwheel.utils.interpolateColorLinear
