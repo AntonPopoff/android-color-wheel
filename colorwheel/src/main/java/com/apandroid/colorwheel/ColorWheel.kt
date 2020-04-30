@@ -247,10 +247,10 @@ private class ColorWheelState : View.BaseSavedState {
     val interceptTouchEvent: Boolean
     val rgb: Int
 
-    constructor(superState: Parcelable?, thumbState: ThumbDrawableState, interceptTouchEvent: Boolean, rgb: Int) : super(superState) {
-        this.thumbState = thumbState
-        this.interceptTouchEvent = interceptTouchEvent
-        this.rgb = rgb
+    constructor(superState: Parcelable?, view: ColorWheel, thumbDrawableState: ThumbDrawableState) : super(superState) {
+        thumbState = thumbDrawableState
+        interceptTouchEvent = view.interceptTouchEvent
+        rgb = view.rgb
     }
 
     constructor(source: Parcel) : super(source) {
@@ -264,5 +264,12 @@ private class ColorWheelState : View.BaseSavedState {
         out.writeThumbState(thumbState, flags)
         out.writeBooleanCompat(interceptTouchEvent)
         out.writeInt(rgb)
+    }
+
+    companion object CREATOR : Parcelable.Creator<ColorWheelState> {
+
+        override fun createFromParcel(source: Parcel) = ColorWheelState(source)
+
+        override fun newArray(size: Int) = arrayOfNulls<ColorWheelState>(size)
     }
 }
