@@ -218,12 +218,11 @@ open class ColorWheel @JvmOverloads constructor(
         colorChangeListener?.invoke(hsvColor.rgb)
     }
 
-    override fun onSaveInstanceState(): Parcelable = ColorWheelState(
-        super.onSaveInstanceState(),
-        thumbDrawable.saveState(),
-        interceptTouchEvent,
-        rgb
-    )
+    override fun onSaveInstanceState(): Parcelable {
+        val superState = super.onSaveInstanceState()
+        val thumbState = thumbDrawable.saveState()
+        return ColorWheelState(superState, this, thumbState)
+    }
 
     override fun onRestoreInstanceState(state: Parcelable) {
         if (state is ColorWheelState) {
