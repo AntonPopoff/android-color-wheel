@@ -212,21 +212,46 @@ open class GradientSeekBar @JvmOverloads constructor(
         colorListener?.invoke(offset, argb)
     }
 
+    override fun onSaveInstanceState(): Parcelable {
+        val superState = super.onSaveInstanceState()
+        val thumbState = thumbDrawable.saveState()
+        return GradientSeekBarState(superState, this, thumbState)
+    }
+
+    override fun onRestoreInstanceState(state: Parcelable) {
+        if (state is GradientSeekBarState) {
+            super.onRestoreInstanceState(state.superState)
+            readGradientSeekBarState(state)
+        } else {
+            super.onRestoreInstanceState(state)
+        }
+    }
+
+    private fun readGradientSeekBarState(state: GradientSeekBarState) {
+        setColors(state.startColor, state.endColor)
+        offset = state.offset
+        barSize = state.barSize
+        cornersRadius = state.cornerRadius
+        orientation = Orientation.values()[state.orientation]
+        interceptTouchEvent = state.interceptTouchEvent
+        thumbDrawable.restoreState(state.thumbState)
+    }
+
     enum class Orientation { VERTICAL, HORIZONTAL }
 }
 
 private class GradientSeekBarState : View.BaseSavedState {
 
-    private val startColor: Int
-    private val endColor: Int
-    private val offset: Float
-    private val barSize: Int
-    private val cornerRadius: Float
-    private val orientation: Int
-    private val interceptTouchEvent: Boolean
-    private val thumbState: ThumbDrawableState
+    val startColor: Int
+    val endColor: Int
+    val offset: Float
+    val barSize: Int
+    val cornerRadius: Float
+    val orientation: Int
+    val interceptTouchEvent: Boolean
+    val thumbState: ThumbDrawableState
 
-    constructor(superState: Parcelable, view: GradientSeekBar, thumbDrawableState: ThumbDrawableState) : super(superState) {
+    constructor(superState: Parcelable?, view: GradientSeekBar, thumbDrawableState: ThumbDrawableState) : super(superState) {
         startColor = view.startColor
         endColor = view.endColor
         offset = view.offset
