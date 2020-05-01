@@ -14,15 +14,15 @@ buildscript {
 }
 
 ext {
-    verCode = 15
-    verName = '1.1.8'
+    verCode = 16
+    verName = '1.1.9'
 }
 
 android {
     compileSdkVersion 29
 
     defaultConfig {
-        minSdkVersion 19
+        minSdkVersion 16
         targetSdkVersion 29
         versionName verName
         versionCode verCode
