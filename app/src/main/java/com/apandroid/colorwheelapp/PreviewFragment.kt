@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.apandroid.colorwheel.gradientseekbar.*
 import com.apandroid.colorwheelapp.extensions.density
-import com.apandroid.colorwheel.utils.setColorAlpha
+import com.apandroid.colorwheelapp.utils.setColorAlpha
 import kotlinx.android.synthetic.main.fragment_preview.*
 
 class PreviewFragment : Fragment() {

@@ -4,7 +4,7 @@
 
 ## Requirements
 
-**The minimal required Android API version is 19 (Android 4.4).**
+**The minimal required Android API version is 16 (Android 4.1).**
 
 ## Screenshots
 
@@ -15,7 +15,7 @@
 To add the library to your project simply add the following line to your app module `build.gradle` file:
 
 ```groovy
-implementation 'com.apandroid:colorwheel:1.1.8'
+implementation 'com.apandroid:colorwheel:1.1.9'
 ```
 
 In case of problems make sure that **jCenter** repository is specified in your `build.gradle` file:
