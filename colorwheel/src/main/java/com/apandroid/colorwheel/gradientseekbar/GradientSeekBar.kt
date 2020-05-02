@@ -50,7 +50,7 @@ open class GradientSeekBar @JvmOverloads constructor(
     var offset = 0f
         set(offset) {
             field = ensureOffsetWithinRange(offset)
-            updateCurrentColor()
+            calculateArgb()
         }
 
     var barSize = 0
@@ -142,7 +142,7 @@ open class GradientSeekBar @JvmOverloads constructor(
         gradientColors[0] = startColor
         gradientColors[1] = endColor
         gradientDrawable.colors = gradientColors
-        updateCurrentColor()
+        calculateArgb()
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
@@ -202,7 +202,7 @@ open class GradientSeekBar @JvmOverloads constructor(
         offset = orientationStrategy.calculateOffsetOnMotionEvent(this, event, gradientDrawable.bounds)
     }
 
-    private fun updateCurrentColor() {
+    private fun calculateArgb() {
         argb = interpolateColorLinear(gradientColors[0], gradientColors[1], offset)
         fireListener()
         invalidate()
