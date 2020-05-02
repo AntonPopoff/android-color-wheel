@@ -139,10 +139,14 @@ open class GradientSeekBar @JvmOverloads constructor(
     }
 
     fun setColors(startColor: Int = gradientColors[0], endColor: Int = gradientColors[1]) {
+        updateGradientColors(startColor, endColor)
+        calculateArgb()
+    }
+
+    private fun updateGradientColors(startColor: Int, endColor: Int) {
         gradientColors[0] = startColor
         gradientColors[1] = endColor
         gradientDrawable.colors = gradientColors
-        calculateArgb()
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
@@ -228,7 +232,7 @@ open class GradientSeekBar @JvmOverloads constructor(
     }
 
     private fun readGradientSeekBarState(state: GradientSeekBarState) {
-        setColors(state.startColor, state.endColor)
+        updateGradientColors(state.startColor, state.endColor)
         offset = state.offset
         barSize = state.barSize
         cornersRadius = state.cornerRadius
