@@ -51,13 +51,11 @@ internal class ThumbDrawable {
         canvas.drawCircle(x, y, colorIndicatorCircleRadius, paint)
     }
 
-    fun restoreState(parcelable: ThumbDrawableState) {
-        (parcelable as? ThumbDrawableState)?.let {
-            radius = it.radius
-            thumbColor = it.thumbColor
-            strokeColor = it.strokeColor
-            colorCircleScale = it.colorCircleScale
-        }
+    fun restoreState(state: ThumbDrawableState) {
+        radius = state.radius
+        thumbColor = state.thumbColor
+        strokeColor = state.strokeColor
+        colorCircleScale = state.colorCircleScale
     }
 
     fun saveState() = ThumbDrawableState(this)
