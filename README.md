@@ -15,7 +15,7 @@
 To add the library to your project simply add the following line to your app module `build.gradle` file:
 
 ```groovy
-implementation 'com.apandroid:colorwheel:1.1.9'
+implementation 'com.apandroid:colorwheel:1.1.10'
 ```
 
 In case of problems make sure that **jCenter** repository is specified in your `build.gradle` file:
