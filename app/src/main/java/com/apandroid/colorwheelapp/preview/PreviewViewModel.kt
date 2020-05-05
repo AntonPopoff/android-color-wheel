@@ -2,7 +2,7 @@ package com.apandroid.colorwheelapp.preview
 
 import androidx.databinding.ObservableInt
 import androidx.lifecycle.ViewModel
-import com.apandroid.colorwheel.utils.setColorAlpha
+import com.apandroid.colorwheelapp.utils.setColorAlpha
 
 class PreviewViewModel : ViewModel() {
 
