@@ -16,7 +16,7 @@ internal class VerticalStrategy : OrientationStrategy {
     override val gradientOrientation = GradientDrawable.Orientation.BOTTOM_TOP
 
     override fun measure(view: GradientSeekBar, widthSpec: Int, heightSpec: Int): Rect {
-        val preferredWidth = maxOf(view.barSize, view.thumbRadius * 2) + view.paddingStart + view.paddingEnd
+        val preferredWidth = maxOf(view.barSize, view.thumbRadius * 2) + view.paddingLeft + view.paddingRight
         val preferredHeight = View.MeasureSpec.getSize(heightSpec) + view.paddingTop + view.paddingBottom
         val finalWidth = View.resolveSize(preferredWidth, widthSpec)
         val finalHeight = View.resolveSize(preferredHeight, heightSpec)

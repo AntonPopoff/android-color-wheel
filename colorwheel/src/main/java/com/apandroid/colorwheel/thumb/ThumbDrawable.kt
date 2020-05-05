@@ -1,4 +1,4 @@
-package com.apandroid.colorwheel
+package com.apandroid.colorwheel.thumb
 
 import android.graphics.Canvas
 import android.graphics.Paint
@@ -50,4 +50,13 @@ internal class ThumbDrawable {
         paint.style = Paint.Style.FILL
         canvas.drawCircle(x, y, colorIndicatorCircleRadius, paint)
     }
+
+    fun restoreState(state: ThumbDrawableState) {
+        radius = state.radius
+        thumbColor = state.thumbColor
+        strokeColor = state.strokeColor
+        colorCircleScale = state.colorCircleScale
+    }
+
+    fun saveState() = ThumbDrawableState(this)
 }

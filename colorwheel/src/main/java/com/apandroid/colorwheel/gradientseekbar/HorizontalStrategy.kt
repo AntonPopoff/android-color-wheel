@@ -16,7 +16,7 @@ internal class HorizontalStrategy : OrientationStrategy {
     override val gradientOrientation = GradientDrawable.Orientation.LEFT_RIGHT
 
     override fun measure(view: GradientSeekBar, widthSpec: Int, heightSpec: Int): Rect {
-        val preferredWidth = View.MeasureSpec.getSize(widthSpec) + view.paddingStart + view.paddingEnd
+        val preferredWidth = View.MeasureSpec.getSize(widthSpec) + view.paddingLeft + view.paddingRight
         val preferredHeight = maxOf(view.barSize, view.thumbRadius * 2) + view.paddingTop + view.paddingBottom
         val finalWidth = View.resolveSize(preferredWidth, widthSpec)
         val finalHeight = View.resolveSize(preferredHeight, heightSpec)
@@ -26,7 +26,7 @@ internal class HorizontalStrategy : OrientationStrategy {
     override fun calculateGradientBounds(view: GradientSeekBar): Rect {
         val left = view.paddingLeft + view.thumbRadius
         val right = view.width - view.paddingRight - view.thumbRadius
-        val top = view.paddingTop + (view.height - view.paddingTop - view.paddingEnd - view.barSize) / 2
+        val top = view.paddingTop + (view.height - view.paddingTop - view.paddingRight - view.barSize) / 2
         val bottom = top + view.barSize
         return rect.apply { set(left, top, right, bottom) }
     }
