@@ -2,6 +2,8 @@
 <layout>
 
     <data>
+        <import type="com.apandroid.colorwheel.gradientseekbar.GradientSeekBarKt"/>
+
         <variable
             name="viewModel"
             type="com.apandroid.colorwheelapp.preview.PreviewViewModel" />
@@ -18,8 +20,9 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_marginEnd="8dp"
-            transparentToColor="@{viewModel.colorWheelRgb}"
-            alphaListener="@{(alpha) -> viewModel.setAlphaColor(alpha)}"
+            android:layout_marginRight="8dp"
+            transparentToColor="@{colorWheel.rgb}"
+            alphaListener="@{(alpha) -> viewModel.onColorChanged(valueSeekBar.getArgb(), alpha)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/colorWheel"
             app:layout_constraintTop_toTopOf="parent"
@@ -31,7 +34,6 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:padding="16dp"
-            rgb="@={viewModel.colorWheelRgb}"
             app:layout_constraintWidth_percent="0.8"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -57,9 +59,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            blackToColor="@{colorWheel.rgb}"
+            colorListener="@{(color) -> viewModel.onColorChanged(color, GradientSeekBarKt.getCurrentColorAlpha(gradientSeekBar))}"
             app:asb_orientation="horizontal"
-            blackToColor="@{viewModel.colorWheelRgb}"
-            colorListener="@{(color) -> viewModel.setBlackColor(color)}"
             app:layout_constraintEnd_toEndOf="@id/colorWheel"
             app:layout_constraintStart_toStartOf="@id/colorWheel"
             app:layout_constraintTop_toBottomOf="@id/colorWheel"
