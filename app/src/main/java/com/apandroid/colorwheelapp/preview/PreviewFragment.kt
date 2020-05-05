@@ -20,8 +20,6 @@ class PreviewFragment : Fragment(R.layout.fragment_preview) {
         FragmentPreviewBinding.bind(view).let {
             it.colorIndicator.background = GradientDrawable().apply { cornerRadius = density * 16 }
             it.viewModel = ViewModelProvider(this).get(PreviewViewModel::class.java)
-            it.executePendingBindings()
-            it.invalidateAll()
         }
     }
 }
