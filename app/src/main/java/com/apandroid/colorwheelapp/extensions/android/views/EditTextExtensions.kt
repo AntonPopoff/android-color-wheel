@@ -1,4 +1,4 @@
-package com.apandroid.colorwheelapp.extensions
+package com.apandroid.colorwheelapp.extensions.android.views
 
 import android.text.Editable
 import android.text.TextWatcher
@@ -14,7 +14,8 @@ interface EmptyTextWatcher : TextWatcher {
 }
 
 fun EditText.afterTextChanged(listener: (String) -> Unit) {
-    this.addTextChangedListener(object : EmptyTextWatcher {
+    this.addTextChangedListener(object :
+        EmptyTextWatcher {
         override fun afterTextChanged(s: Editable) {
             listener(s.toString())
         }

@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import android.widget.RadioGroup
 import androidx.fragment.app.Fragment
 import com.apandroid.colorwheel.gradientseekbar.*
-import com.apandroid.colorwheelapp.extensions.afterTextChanged
+import com.apandroid.colorwheelapp.extensions.android.views.afterTextChanged
 import com.apandroid.colorwheelapp.extensions.density
-import com.apandroid.colorwheelapp.extensions.setOnProgressChangeListener
+import com.apandroid.colorwheelapp.extensions.android.views.setOnProgressChangeListener
 import com.apandroid.colorwheelapp.utils.randomArgb
 import com.apandroid.colorwheelapp.utils.randomRgb
 import kotlinx.android.synthetic.main.fragment_test_gradient_seek_bar.*
