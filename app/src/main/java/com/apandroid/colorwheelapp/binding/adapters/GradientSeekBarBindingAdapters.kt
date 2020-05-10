@@ -38,21 +38,6 @@ fun GradientSeekBar.bindAlphaChangeListener(listener: GradientSeekBarOnAlphaChan
     this.setAlphaListener { _, _, alpha -> listener.onAlphaChanged(alpha) }
 }
 
-@BindingAdapter("barSize")
-fun GradientSeekBar.bindBarSize(size: Int) {
-    if (this.barSize != size) this.barSize = size
-}
-
-@BindingAdapter("cornersRadius")
-fun GradientSeekBar.bindCornersRadius(radius: Float) {
-    if (this.cornersRadius != radius) this.cornersRadius = radius
-}
-
-@BindingAdapter("thumbRadius")
-fun GradientSeekBar.bindThumbRadius(radius: Int) {
-    if (this.thumbRadius != radius) this.thumbRadius = radius
-}
-
 @BindingAdapter("offset")
 fun GradientSeekBar.bindOffset(offset: Float) {
     if (this.offset != offset) this.offset = offset
@@ -64,14 +49,4 @@ fun GradientSeekBar.receiveOffset() = this.offset
 @BindingAdapter("offsetAttrChanged")
 fun GradientSeekBar.bindOffsetListener(listener: InverseBindingListener) {
     this.colorListener = { _, _ -> listener.onChange() }
-}
-
-@BindingAdapter("colorCircleScale")
-fun GradientSeekBar.bindColorCircleScale(scale: Float) {
-    if (this.thumbColorCircleScale != scale) this.thumbColorCircleScale = scale
-}
-
-@BindingAdapter("orientation")
-fun GradientSeekBar.bindOrientation(orientation: GradientSeekBar.Orientation) {
-    if (this.orientation != orientation) this.orientation = orientation
 }
