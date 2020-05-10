@@ -17,13 +17,3 @@ fun ColorWheel.receiveRgb() = this.rgb
 fun ColorWheel.bindRgbAttributeListener(listener: InverseBindingListener) {
     this.colorChangeListener = { listener.onChange() }
 }
-
-@BindingAdapter("thumbRadius")
-fun ColorWheel.bindThumbRadius(radius: Int) {
-    if (this.thumbRadius != radius) this.thumbRadius = radius
-}
-
-@BindingAdapter("thumbColorCircleScale")
-fun ColorWheel.bindThumbColorCircleScale(scale: Float) {
-    if (this.thumbColorCircleScale != scale) this.thumbColorCircleScale = scale
-}
