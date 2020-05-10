@@ -7,8 +7,6 @@ import com.apandroid.colorwheel.gradientseekbar.GradientSeekBar
 import com.apandroid.colorwheel.gradientseekbar.setAlphaListener
 import com.apandroid.colorwheel.gradientseekbar.setBlackToColor
 import com.apandroid.colorwheel.gradientseekbar.setTransparentToColor
-import kotlinx.android.synthetic.main.fragment_test_color_wheel.view.*
-import kotlinx.android.synthetic.main.fragment_test_gradient_seek_bar.view.*
 
 interface GradientSeekBarOnColorChangedListener {
 
@@ -68,7 +66,12 @@ fun GradientSeekBar.bindOffsetListener(listener: InverseBindingListener) {
     this.colorListener = { _, _ -> listener.onChange() }
 }
 
-@BindingAdapter("bindColorCircleScale")
+@BindingAdapter("colorCircleScale")
 fun GradientSeekBar.bindColorCircleScale(scale: Float) {
     if (this.thumbColorCircleScale != scale) this.thumbColorCircleScale = scale
+}
+
+@BindingAdapter("orientation")
+fun GradientSeekBar.bindOrientation(orientation: GradientSeekBar.Orientation) {
+    if (this.orientation != orientation) this.orientation = orientation
 }

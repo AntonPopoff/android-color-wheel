@@ -22,6 +22,7 @@ class TestGradientSeekBarFragment : Fragment(R.layout.fragment_test_gradient_see
                 colorCircleScaleObservable.set(it.gradientSeekBar.thumbColorCircleScale)
                 cornerRadiusObservable.set(it.gradientSeekBar.cornersRadius)
                 barSizeObservable.set(it.gradientSeekBar.barSize)
+                gradientSeekBarOrientation.set(it.gradientSeekBar.orientation)
             }
         }
     }
