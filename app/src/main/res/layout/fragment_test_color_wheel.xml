@@ -2,8 +2,8 @@
 <layout>
 
     <data>
-        <import type="com.apandroid.colorwheelapp.utils.UIUtilsKt"/>
         <import type="com.apandroid.colorwheelapp.binding.converters.ConvertersKt"/>
+        <import type="com.apandroid.colorwheelapp.utils.UIUtilsKt"/>
         <import type="com.apandroid.colorwheelapp.utils.ColorUtilsKt"/>
 
         <variable
@@ -41,7 +41,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            progress="@={viewModel.thumbRadiusObservable}"
+            android:progress="@={viewModel.thumbRadiusObservable}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/thumbRadiusText"
@@ -114,7 +114,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:max="100"
-            progress="@={ConvertersKt.convertFloatRatioToProgress(colorCircleScaleSeekBar, viewModel.colorCircleScaleObservable)}"
+            android:progress="@={ConvertersKt.convertFloatRatioToProgress(colorCircleScaleSeekBar.getMax(), viewModel.colorCircleScaleObservable)}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/colorCircleScale" />

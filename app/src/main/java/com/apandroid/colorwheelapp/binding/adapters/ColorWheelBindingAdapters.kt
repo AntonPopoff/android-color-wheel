@@ -25,5 +25,5 @@ fun ColorWheel.bindThumbRadius(radius: Int) {
 
 @BindingAdapter("thumbColorCircleScale")
 fun ColorWheel.bindThumbColorCircleScale(scale: Float) {
-    if(this.thumbColorCircleScale != scale) this.thumbColorCircleScale = scale
+    if (this.thumbColorCircleScale != scale) this.thumbColorCircleScale = scale
 }
