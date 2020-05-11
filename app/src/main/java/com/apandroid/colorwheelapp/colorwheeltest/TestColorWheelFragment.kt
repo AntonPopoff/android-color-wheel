@@ -17,9 +17,9 @@ class TestColorWheelFragment : Fragment(R.layout.fragment_test_color_wheel) {
         FragmentTestColorWheelBinding.bind(view).also {
             it.random = Random()
             it.viewModel = ViewModelProvider(this).get(TestColorWheelViewModel::class.java).apply {
-                thumbRadiusObservable.set(pixelsToDp(requireContext(), it.colorWheel.thumbRadius))
                 colorCircleScaleObservable.set(it.colorWheel.thumbColorCircleScale)
-                colorWheelPaddingObservable.set(16)
+                it.thumbRadiusSeekBar.progress = pixelsToDp(requireContext(), it.colorWheel.thumbRadius)
+                it.colorWheelPaddingSeekBar.progress = 16
             }
         }
     }

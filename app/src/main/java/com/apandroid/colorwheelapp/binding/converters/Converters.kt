@@ -7,13 +7,3 @@ import kotlin.math.roundToInt
 fun convertFloatRatioToProgress(max: Int, value: Float) = (value * max).roundToInt()
 
 fun convertProgressToFloatRatio(max: Int, value: Int) = value / max.toFloat()
-
-@InverseMethod("convertIntToString")
-fun convertStringToInt(value: String) = value.toIntOrNull() ?: 0
-
-fun convertIntToString(value: Int) = value.toString()
-
-@InverseMethod("convertFloatToString")
-fun convertStringToFloat(value: String) = value.toFloatOrNull() ?: 0f
-
-fun convertFloatToString(value: Float) = value.toString()
