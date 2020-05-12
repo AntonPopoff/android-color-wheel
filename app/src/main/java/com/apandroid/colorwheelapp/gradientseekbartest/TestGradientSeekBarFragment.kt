@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import com.apandroid.colorwheelapp.R
 import com.apandroid.colorwheelapp.databinding.FragmentTestGradientSeekBarBinding
 import java.util.*
+import kotlin.math.roundToInt
 
 class TestGradientSeekBarFragment : Fragment(R.layout.fragment_test_gradient_seek_bar) {
 
@@ -19,8 +20,8 @@ class TestGradientSeekBarFragment : Fragment(R.layout.fragment_test_gradient_see
             it.random = Random()
             it.viewModel = TestGradientSeekBarViewModel().apply {
                 colorCircleScaleObservable.set(it.gradientSeekBar.thumbColorCircleScale)
-                colorCircleScaleObservable.set(it.gradientSeekBar.thumbColorCircleScale)
-                cornerRadiusObservable.set(it.gradientSeekBar.cornersRadius)
+                cornerRadiusObservable.set(it.gradientSeekBar.cornersRadius.roundToInt())
+                thumbRadiusObservable.set(it.gradientSeekBar.thumbRadius)
                 barSizeObservable.set(it.gradientSeekBar.barSize)
                 gradientSeekBarOrientation.set(it.gradientSeekBar.orientation)
             }

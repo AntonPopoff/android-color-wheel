@@ -52,7 +52,7 @@
                 android:textAlignment="center"
                 android:layout_marginStart="8dp"
                 android:hint="@string/zero"
-                android:onTextChanged="@{(text, start, end, count) -> viewModel.onBarSizeTextChanged(text)}"
+                intText="@={viewModel.barSizeObservable}"
                 app:layout_constraintBaseline_toBaselineOf="@id/barSizeText"
                 app:layout_constraintStart_toEndOf="@id/textViewBarrier" />
 
@@ -97,7 +97,7 @@
                 android:textAlignment="center"
                 android:layout_marginStart="8dp"
                 android:hint="@string/zero"
-                android:onTextChanged="@{(text, start, end, count) -> viewModel.onCornerRadiusTextChanged(text)}"
+                intText="@={viewModel.cornerRadiusObservable}"
                 app:layout_constraintBaseline_toBaselineOf="@id/cornerRadiusText"
                 app:layout_constraintStart_toEndOf="@id/textViewBarrier" />
 
@@ -141,8 +141,8 @@
                 android:inputType="number"
                 android:textAlignment="center"
                 android:layout_marginStart="8dp"
-                android:onTextChanged="@{(text, start, end, count) -> viewModel.onThumbRadiusTextChanged(text)}"
                 android:hint="@string/zero"
+                intText="@={viewModel.thumbRadiusObservable}"
                 app:layout_constraintBaseline_toBaselineOf="@id/thumbRadiusText"
                 app:layout_constraintStart_toEndOf="@id/textViewBarrier" />
 
@@ -351,7 +351,7 @@
                 android:padding="1dp"
                 offset="@={viewModel.offsetObservable}"
                 app:barSize="@{viewModel.barSizeObservable}"
-                app:cornersRadius="@{viewModel.cornerRadiusObservable}"
+                app:cornersRadius="@{ConvertersKt.convertIntToFloat(viewModel.cornerRadiusObservable)}"
                 app:thumbColorCircleScale="@{viewModel.colorCircleScaleObservable}"
                 app:thumbRadius="@{viewModel.thumbRadiusObservable}"
                 app:orientation="@{viewModel.gradientSeekBarOrientation}"
