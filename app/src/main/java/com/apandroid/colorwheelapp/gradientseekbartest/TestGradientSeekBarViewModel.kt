@@ -16,12 +16,4 @@ class TestGradientSeekBarViewModel : ViewModel() {
     val colorCircleScaleObservable = ObservableFloat()
     val offsetObservable = ObservableFloat()
     val gradientSeekBarOrientation = ObservableField<GradientSeekBar.Orientation>()
-
-    fun onOrientationRadioChanged(id: Int) {
-        if (id == R.id.verticalOrientationButton) {
-            gradientSeekBarOrientation.set(GradientSeekBar.Orientation.VERTICAL)
-        } else if (id == R.id.horizontalOrientationButton) {
-            gradientSeekBarOrientation.set(GradientSeekBar.Orientation.HORIZONTAL)
-        }
-    }
 }
