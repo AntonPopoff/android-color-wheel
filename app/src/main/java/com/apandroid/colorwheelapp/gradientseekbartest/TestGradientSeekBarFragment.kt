@@ -16,16 +16,17 @@ class TestGradientSeekBarFragment : Fragment(R.layout.fragment_test_gradient_see
     }
 
     private fun setupDataBinding(view: View) {
-        FragmentTestGradientSeekBarBinding.bind(view).let {
-            it.random = Random()
-            it.viewModel = TestGradientSeekBarViewModel().apply {
-                colorCircleScaleObservable.set(it.gradientSeekBar.thumbColorCircleScale)
-                cornerRadiusObservable.set(it.gradientSeekBar.cornersRadius.roundToInt())
-                thumbRadiusObservable.set(it.gradientSeekBar.thumbRadius)
-                barSizeObservable.set(it.gradientSeekBar.barSize)
-                gradientSeekBarOrientation.set(it.gradientSeekBar.orientation)
-            }
+        FragmentTestGradientSeekBarBinding.bind(view).apply {
+            viewModel = createViewModel(this)
+            random = Random()
         }
     }
 
+    private fun createViewModel(binding: FragmentTestGradientSeekBarBinding) = TestGradientSeekBarViewModel().apply {
+        colorCircleScaleObservable.set(binding.gradientSeekBar.thumbColorCircleScale)
+        cornerRadiusObservable.set(binding.gradientSeekBar.cornersRadius.roundToInt())
+        thumbRadiusObservable.set(binding.gradientSeekBar.thumbRadius)
+        barSizeObservable.set(binding.gradientSeekBar.barSize)
+        gradientSeekBarOrientation.set(binding.gradientSeekBar.orientation)
+    }
 }

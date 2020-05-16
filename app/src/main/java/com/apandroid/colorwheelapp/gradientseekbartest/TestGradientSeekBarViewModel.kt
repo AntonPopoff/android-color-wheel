@@ -1,5 +1,6 @@
 package com.apandroid.colorwheelapp.gradientseekbartest
 
+import androidx.databinding.Observable
 import androidx.databinding.ObservableField
 import androidx.databinding.ObservableFloat
 import androidx.databinding.ObservableInt
