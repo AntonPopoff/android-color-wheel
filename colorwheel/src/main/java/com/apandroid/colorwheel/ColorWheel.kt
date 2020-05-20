@@ -103,6 +103,8 @@ open class ColorWheel @JvmOverloads constructor(
 
     var colorChangeListener: ((Int) -> Unit)? = null
 
+    var colorPickedListener: ((Int) -> Unit)? = null
+
     var interceptTouchEvent = true
 
     init {
@@ -192,6 +194,7 @@ open class ColorWheel @JvmOverloads constructor(
             }
             MotionEvent.ACTION_UP -> {
                 updateColorOnMotionEvent(event)
+                firePickedListener()
                 if (isTap(event)) performClick()
             }
         }
@@ -235,6 +238,10 @@ open class ColorWheel @JvmOverloads constructor(
 
     private fun fireColorListener() {
         colorChangeListener?.invoke(hsvColor.rgb)
+    }
+
+    private fun firePickedListener() {
+        colorPickedListener?.invoke(hsvColor.rgb)
     }
 
     override fun onSaveInstanceState(): Parcelable {
