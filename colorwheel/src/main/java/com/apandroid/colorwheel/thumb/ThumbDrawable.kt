@@ -14,6 +14,8 @@ internal class ThumbDrawable {
     var strokeColor = 0
     var thumbColor = 0
     var radius = 0
+    var shadowColor = 0
+    var shadowRadius = 0f
 
     var colorCircleScale = 0f
         set(value) { field = ensureNumberWithinRange(value, 0f, 1f) }
@@ -32,6 +34,7 @@ internal class ThumbDrawable {
     private fun drawThumb(canvas: Canvas) {
         paint.color = thumbColor
         paint.style = Paint.Style.FILL
+        paint.setShadowLayer(shadowRadius, shadowRadius * 0.3f, shadowRadius * 0.5f, shadowColor)
         canvas.drawCircle(x, y, radius.toFloat(), paint)
     }
 
@@ -40,6 +43,7 @@ internal class ThumbDrawable {
 
         paint.color = strokeColor
         paint.style = Paint.Style.STROKE
+        paint.setShadowLayer(0f, 0f, 0f, 0)
         canvas.drawCircle(x, y, strokeCircleRadius, paint)
     }
 
@@ -48,6 +52,7 @@ internal class ThumbDrawable {
 
         paint.color = indicatorColor
         paint.style = Paint.Style.FILL
+        paint.setShadowLayer(0f, 0f, 0f, 0)
         canvas.drawCircle(x, y, colorIndicatorCircleRadius, paint)
     }
 
@@ -56,6 +61,8 @@ internal class ThumbDrawable {
         thumbColor = state.thumbColor
         strokeColor = state.strokeColor
         colorCircleScale = state.colorCircleScale
+        shadowColor = state.colorShadow
+        shadowRadius = state.shadowRadius
     }
 
     fun saveState() = ThumbDrawableState(this)

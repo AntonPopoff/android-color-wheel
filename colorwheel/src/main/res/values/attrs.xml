@@ -6,6 +6,8 @@
         <attr name="cw_thumbColor" format="color" />
         <attr name="cw_thumbStrokeColor" format="color" />
         <attr name="cw_thumbColorCircleScale" format="float" />
+        <attr name="cw_thumbShadowColor" format="color" />
+        <attr name="cw_thumbShadowRadius" format="dimension" />
     </declare-styleable>
 
     <declare-styleable name="GradientSeekBar">

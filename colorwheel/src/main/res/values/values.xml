@@ -5,4 +5,6 @@
 
     <item name="default_thumb_color_circle_scale" type="dimen" format="float">0.7</item>
 
+    <dimen name="default_thumb_shadow_radius">4dp</dimen>
+
 </resources>

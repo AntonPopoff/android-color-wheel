@@ -3,5 +3,6 @@
 
     <color name="default_thumb_color">@android:color/white</color>
     <color name="default_thumb_stroke_color">@android:color/darker_gray</color>
+    <color name="default_thumb_shadow_color">#48000000</color>
 
 </resources>

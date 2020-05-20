@@ -7,19 +7,25 @@ internal class ThumbDrawableState private constructor(
     val radius: Int,
     val thumbColor: Int,
     val strokeColor: Int,
-    val colorCircleScale: Float
+    val colorCircleScale: Float,
+    val colorShadow: Int,
+    val shadowRadius: Float
 ) : Parcelable {
 
     constructor(thumbDrawable: ThumbDrawable) : this(
         thumbDrawable.radius,
         thumbDrawable.thumbColor,
         thumbDrawable.strokeColor,
-        thumbDrawable.colorCircleScale
+        thumbDrawable.colorCircleScale,
+        thumbDrawable.shadowColor,
+        thumbDrawable.shadowRadius
     )
 
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
         parcel.readInt(),
+        parcel.readInt(),
+        parcel.readFloat(),
         parcel.readInt(),
         parcel.readFloat()
     )
@@ -29,13 +35,15 @@ internal class ThumbDrawableState private constructor(
         parcel.writeInt(thumbColor)
         parcel.writeInt(strokeColor)
         parcel.writeFloat(colorCircleScale)
+        parcel.writeInt(colorShadow)
+        parcel.writeFloat(shadowRadius)
     }
 
     override fun describeContents() = 0
 
     companion object {
 
-        val EMPTY_STATE = ThumbDrawableState(0, 0, 0, 0f)
+        val EMPTY_STATE = ThumbDrawableState(0, 0, 0, 0f, 0, 0f)
 
         @JvmField
         val CREATOR = object : Parcelable.Creator<ThumbDrawableState> {

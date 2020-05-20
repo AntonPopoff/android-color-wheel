@@ -87,6 +87,20 @@ open class ColorWheel @JvmOverloads constructor(
             invalidate()
         }
 
+    var thumbShadowColor
+        get() = thumbDrawable.shadowColor
+        set(value) {
+            thumbDrawable.shadowColor = value
+            invalidate()
+        }
+
+    var thumbShadowRadius
+        get() = thumbDrawable.shadowRadius
+        set(value) {
+            thumbDrawable.shadowRadius = value
+            invalidate()
+        }
+
     var colorChangeListener: ((Int) -> Unit)? = null
 
     var interceptTouchEvent = true
@@ -96,11 +110,18 @@ open class ColorWheel @JvmOverloads constructor(
     }
 
     private fun parseAttributes(context: Context, attrs: AttributeSet?) {
-        context.obtainStyledAttributes(attrs, R.styleable.ColorWheel, 0, R.style.ColorWheelDefaultStyle).apply {
+        context.obtainStyledAttributes(
+            attrs,
+            R.styleable.ColorWheel,
+            0,
+            R.style.ColorWheelDefaultStyle
+        ).apply {
             thumbRadius = getDimensionPixelSize(R.styleable.ColorWheel_cw_thumbRadius, 0)
             thumbColor = getColor(R.styleable.ColorWheel_cw_thumbColor, 0)
             thumbStrokeColor = getColor(R.styleable.ColorWheel_cw_thumbStrokeColor, 0)
             thumbColorCircleScale = getFloat(R.styleable.ColorWheel_cw_thumbColorCircleScale, 0f)
+            thumbShadowColor = getColor(R.styleable.ColorWheel_cw_thumbShadowColor, 0)
+            thumbShadowRadius = getDimensionPixelSize(R.styleable.ColorWheel_cw_thumbShadowRadius, 0).toFloat()
             recycle()
         }
     }
@@ -244,7 +265,11 @@ private class ColorWheelState : View.BaseSavedState {
     val interceptTouchEvent: Boolean
     val rgb: Int
 
-    constructor(superState: Parcelable?, view: ColorWheel, thumbDrawableState: ThumbDrawableState) : super(superState) {
+    constructor(
+        superState: Parcelable?,
+        view: ColorWheel,
+        thumbDrawableState: ThumbDrawableState
+    ) : super(superState) {
         thumbState = thumbDrawableState
         interceptTouchEvent = view.interceptTouchEvent
         rgb = view.rgb
