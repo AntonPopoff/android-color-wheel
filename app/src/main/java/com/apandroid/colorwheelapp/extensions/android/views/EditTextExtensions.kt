@@ -14,8 +14,7 @@ interface EmptyTextWatcher : TextWatcher {
 }
 
 fun EditText.afterTextChanged(listener: (String) -> Unit) {
-    this.addTextChangedListener(object :
-        EmptyTextWatcher {
+    this.addTextChangedListener(object : EmptyTextWatcher {
         override fun afterTextChanged(s: Editable) {
             listener(s.toString())
         }
