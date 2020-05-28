@@ -1,4 +1,4 @@
-package com.apandroid.colorwheelapp.extensions
+package com.apandroid.colorwheelapp.extensions.android.views
 
 import android.text.Editable
 import android.text.TextWatcher
