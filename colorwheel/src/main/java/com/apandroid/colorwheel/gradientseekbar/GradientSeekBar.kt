@@ -18,11 +18,11 @@ import com.apandroid.colorwheel.thumb.ThumbDrawable
 import com.apandroid.colorwheel.thumb.ThumbDrawableState
 import com.apandroid.colorwheel.thumb.readThumbState
 import com.apandroid.colorwheel.thumb.writeThumbState
+import com.apandroid.colorwheel.utils.*
 import com.apandroid.colorwheel.utils.MAX_ALPHA
 import com.apandroid.colorwheel.utils.ensureNumberWithinRange
 import com.apandroid.colorwheel.utils.interpolateColorLinear
 import com.apandroid.colorwheel.utils.setColorAlpha
-import kotlin.math.hypot
 
 open class GradientSeekBar @JvmOverloads constructor(
     context: Context,
@@ -36,8 +36,8 @@ open class GradientSeekBar @JvmOverloads constructor(
     private val gradientDrawable = GradientDrawable()
 
     private lateinit var orientationStrategy: OrientationStrategy
-    private var motionEventDownX = 0f
-    private var motionEventDownY = 0f
+    private var downX = 0f
+    private var downY = 0f
 
     var startColor
         get() = gradientColors[0]
@@ -179,15 +179,15 @@ open class GradientSeekBar @JvmOverloads constructor(
             MotionEvent.ACTION_DOWN -> {
                 parent.requestDisallowInterceptTouchEvent(interceptTouchEvent)
                 calculateOffsetOnMotionEvent(event)
-                motionEventDownX = event.x
-                motionEventDownY = event.y
+                downX = event.x
+                downY = event.y
             }
             MotionEvent.ACTION_MOVE -> {
                 calculateOffsetOnMotionEvent(event)
             }
             MotionEvent.ACTION_UP -> {
                 calculateOffsetOnMotionEvent(event)
-                if (isTap(event)) performClick()
+                if (isTap(event, downX, downY, viewConfig)) performClick()
             }
         }
 
@@ -195,12 +195,6 @@ open class GradientSeekBar @JvmOverloads constructor(
     }
 
     override fun performClick() = super.performClick()
-
-    private fun isTap(event: MotionEvent): Boolean {
-        val eventDuration = event.eventTime - event.downTime
-        val travelDistance = hypot(motionEventDownX - event.x, motionEventDownY - event.y)
-        return eventDuration < ViewConfiguration.getTapTimeout() && travelDistance < viewConfig.scaledTouchSlop
-    }
 
     private fun calculateOffsetOnMotionEvent(event: MotionEvent) {
         offset = orientationStrategy.calculateOffsetOnMotionEvent(this, event, gradientDrawable.bounds)
