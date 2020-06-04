@@ -160,15 +160,8 @@ open class ColorWheel @JvmOverloads constructor(
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
         when (event.actionMasked) {
-            MotionEvent.ACTION_DOWN -> {
-                parent.requestDisallowInterceptTouchEvent(interceptTouchEvent)
-                updateColorOnMotionEvent(event)
-                downX = event.x
-                downY = event.y
-            }
-            MotionEvent.ACTION_MOVE -> {
-                updateColorOnMotionEvent(event)
-            }
+            MotionEvent.ACTION_DOWN -> onActionDown(event)
+            MotionEvent.ACTION_MOVE -> updateColorOnMotionEvent(event)
             MotionEvent.ACTION_UP -> {
                 updateColorOnMotionEvent(event)
                 if (isTap(event, downX, downY, viewConfig)) performClick()
@@ -176,6 +169,13 @@ open class ColorWheel @JvmOverloads constructor(
         }
 
         return true
+    }
+
+    private fun onActionDown(event: MotionEvent) {
+        parent.requestDisallowInterceptTouchEvent(interceptTouchEvent)
+        updateColorOnMotionEvent(event)
+        downX = event.x
+        downY = event.y
     }
 
     override fun performClick() = super.performClick()

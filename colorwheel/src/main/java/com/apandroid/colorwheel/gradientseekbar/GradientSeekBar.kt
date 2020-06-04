@@ -176,15 +176,8 @@ open class GradientSeekBar @JvmOverloads constructor(
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
         when (event.actionMasked) {
-            MotionEvent.ACTION_DOWN -> {
-                parent.requestDisallowInterceptTouchEvent(interceptTouchEvent)
-                calculateOffsetOnMotionEvent(event)
-                downX = event.x
-                downY = event.y
-            }
-            MotionEvent.ACTION_MOVE -> {
-                calculateOffsetOnMotionEvent(event)
-            }
+            MotionEvent.ACTION_DOWN -> onActionDown(event)
+            MotionEvent.ACTION_MOVE -> calculateOffsetOnMotionEvent(event)
             MotionEvent.ACTION_UP -> {
                 calculateOffsetOnMotionEvent(event)
                 if (isTap(event, downX, downY, viewConfig)) performClick()
@@ -192,6 +185,13 @@ open class GradientSeekBar @JvmOverloads constructor(
         }
 
         return true
+    }
+
+    private fun onActionDown(event: MotionEvent) {
+        parent.requestDisallowInterceptTouchEvent(interceptTouchEvent)
+        calculateOffsetOnMotionEvent(event)
+        downX = event.x
+        downY = event.y
     }
 
     override fun performClick() = super.performClick()
