@@ -189,16 +189,9 @@ open class ColorWheel @JvmOverloads constructor(
     private fun calculateColor(event: MotionEvent) {
         val legX = event.x - wheelCenterX
         val legY = event.y - wheelCenterY
-        val hypot = hypot(legX, legY)
-        val r = minOf(hypot, wheelRadius.toFloat())
-        val angle = atan2(legY, legX)
-        val x = cos(angle) * r + wheelCenterX
-        val y = sin(angle) * r + wheelCenterY
-        val dx = x - wheelCenterX
-        val dy = y - wheelCenterY
-        val hue = (toDegrees(atan2(dy, dx)) + 360) % 360
-        val saturation = hypot(dx, dy) / wheelRadius
-
+        val hypot = minOf(hypot(legX, legY), wheelRadius.toFloat())
+        val hue = (toDegrees(atan2(legY, legX)) + 360) % 360
+        val saturation = hypot / wheelRadius
         hsvColor.set(hue, saturation, 1f)
     }
 
