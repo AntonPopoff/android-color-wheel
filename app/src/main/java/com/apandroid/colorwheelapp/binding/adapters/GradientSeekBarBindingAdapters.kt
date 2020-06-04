@@ -4,7 +4,7 @@ import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseBindingAdapter
 import androidx.databinding.InverseBindingListener
 import com.apandroid.colorwheel.gradientseekbar.GradientSeekBar
-import com.apandroid.colorwheel.gradientseekbar.setAlphaListener
+import com.apandroid.colorwheel.gradientseekbar.setAlphaChangeListener
 import com.apandroid.colorwheel.gradientseekbar.setBlackToColor
 import com.apandroid.colorwheel.gradientseekbar.setTransparentToColor
 
@@ -30,12 +30,12 @@ fun GradientSeekBar.bindBlackToColor(argb: Int) {
 
 @BindingAdapter("colorListener")
 fun GradientSeekBar.bindOnColorChangedListener(listener: GradientSeekBarOnColorChangedListener) {
-    this.colorListener = { _, argb -> listener.onColorChanged(argb) }
+    this.colorChangeListener = { _, argb -> listener.onColorChanged(argb) }
 }
 
 @BindingAdapter("alphaListener")
 fun GradientSeekBar.bindAlphaChangeListener(listener: GradientSeekBarOnAlphaChangedListener) {
-    this.setAlphaListener { _, _, alpha -> listener.onAlphaChanged(alpha) }
+    this.setAlphaChangeListener { _, _, alpha -> listener.onAlphaChanged(alpha) }
 }
 
 @BindingAdapter("offset")
@@ -48,5 +48,5 @@ fun GradientSeekBar.receiveOffset() = this.offset
 
 @BindingAdapter("offsetAttrChanged")
 fun GradientSeekBar.bindOffsetListener(listener: InverseBindingListener) {
-    this.colorListener = { _, _ -> listener.onChange() }
+    this.colorChangeListener = { _, _ -> listener.onChange() }
 }

@@ -103,7 +103,7 @@ open class GradientSeekBar @JvmOverloads constructor(
     var argb = 0
         private set
 
-    var colorListener: ((Float, Int) -> Unit)? = null
+    var colorChangeListener: ((Float, Int) -> Unit)? = null
 
     var interceptTouchEvent = true
 
@@ -213,7 +213,7 @@ open class GradientSeekBar @JvmOverloads constructor(
     }
 
     private fun fireListener() {
-        colorListener?.invoke(offset, argb)
+        colorChangeListener?.invoke(offset, argb)
     }
 
     override fun onSaveInstanceState(): Parcelable {
@@ -255,7 +255,7 @@ private class GradientSeekBarState : View.BaseSavedState {
     val interceptTouchEvent: Boolean
     val thumbState: ThumbDrawableState
 
-    constructor(superState: Parcelable?, view: GradientSeekBar, thumbDrawableState: ThumbDrawableState) : super(superState) {
+    constructor(superState: Parcelable?, view: GradientSeekBar, thumbState: ThumbDrawableState) : super(superState) {
         startColor = view.startColor
         endColor = view.endColor
         offset = view.offset
@@ -263,7 +263,7 @@ private class GradientSeekBarState : View.BaseSavedState {
         cornerRadius = view.cornersRadius
         orientation = view.orientation.ordinal
         interceptTouchEvent = view.interceptTouchEvent
-        thumbState = thumbDrawableState
+        this.thumbState = thumbState
     }
 
     constructor(source: Parcel) : super(source) {
@@ -304,8 +304,8 @@ fun GradientSeekBar.setTransparentToColor(color: Int, respectAlpha: Boolean = tr
     this.setColors(setColorAlpha(color, 0), setColorAlpha(color, MAX_ALPHA))
 }
 
-inline fun GradientSeekBar.setAlphaListener(crossinline listener: (Float, Int, Int) -> Unit) {
-    this.colorListener = { offset, color -> listener(offset, color, this.currentColorAlpha) }
+inline fun GradientSeekBar.setAlphaChangeListener(crossinline listener: (Float, Int, Int) -> Unit) {
+    this.colorChangeListener = { offset, color -> listener(offset, color, this.currentColorAlpha) }
 }
 
 fun GradientSeekBar.setBlackToColor(color: Int) {

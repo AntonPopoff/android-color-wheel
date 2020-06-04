@@ -196,9 +196,9 @@ open class ColorWheel @JvmOverloads constructor(
     }
 
     private fun isTap(event: MotionEvent): Boolean {
-        val eventDuration = event.eventTime - event.downTime
-        val travelDistance = hypot(event.x - motionEventDownX, event.y - motionEventDownY)
-        return eventDuration < ViewConfiguration.getTapTimeout() && travelDistance < viewConfig.scaledTouchSlop
+        val duration = event.eventTime - event.downTime
+        val distance = hypot(event.x - motionEventDownX, event.y - motionEventDownY)
+        return duration < ViewConfiguration.getTapTimeout() && distance < viewConfig.scaledTouchSlop
     }
 
     private fun fireColorListener() {
@@ -233,8 +233,8 @@ private class ColorWheelState : View.BaseSavedState {
     val interceptTouchEvent: Boolean
     val rgb: Int
 
-    constructor(superState: Parcelable?, view: ColorWheel, thumbDrawableState: ThumbDrawableState) : super(superState) {
-        thumbState = thumbDrawableState
+    constructor(superState: Parcelable?, view: ColorWheel, thumbState: ThumbDrawableState) : super(superState) {
+        this.thumbState = thumbState
         interceptTouchEvent = view.interceptTouchEvent
         rgb = view.rgb
     }
