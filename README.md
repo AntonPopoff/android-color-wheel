@@ -15,7 +15,7 @@
 To add the library to your project simply add the following line to your app module `build.gradle` file:
 
 ```groovy
-implementation 'com.apandroid:colorwheel:1.1.10'
+implementation 'com.apandroid:colorwheel:1.1.11'
 ```
 
 In case of problems make sure that **jCenter** repository is specified in your `build.gradle` file:
@@ -56,12 +56,12 @@ colorWheel.rgb = Color.rgb(13, 37, 42)
 val currentColor = colorWheel.rgb
 ```
 
-**Note**: when you set an ARGB color it's transformed to the closest HSV color with value(brightness) component of it set to 1
-so the color can be correctly displayed on the `ColorWheel` since it's only 2 dimensional. Therefore currently displayed color
-on `ColorWheel` may differ from the original color which you have set. To change brightness or alpha component
-of a color picked from `ColorWheel` you can use `GradientSeekBar` view.
+**Note**: when you set an ARGB color to `ColorWheel` it's transformed to the closest HSV color with the value(brightness) 
+component of it set to 1 so the color can be correctly displayed on `ColorWheel` since it's only 2 dimensional. 
+Therefore the color that is displayed by `ColorWheel` may differ from the original color which you have set. To change the brightness 
+or the alpha component of a color picked from `ColorWheel` you can use `GradientSeekBar` view.
 
-To be notified when a currently selected color is changed you can use `ColorWheel.colorChangeListener` property:
+To be notified when the current color on `ColorWheel` is changed you can use `ColorWheel.colorChangeListener` property:
 
 ```kotlin
 colorWheel.colorChangeListener = { rgb: Int ->
@@ -71,12 +71,12 @@ colorWheel.colorChangeListener = { rgb: Int ->
 
 ### GradientSeekBar
 
-`GradientSeekBar` view draws a vertical or horizontal bar filled with linear gradient of two colors.
+`GradientSeekBar` view draws a vertical or horizontal bar filled with a linear gradient of two colors.
 You can use it to pick an intermediate color between these two.
 
 #### Color
 
-To pick an intermediate ARGB color you can use `GradientSeekBar.argb` property:
+To pick the intermediate ARGB color you can use `GradientSeekBar.argb` property:
 
 ```kotlin
 val color = gradientSeekBar.argb
@@ -101,23 +101,23 @@ gradientSeekBar.colorListener = { offset: Float, argb: Int ->
 }
 ```
 
-If you want to change an intermediate color programmatically you can use `GradientSeekBar.offset` property. This value is always within
-the range from `0f` to `1f` and shows how close an intermediate color to a start color or end color.
+If you want to change the intermediate color programmatically you can use `GradientSeekBar.offset` property. This value is always within
+the range from `0f` to `1f` and shows how close the intermediate color to the start color or end color.
 
 #### Alpha
 
-If you want to use `GradientSeekBar` to pick an alpha value of a color in range from `0` to `255`
+If you want to use `GradientSeekBar` to pick the alpha value of a color in range from `0` to `255`
 you can use the following extension of `GradientSeekBar`:
 
 * `GradientSeekBar.setTransparentToColor(color: Int, respectAlpha: Boolean = true)`
 
-This method takes an ARGB color and sets transparent version of it as `start` color and opaque as `end` color,
-`respectAlpha` parameter determines if the thumb's position will be adjusted based on an alpha value of a color you supplied.
+This method takes an ARGB color and sets the transparent version of it as the `start` color and an opaque one as the `end` color,
+`respectAlpha` parameter determines if the thumb's position will be adjusted based on the alpha value of the color you supplied.
 
-To get an alpha value of a current intermediate color you can use `GradientSeekBar.currentColorAlpha` extension property.
+To get the alpha value of the current color you can use `GradientSeekBar.currentColorAlpha` extension property.
 
 Also you can use `GradientSeekBar.setAlphaListener` method to set a listener that will be called when
-alpha value is changed.
+the alpha value of a color is changed.
 
 ```kotlin
 gradientSeekBar.setAlphaListener { offset: Float, color: Int, alpha: Int ->
@@ -127,7 +127,7 @@ gradientSeekBar.setAlphaListener { offset: Float, color: Int, alpha: Int ->
 
 #### Brightness
 
-It's impossible to pick all different colors from `ColorWheel` since it's only 2 dimensional and value(brightness) component of it
+It's impossible to pick all different colors from `ColorWheel` since it's only 2 dimensional and the value(brightness) component of it
 is always set to `1`.
 
 To compensate that you can use `GradientSeekBar` and its `setBlackToColor(color)` extension. This method sets black color as
