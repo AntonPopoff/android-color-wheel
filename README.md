@@ -96,7 +96,7 @@ gradientSeekBar.setColors(startColor, endColor)
 You can set a color listener via `GradientSeekBar.colorListener`:
 
 ```kotlin
-gradientSeekBar.colorListener = { offset: Float, argb: Int ->
+gradientSeekBar.colorChangeListener = { offset: Float, argb: Int ->
     // Listener code
 }
 ```
@@ -116,11 +116,11 @@ This method takes an ARGB color and sets the transparent version of it as the `s
 
 To get the alpha value of the current color you can use `GradientSeekBar.currentColorAlpha` extension property.
 
-Also you can use `GradientSeekBar.setAlphaListener` method to set a listener that will be called when
+Also you can use `GradientSeekBar.setAlphaChangeListener` method to set a listener that will be called when
 the alpha value of a color is changed.
 
 ```kotlin
-gradientSeekBar.setAlphaListener { offset: Float, color: Int, alpha: Int ->
+gradientSeekBar.setAlphaChangeListener { offset: Float, color: Int, alpha: Int ->
     // Listener code
 }
 ```
