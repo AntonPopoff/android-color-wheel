@@ -18,11 +18,11 @@ import com.apandroid.colorwheel.thumb.ThumbDrawable
 import com.apandroid.colorwheel.thumb.ThumbDrawableState
 import com.apandroid.colorwheel.thumb.readThumbState
 import com.apandroid.colorwheel.thumb.writeThumbState
+import com.apandroid.colorwheel.utils.*
 import com.apandroid.colorwheel.utils.MAX_ALPHA
 import com.apandroid.colorwheel.utils.ensureNumberWithinRange
 import com.apandroid.colorwheel.utils.interpolateColorLinear
 import com.apandroid.colorwheel.utils.setColorAlpha
-import kotlin.math.hypot
 
 open class GradientSeekBar @JvmOverloads constructor(
     context: Context,
@@ -36,8 +36,8 @@ open class GradientSeekBar @JvmOverloads constructor(
     private val gradientDrawable = GradientDrawable()
 
     private lateinit var orientationStrategy: OrientationStrategy
-    private var motionEventDownX = 0f
-    private var motionEventDownY = 0f
+    private var downX = 0f
+    private var downY = 0f
 
     var startColor
         get() = gradientColors[0]
@@ -103,7 +103,7 @@ open class GradientSeekBar @JvmOverloads constructor(
     var argb = 0
         private set
 
-    var colorListener: ((Float, Int) -> Unit)? = null
+    var colorChangeListener: ((Float, Int) -> Unit)? = null
 
     var interceptTouchEvent = true
 
@@ -176,31 +176,25 @@ open class GradientSeekBar @JvmOverloads constructor(
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
         when (event.actionMasked) {
-            MotionEvent.ACTION_DOWN -> {
-                parent.requestDisallowInterceptTouchEvent(interceptTouchEvent)
-                calculateOffsetOnMotionEvent(event)
-                motionEventDownX = event.x
-                motionEventDownY = event.y
-            }
-            MotionEvent.ACTION_MOVE -> {
-                calculateOffsetOnMotionEvent(event)
-            }
+            MotionEvent.ACTION_DOWN -> onActionDown(event)
+            MotionEvent.ACTION_MOVE -> calculateOffsetOnMotionEvent(event)
             MotionEvent.ACTION_UP -> {
                 calculateOffsetOnMotionEvent(event)
-                if (isTap(event)) performClick()
+                if (isTap(event, downX, downY, viewConfig)) performClick()
             }
         }
 
         return true
     }
 
-    override fun performClick() = super.performClick()
-
-    private fun isTap(event: MotionEvent): Boolean {
-        val eventDuration = event.eventTime - event.downTime
-        val travelDistance = hypot(motionEventDownX - event.x, motionEventDownY - event.y)
-        return eventDuration < ViewConfiguration.getTapTimeout() && travelDistance < viewConfig.scaledTouchSlop
+    private fun onActionDown(event: MotionEvent) {
+        parent.requestDisallowInterceptTouchEvent(interceptTouchEvent)
+        calculateOffsetOnMotionEvent(event)
+        downX = event.x
+        downY = event.y
     }
+
+    override fun performClick() = super.performClick()
 
     private fun calculateOffsetOnMotionEvent(event: MotionEvent) {
         offset = orientationStrategy.calculateOffsetOnMotionEvent(this, event, gradientDrawable.bounds)
@@ -213,7 +207,7 @@ open class GradientSeekBar @JvmOverloads constructor(
     }
 
     private fun fireListener() {
-        colorListener?.invoke(offset, argb)
+        colorChangeListener?.invoke(offset, argb)
     }
 
     override fun onSaveInstanceState(): Parcelable {
@@ -255,7 +249,7 @@ private class GradientSeekBarState : View.BaseSavedState {
     val interceptTouchEvent: Boolean
     val thumbState: ThumbDrawableState
 
-    constructor(superState: Parcelable?, view: GradientSeekBar, thumbDrawableState: ThumbDrawableState) : super(superState) {
+    constructor(superState: Parcelable?, view: GradientSeekBar, thumbState: ThumbDrawableState) : super(superState) {
         startColor = view.startColor
         endColor = view.endColor
         offset = view.offset
@@ -263,7 +257,7 @@ private class GradientSeekBarState : View.BaseSavedState {
         cornerRadius = view.cornersRadius
         orientation = view.orientation.ordinal
         interceptTouchEvent = view.interceptTouchEvent
-        thumbState = thumbDrawableState
+        this.thumbState = thumbState
     }
 
     constructor(source: Parcel) : super(source) {
@@ -304,8 +298,8 @@ fun GradientSeekBar.setTransparentToColor(color: Int, respectAlpha: Boolean = tr
     this.setColors(setColorAlpha(color, 0), setColorAlpha(color, MAX_ALPHA))
 }
 
-inline fun GradientSeekBar.setAlphaListener(crossinline listener: (Float, Int, Int) -> Unit) {
-    this.colorListener = { offset, color -> listener(offset, color, this.currentColorAlpha) }
+inline fun GradientSeekBar.setAlphaChangeListener(crossinline listener: (Float, Int, Int) -> Unit) {
+    this.colorChangeListener = { offset, color -> listener(offset, color, this.currentColorAlpha) }
 }
 
 fun GradientSeekBar.setBlackToColor(color: Int) {

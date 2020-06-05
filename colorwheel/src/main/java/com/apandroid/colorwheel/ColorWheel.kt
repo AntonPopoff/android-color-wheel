@@ -47,8 +47,8 @@ open class ColorWheel @JvmOverloads constructor(
     private var wheelCenterX = 0
     private var wheelCenterY = 0
     private var wheelRadius = 0
-    private var motionEventDownX = 0f
-    private var motionEventDownY = 0f
+    private var downX = 0f
+    private var downY = 0f
 
     var rgb
         get() = hsvColor.rgb
@@ -160,22 +160,22 @@ open class ColorWheel @JvmOverloads constructor(
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
         when (event.actionMasked) {
-            MotionEvent.ACTION_DOWN -> {
-                parent.requestDisallowInterceptTouchEvent(interceptTouchEvent)
-                updateColorOnMotionEvent(event)
-                motionEventDownX = event.x
-                motionEventDownY = event.y
-            }
-            MotionEvent.ACTION_MOVE -> {
-                updateColorOnMotionEvent(event)
-            }
+            MotionEvent.ACTION_DOWN -> onActionDown(event)
+            MotionEvent.ACTION_MOVE -> updateColorOnMotionEvent(event)
             MotionEvent.ACTION_UP -> {
                 updateColorOnMotionEvent(event)
-                if (isTap(event)) performClick()
+                if (isTap(event, downX, downY, viewConfig)) performClick()
             }
         }
 
         return true
+    }
+
+    private fun onActionDown(event: MotionEvent) {
+        parent.requestDisallowInterceptTouchEvent(interceptTouchEvent)
+        updateColorOnMotionEvent(event)
+        downX = event.x
+        downY = event.y
     }
 
     override fun performClick() = super.performClick()
@@ -189,27 +189,10 @@ open class ColorWheel @JvmOverloads constructor(
     private fun calculateColor(event: MotionEvent) {
         val legX = event.x - wheelCenterX
         val legY = event.y - wheelCenterY
-        val r = calculateRadius(legX, legY)
-        val angle = atan2(legY, legX)
-        val x = cos(angle) * r + wheelCenterX
-        val y = sin(angle) * r + wheelCenterY
-        val dx = x - wheelCenterX
-        val dy = y - wheelCenterY
-        val hue = (toDegrees(atan2(dy, dx)) + 360) % 360
-        val saturation = hypot(dx, dy) / wheelRadius
-
+        val hypot = minOf(hypot(legX, legY), wheelRadius.toFloat())
+        val hue = (toDegrees(atan2(legY, legX)) + 360) % 360
+        val saturation = hypot / wheelRadius
         hsvColor.set(hue, saturation, 1f)
-    }
-
-    private fun calculateRadius(legX: Float, legY: Float): Float {
-        val radius = hypot(legX, legY)
-        return if (radius > wheelRadius) wheelRadius.toFloat() else radius
-    }
-
-    private fun isTap(event: MotionEvent): Boolean {
-        val eventDuration = event.eventTime - event.downTime
-        val travelDistance = hypot(event.x - motionEventDownX, event.y - motionEventDownY)
-        return eventDuration < ViewConfiguration.getTapTimeout() && travelDistance < viewConfig.scaledTouchSlop
     }
 
     private fun fireColorListener() {
@@ -244,8 +227,8 @@ private class ColorWheelState : View.BaseSavedState {
     val interceptTouchEvent: Boolean
     val rgb: Int
 
-    constructor(superState: Parcelable?, view: ColorWheel, thumbDrawableState: ThumbDrawableState) : super(superState) {
-        thumbState = thumbDrawableState
+    constructor(superState: Parcelable?, view: ColorWheel, thumbState: ThumbDrawableState) : super(superState) {
+        this.thumbState = thumbState
         interceptTouchEvent = view.interceptTouchEvent
         rgb = view.rgb
     }
