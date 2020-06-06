@@ -114,10 +114,10 @@ open class GradientSeekBar @JvmOverloads constructor(
     private fun parseAttributes(context: Context, attrs: AttributeSet?, defStyle: Int) {
         context.obtainStyledAttributes(attrs, R.styleable.GradientSeekBar, 0, defStyle).apply {
             readGradientColors(this)
-            thumbColor = getColor(R.styleable.GradientSeekBar_asb_thumbColor, 0)
-            thumbStrokeColor = getColor(R.styleable.GradientSeekBar_asb_thumbStrokeColor, 0)
-            thumbColorCircleScale = getFloat(R.styleable.GradientSeekBar_asb_thumbColorCircleScale, 0f)
-            thumbRadius = getDimensionPixelSize(R.styleable.GradientSeekBar_asb_thumbRadius, 0)
+            thumbColor = getColor(R.styleable.ThumbAttributes_tb_thumbColor, 0)
+            thumbStrokeColor = getColor(R.styleable.ThumbAttributes_tb_thumbStrokeColor, 0)
+            thumbColorCircleScale = getFloat(R.styleable.ThumbAttributes_tb_thumbColorCircleScale, 0f)
+            thumbRadius = getDimensionPixelSize(R.styleable.ThumbAttributes_tb_thumbRadius, 0)
             barSize = getDimensionPixelSize(R.styleable.GradientSeekBar_asb_barSize, 0)
             cornersRadius = getDimension(R.styleable.GradientSeekBar_asb_barCornersRadius, 0f)
             offset = ensureOffsetWithinRange(getFloat(R.styleable.GradientSeekBar_asb_offset, 0f))

@@ -1,18 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <declare-styleable name="ThumbAttributes">
+        <attr name="tb_thumbRadius" format="dimension" />
+        <attr name="tb_thumbColor" format="dimension" />
+        <attr name="tb_thumbStrokeColor" format="dimension" />
+        <attr name="tb_thumbColorCircleScale" format="dimension" />
+    </declare-styleable>
+
     <declare-styleable name="ColorWheel">
-        <attr name="cw_thumbRadius" format="dimension" />
-        <attr name="cw_thumbColor" format="color" />
-        <attr name="cw_thumbStrokeColor" format="color" />
-        <attr name="cw_thumbColorCircleScale" format="float" />
+        <attr name="tb_thumbRadius" />
+        <attr name="tb_thumbColor" />
+        <attr name="tb_thumbStrokeColor" />
+        <attr name="tb_thumbColorCircleScale" />
     </declare-styleable>
 
     <declare-styleable name="GradientSeekBar">
-        <attr name="asb_thumbColor" format="color" />
-        <attr name="asb_thumbStrokeColor" format="color" />
-        <attr name="asb_thumbColorCircleScale" format="float" />
-        <attr name="asb_thumbRadius" format="dimension" />
+        <attr name="tb_thumbRadius" />
+        <attr name="tb_thumbColor" />
+        <attr name="tb_thumbStrokeColor" />
+        <attr name="tb_thumbColorCircleScale" />
+
         <attr name="asb_barSize" format="dimension" />
         <attr name="asb_barCornersRadius" format="dimension" />
         <attr name="asb_startColor" format="color" />
