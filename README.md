@@ -141,25 +141,25 @@ You can use the following XML attributes to additionally customize `ColorWheel` 
 
 | XML Attribute              | Property                | Description                                                                                                                                                                          |
 |----------------------------|-------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `cw_thumbRadius`           | `thumbRadius`           | Sets `ColorWheel`'s thumb radius                                                                                                                                                     |
-| `cw_thumbColor`            | `thumbColor`            | Sets `ColorWheel`'s thumb color                                                                                                                                                      |
-| `cw_thumbStrokeColor`      | `thumbStrokeColor`      | Sets `ColorWheel`'s thumb stroke color                                                                                                                                               |
-| `cw_thumbColorCirlceScale` | `thumbColorCircleScale` | Sets `ColorWheel`'s thumb color circle size which is relative to `thumbRadius`. This value is in range from `0` to `1`. If it set to `1` it will have the same size as `thumbRadius` |
+| `tb_thumbRadius`           | `thumbRadius`           | Sets `ColorWheel`'s thumb radius                                                                                                                                                     |
+| `tb_thumbColor`            | `thumbColor`            | Sets `ColorWheel`'s thumb color                                                                                                                                                      |
+| `tb_thumbStrokeColor`      | `thumbStrokeColor`      | Sets `ColorWheel`'s thumb stroke color                                                                                                                                               |
+| `tb_thumbColorCirlceScale` | `thumbColorCircleScale` | Sets `ColorWheel`'s thumb color circle size which is relative to `thumbRadius`. This value is in range from `0` to `1`. If it set to `1` it will have the same size as `thumbRadius` |
 
 #### GradientSeekBar
 
 | XML Attribute               | Property                | Description                                                                                                                                                                               |
 |-----------------------------|-------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `asb_thumbRadius`           | `thumbRadius`           | Sets `GradientSeekBar`'s thumb radius                                                                                                                                                     |
-| `asb_thumbColor`            | `thumbColor`            | Sets `GradientSeekBar`'s thumb color                                                                                                                                                      |
-| `asb_thumbStrokeColor`      | `thumbStrokeColor`      | Sets `GradientSeekBar`'s thumb stroke color                                                                                                                                               |
-| `asb_thumbColorCirlceScale` | `thumbColorCircleScale` | Sets `GradientSeekBar`'s thumb color circle size which is relative to `thumbRadius`. This value is in range from `0` to `1`. If it set to `1` it will have the same size as `thumbRadius` |
-| `asb_barSize`               | `barSize`               | Sets width(vertical)/height(horizontal) of `GradientSeekBar`'s gradient bar depending on it's orientation                                                                             |
-| `asb_barCornersRadius`      | `cornerRadius`          | Sets `GradientSeekBar`'s gradient bar corners radius                                                                                                                                      |
-| `asb_startColor`            | `startColor`            | Sets `GradientSeekBar`'s startColor                                                                                                                                                       |
-| `asb_endColor`              | `endColor`              | Sets `GradientSeekBar`'s endColor                                                                                                                                                         |
-| `asb_offset`                | `offset`                | Sets `GradientSeekBar`'s offset                                                                                                                                                           |
-| `asb_orientation`           | `orientation`           | Sets `GradientSeekBar`'s orientation. Possible values: `vertical`/`horizontal`                                                                                                            |
+| `tb_thumbRadius`            | `thumbRadius`           | Sets `GradientSeekBar`'s thumb radius                                                                                                                                                     |
+| `tb_thumbColor`             | `thumbColor`            | Sets `GradientSeekBar`'s thumb color                                                                                                                                                      |
+| `tb_thumbStrokeColor`       | `thumbStrokeColor`      | Sets `GradientSeekBar`'s thumb stroke color                                                                                                                                               |
+| `tb_thumbColorCirlceScale`  | `thumbColorCircleScale` | Sets `GradientSeekBar`'s thumb color circle size which is relative to `thumbRadius`. This value is in range from `0` to `1`. If it set to `1` it will have the same size as `thumbRadius` |
+| `gsb_barSize`               | `barSize`               | Sets width(vertical)/height(horizontal) of `GradientSeekBar`'s gradient bar depending on it's orientation                                                                             |
+| `gsb_barCornersRadius`      | `cornerRadius`          | Sets `GradientSeekBar`'s gradient bar corners radius                                                                                                                                      |
+| `gsb_startColor`            | `startColor`            | Sets `GradientSeekBar`'s startColor                                                                                                                                                       |
+| `gsb_endColor`              | `endColor`              | Sets `GradientSeekBar`'s endColor                                                                                                                                                         |
+| `gsb_offset`                | `offset`                | Sets `GradientSeekBar`'s offset                                                                                                                                                           |
+| `gsb_orientation`           | `orientation`           | Sets `GradientSeekBar`'s orientation. Possible values: `vertical`/`horizontal`                                                                                                            |
 
 ## License
 
