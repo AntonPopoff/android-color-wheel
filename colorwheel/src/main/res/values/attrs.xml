@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <declare-styleable name="ThumbAttributes">
-        <attr name="tb_thumbRadius" format="dimension" />
-        <attr name="tb_thumbColor" format="dimension" />
-        <attr name="tb_thumbStrokeColor" format="dimension" />
-        <attr name="tb_thumbColorCircleScale" format="dimension" />
-    </declare-styleable>
+    <attr name="tb_thumbRadius" format="dimension" />
+    <attr name="tb_thumbColor" format="dimension" />
+    <attr name="tb_thumbStrokeColor" format="dimension" />
+    <attr name="tb_thumbColorCircleScale" format="dimension" />
 
     <declare-styleable name="ColorWheel">
         <attr name="tb_thumbRadius" />
@@ -20,13 +18,12 @@
         <attr name="tb_thumbColor" />
         <attr name="tb_thumbStrokeColor" />
         <attr name="tb_thumbColorCircleScale" />
-
         <attr name="asb_barSize" format="dimension" />
-        <attr name="asb_barCornersRadius" format="dimension" />
-        <attr name="asb_startColor" format="color" />
-        <attr name="asb_endColor" format="color" />
-        <attr name="asb_offset" format="float" />
-        <attr name="asb_orientation" format="enum">
+        <attr name="gsb_barCornersRadius" format="dimension" />
+        <attr name="gsb_startColor" format="color" />
+        <attr name="gsb_endColor" format="color" />
+        <attr name="gsb_offset" format="float" />
+        <attr name="gsb_orientation" format="enum">
             <enum name="vertical" value="0" />
             <enum name="horizontal" value="1" />
         </attr>

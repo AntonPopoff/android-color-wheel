@@ -14,7 +14,7 @@
         <item name="tb_thumbStrokeColor">@color/default_thumb_stroke_color</item>
         <item name="tb_thumbColorCircleScale">@dimen/default_thumb_color_circle_scale</item>
         <item name="asb_barSize">10dp</item>
-        <item name="asb_barCornersRadius">5dp</item>
+        <item name="gsb_barCornersRadius">5dp</item>
     </style>
 
 </resources>

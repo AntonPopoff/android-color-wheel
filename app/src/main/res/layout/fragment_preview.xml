@@ -62,7 +62,7 @@
             android:layout_marginTop="16dp"
             blackToColor="@{colorWheel.rgb}"
             colorListener="@{(color) -> viewModel.onColorChanged(color, GradientSeekBarKt.getCurrentColorAlpha(gradientSeekBar))}"
-            app:asb_orientation="horizontal"
+            app:gsb_orientation="horizontal"
             app:layout_constraintEnd_toEndOf="@id/colorWheel"
             app:layout_constraintStart_toStartOf="@id/colorWheel"
             app:layout_constraintTop_toBottomOf="@id/colorWheel"

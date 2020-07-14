@@ -114,22 +114,22 @@ open class GradientSeekBar @JvmOverloads constructor(
     private fun parseAttributes(context: Context, attrs: AttributeSet?, defStyle: Int) {
         context.obtainStyledAttributes(attrs, R.styleable.GradientSeekBar, 0, defStyle).apply {
             readGradientColors(this)
-            thumbColor = getColor(R.styleable.ThumbAttributes_tb_thumbColor, 0)
-            thumbStrokeColor = getColor(R.styleable.ThumbAttributes_tb_thumbStrokeColor, 0)
-            thumbColorCircleScale = getFloat(R.styleable.ThumbAttributes_tb_thumbColorCircleScale, 0f)
-            thumbRadius = getDimensionPixelSize(R.styleable.ThumbAttributes_tb_thumbRadius, 0)
+            thumbColor = getColor(R.styleable.GradientSeekBar_tb_thumbColor, 0)
+            thumbStrokeColor = getColor(R.styleable.GradientSeekBar_tb_thumbStrokeColor, 0)
+            thumbColorCircleScale = getFloat(R.styleable.GradientSeekBar_tb_thumbColorCircleScale, 0f)
+            thumbRadius = getDimensionPixelSize(R.styleable.GradientSeekBar_tb_thumbRadius, 0)
             barSize = getDimensionPixelSize(R.styleable.GradientSeekBar_asb_barSize, 0)
-            cornersRadius = getDimension(R.styleable.GradientSeekBar_asb_barCornersRadius, 0f)
-            offset = ensureOffsetWithinRange(getFloat(R.styleable.GradientSeekBar_asb_offset, 0f))
-            orientation = Orientation.values()[getInt(R.styleable.GradientSeekBar_asb_orientation, 0)]
+            cornersRadius = getDimension(R.styleable.GradientSeekBar_gsb_barCornersRadius, 0f)
+            offset = ensureOffsetWithinRange(getFloat(R.styleable.GradientSeekBar_gsb_offset, 0f))
+            orientation = Orientation.values()[getInt(R.styleable.GradientSeekBar_gsb_orientation, 0)]
             recycle()
         }
     }
 
     private fun readGradientColors(array: TypedArray) {
         setColors(
-            array.getColor(R.styleable.GradientSeekBar_asb_startColor, Color.TRANSPARENT),
-            array.getColor(R.styleable.GradientSeekBar_asb_endColor, Color.BLACK)
+            array.getColor(R.styleable.GradientSeekBar_gsb_startColor, Color.TRANSPARENT),
+            array.getColor(R.styleable.GradientSeekBar_gsb_endColor, Color.BLACK)
         )
     }
 

@@ -97,10 +97,10 @@ open class ColorWheel @JvmOverloads constructor(
 
     private fun parseAttributes(context: Context, attrs: AttributeSet?) {
         context.obtainStyledAttributes(attrs, R.styleable.ColorWheel, 0, R.style.ColorWheelDefaultStyle).apply {
-            thumbRadius = getDimensionPixelSize(R.styleable.ThumbAttributes_tb_thumbRadius, 0)
-            thumbColor = getColor(R.styleable.ThumbAttributes_tb_thumbColor, 0)
-            thumbStrokeColor = getColor(R.styleable.ThumbAttributes_tb_thumbStrokeColor, 0)
-            thumbColorCircleScale = getFloat(R.styleable.ThumbAttributes_tb_thumbColorCircleScale, 0f)
+            thumbRadius = getDimensionPixelSize(R.styleable.ColorWheel_tb_thumbRadius, 0)
+            thumbColor = getColor(R.styleable.ColorWheel_tb_thumbColor, 0)
+            thumbStrokeColor = getColor(R.styleable.ColorWheel_tb_thumbStrokeColor, 0)
+            thumbColorCircleScale = getFloat(R.styleable.ColorWheel_tb_thumbColorCircleScale, 0f)
             recycle()
         }
     }
