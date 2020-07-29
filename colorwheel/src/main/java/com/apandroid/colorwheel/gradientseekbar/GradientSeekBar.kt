@@ -5,19 +5,13 @@ import android.content.res.TypedArray
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
-import android.os.Parcel
 import android.os.Parcelable
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewConfiguration
 import com.apandroid.colorwheel.R
-import com.apandroid.colorwheel.extensions.readBooleanCompat
-import com.apandroid.colorwheel.extensions.writeBooleanCompat
 import com.apandroid.colorwheel.thumb.ThumbDrawable
-import com.apandroid.colorwheel.thumb.ThumbDrawableState
-import com.apandroid.colorwheel.thumb.readThumbState
-import com.apandroid.colorwheel.thumb.writeThumbState
 import com.apandroid.colorwheel.utils.*
 import com.apandroid.colorwheel.utils.MAX_ALPHA
 import com.apandroid.colorwheel.utils.ensureNumberWithinRange
@@ -236,59 +230,6 @@ open class GradientSeekBar @JvmOverloads constructor(
     }
 
     enum class Orientation { VERTICAL, HORIZONTAL }
-}
-
-private class GradientSeekBarState : View.BaseSavedState {
-
-    val startColor: Int
-    val endColor: Int
-    val offset: Float
-    val barSize: Int
-    val cornerRadius: Float
-    val orientation: Int
-    val interceptTouchEvent: Boolean
-    val thumbState: ThumbDrawableState
-
-    constructor(superState: Parcelable?, view: GradientSeekBar, thumbState: ThumbDrawableState) : super(superState) {
-        startColor = view.startColor
-        endColor = view.endColor
-        offset = view.offset
-        barSize = view.barSize
-        cornerRadius = view.cornersRadius
-        orientation = view.orientation.ordinal
-        interceptTouchEvent = view.interceptTouchEvent
-        this.thumbState = thumbState
-    }
-
-    constructor(source: Parcel) : super(source) {
-        startColor = source.readInt()
-        endColor = source.readInt()
-        offset = source.readFloat()
-        barSize = source.readInt()
-        cornerRadius = source.readFloat()
-        orientation = source.readInt()
-        interceptTouchEvent = source.readBooleanCompat()
-        thumbState = source.readThumbState()
-    }
-
-    override fun writeToParcel(out: Parcel, flags: Int) {
-        super.writeToParcel(out, flags)
-        out.writeInt(startColor)
-        out.writeInt(endColor)
-        out.writeFloat(offset)
-        out.writeInt(barSize)
-        out.writeFloat(cornerRadius)
-        out.writeInt(orientation)
-        out.writeBooleanCompat(interceptTouchEvent)
-        out.writeThumbState(thumbState, flags)
-    }
-
-    companion object CREATOR : Parcelable.Creator<GradientSeekBarState> {
-
-        override fun createFromParcel(source: Parcel) = GradientSeekBarState(source)
-
-        override fun newArray(size: Int) = arrayOfNulls<GradientSeekBarState>(size)
-    }
 }
 
 val GradientSeekBar.currentColorAlpha get() = Color.alpha(argb)
