@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.apandroid.colorwheelapp.R
 import com.apandroid.colorwheelapp.databinding.FragmentPreviewBinding
-import com.apandroid.colorwheelapp.extensions.density
+import com.apandroid.colorwheelapp.extensions.android.density
 
 class PreviewFragment : Fragment(R.layout.fragment_preview) {
 
