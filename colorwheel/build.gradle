@@ -1,29 +1,31 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'com.novoda.bintray-release'
+apply plugin: 'com.github.panpf.bintray-publish'
 
 buildscript {
+
+    ext.bintrayPublishVer = '1.0.0'
 
     repositories {
         jcenter()
     }
 
     dependencies {
-        classpath 'com.novoda:bintray-release:0.9.2'
+        classpath "com.github.panpf.bintray-publish:bintray-publish:$bintrayPublishVer"
     }
 }
 
 ext {
-    verCode = 18
-    verName = '1.1.11'
+    verCode = 19
+    verName = '1.1.12'
 }
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
 
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionName verName
         versionCode verCode
     }
@@ -37,7 +39,7 @@ android {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVer"
 }
 
 repositories {
