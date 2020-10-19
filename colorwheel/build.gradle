@@ -1,6 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'com.novoda.bintray-release'
+//apply plugin: 'com.novoda.bintray-release'
 
 buildscript {
 
@@ -37,19 +37,19 @@ android {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVer"
 }
 
 repositories {
     mavenCentral()
 }
 
-publish {
-    userOrg = 'panton295'
-    repoName = 'com.apandroid'
-    groupId = 'com.apandroid'
-    artifactId = 'colorwheel'
-    desc = 'A color picker for Android'
-    website = 'https://github.com/AntonPopoff/android-color-wheel'
-    publishVersion = verName
-}
+//publish {
+//    userOrg = 'panton295'
+//    repoName = 'com.apandroid'
+//    groupId = 'com.apandroid'
+//    artifactId = 'colorwheel'
+//    desc = 'A color picker for Android'
+//    website = 'https://github.com/AntonPopoff/android-color-wheel'
+//    publishVersion = verName
+//}
