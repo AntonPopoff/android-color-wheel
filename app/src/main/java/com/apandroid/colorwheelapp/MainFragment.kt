@@ -13,9 +13,21 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        previewScreenButton.setOnClickListener { replaceFragment(PreviewFragment()) }
-        testColorWheelScreenButton.setOnClickListener { replaceFragment(TestColorWheelFragment()) }
-        testAlphaSeekBarScreenButton.setOnClickListener { replaceFragment(TestGradientSeekBarFragment()) }
+        setupClickListeners()
+    }
+
+    private fun setupClickListeners() {
+        previewScreenButton.setOnClickListener {
+            replaceFragment(PreviewFragment())
+        }
+
+        testColorWheelScreenButton.setOnClickListener {
+            replaceFragment(TestColorWheelFragment())
+        }
+
+        testAlphaSeekBarScreenButton.setOnClickListener {
+            replaceFragment(TestGradientSeekBarFragment())
+        }
     }
 
     private fun replaceFragment(fragment: Fragment) {

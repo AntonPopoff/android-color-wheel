@@ -4,7 +4,7 @@ import android.widget.EditText
 import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseBindingAdapter
 import androidx.databinding.InverseBindingListener
-import com.apandroid.colorwheelapp.extensions.android.views.afterTextChanged
+import com.apandroid.colorwheelapp.extensions.afterTextChanged
 
 @BindingAdapter("intText")
 fun EditText.bindIntText(value: Int) {

@@ -22,11 +22,13 @@ class TestGradientSeekBarFragment : Fragment(R.layout.fragment_test_gradient_see
         }
     }
 
-    private fun createViewModel(binding: FragmentTestGradientSeekBarBinding) = TestGradientSeekBarViewModel().apply {
-        colorCircleScaleObservable.set(binding.gradientSeekBar.thumbColorCircleScale)
-        cornerRadiusObservable.set(binding.gradientSeekBar.cornersRadius.roundToInt())
-        thumbRadiusObservable.set(binding.gradientSeekBar.thumbRadius)
-        barSizeObservable.set(binding.gradientSeekBar.barSize)
-        gradientSeekBarOrientation.set(binding.gradientSeekBar.orientation)
+    private fun createViewModel(binding: FragmentTestGradientSeekBarBinding): TestGradientSeekBarViewModel {
+        return TestGradientSeekBarViewModel().apply {
+            colorCircleScaleObservable.set(binding.gradientSeekBar.thumbColorCircleScale)
+            cornerRadiusObservable.set(binding.gradientSeekBar.cornersRadius.roundToInt())
+            thumbRadiusObservable.set(binding.gradientSeekBar.thumbRadius)
+            barSizeObservable.set(binding.gradientSeekBar.barSize)
+            gradientSeekBarOrientation.set(binding.gradientSeekBar.orientation)
+        }
     }
 }
