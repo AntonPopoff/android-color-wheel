@@ -110,7 +110,12 @@ open class ColorWheel @JvmOverloads constructor(
     }
 
     private fun parseAttributes(context: Context, attrs: AttributeSet?) {
-        context.obtainStyledAttributes(attrs, R.styleable.ColorWheel, 0, R.style.ColorWheelDefaultStyle).apply {
+        context.obtainStyledAttributes(
+            attrs,
+            R.styleable.ColorWheel,
+            0,
+            R.style.ColorWheelDefaultStyle
+        ).apply {
             thumbRadius = getDimensionPixelSize(R.styleable.ColorWheel_tb_thumbRadius, 0)
             thumbColor = getColor(R.styleable.ColorWheel_tb_thumbColor, 0)
             thumbStrokeColor = getColor(R.styleable.ColorWheel_tb_thumbStrokeColor, 0)
@@ -146,7 +151,7 @@ open class ColorWheel @JvmOverloads constructor(
 
         wheelCenterX = paddingLeft + hSpace / 2
         wheelCenterY = paddingTop + vSpace / 2
-        wheelRadius = (minOf(hSpace, vSpace) / 2).takeIf { it > 0 } ?: 0
+        wheelRadius = max(min(hSpace, vSpace) / 2, 0)
 
         val left = wheelCenterX - wheelRadius
         val top = wheelCenterY - wheelRadius
@@ -241,7 +246,11 @@ private class ColorWheelState : View.BaseSavedState {
     val interceptTouchEvent: Boolean
     val rgb: Int
 
-    constructor(superState: Parcelable?, view: ColorWheel, thumbState: ThumbDrawableState) : super(superState) {
+    constructor(
+        superState: Parcelable?,
+        view: ColorWheel,
+        thumbState: ThumbDrawableState
+    ) : super(superState) {
         this.thumbState = thumbState
         interceptTouchEvent = view.interceptTouchEvent
         rgb = view.rgb
