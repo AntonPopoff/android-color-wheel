@@ -1,12 +1,10 @@
 package com.apandroid.colorwheelapp.gradientseekbartest
 
-import androidx.databinding.Observable
 import androidx.databinding.ObservableField
 import androidx.databinding.ObservableFloat
 import androidx.databinding.ObservableInt
 import androidx.lifecycle.ViewModel
 import com.apandroid.colorwheel.gradientseekbar.GradientSeekBar
-import com.apandroid.colorwheelapp.R
 
 class TestGradientSeekBarViewModel : ViewModel() {
 

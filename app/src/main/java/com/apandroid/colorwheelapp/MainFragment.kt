@@ -1,9 +1,7 @@
 package com.apandroid.colorwheelapp
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.apandroid.colorwheelapp.colorwheeltest.TestColorWheelFragment
@@ -15,9 +13,21 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        previewScreenButton.setOnClickListener { replaceFragment(PreviewFragment()) }
-        testColorWheelScreenButton.setOnClickListener { replaceFragment(TestColorWheelFragment()) }
-        testAlphaSeekBarScreenButton.setOnClickListener { replaceFragment(TestGradientSeekBarFragment()) }
+        setupClickListeners()
+    }
+
+    private fun setupClickListeners() {
+        previewScreenButton.setOnClickListener {
+            replaceFragment(PreviewFragment())
+        }
+
+        testColorWheelScreenButton.setOnClickListener {
+            replaceFragment(TestColorWheelFragment())
+        }
+
+        testAlphaSeekBarScreenButton.setOnClickListener {
+            replaceFragment(TestGradientSeekBarFragment())
+        }
     }
 
     private fun replaceFragment(fragment: Fragment) {
