@@ -5,7 +5,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import com.apandroid.colorwheelapp.R
 import com.apandroid.colorwheelapp.databinding.FragmentTestColorWheelBinding
-import com.apandroid.colorwheelapp.extensions.getViewModel
+import com.apandroid.colorwheelapp.extensions.android.getViewModel
 import com.apandroid.colorwheelapp.utils.pixelsToDp
 import java.util.*
 

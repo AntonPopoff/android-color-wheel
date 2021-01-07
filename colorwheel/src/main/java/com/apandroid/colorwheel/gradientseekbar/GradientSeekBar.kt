@@ -107,18 +107,56 @@ open class GradientSeekBar @JvmOverloads constructor(
     }
 
     private fun parseAttributes(context: Context, attrs: AttributeSet?, defStyle: Int) {
-        context.obtainStyledAttributes(attrs, R.styleable.GradientSeekBar, 0, defStyle).apply {
-            readGradientColors(this)
-            thumbColor = getColor(R.styleable.GradientSeekBar_tb_thumbColor, 0)
-            thumbStrokeColor = getColor(R.styleable.GradientSeekBar_tb_thumbStrokeColor, 0)
-            thumbColorCircleScale = getFloat(R.styleable.GradientSeekBar_tb_thumbColorCircleScale, 0f)
-            thumbRadius = getDimensionPixelSize(R.styleable.GradientSeekBar_tb_thumbRadius, 0)
-            barSize = getDimensionPixelSize(R.styleable.GradientSeekBar_asb_barSize, 0)
-            cornersRadius = getDimension(R.styleable.GradientSeekBar_gsb_barCornersRadius, 0f)
-            offset = ensureOffsetWithinRange(getFloat(R.styleable.GradientSeekBar_gsb_offset, 0f))
-            orientation = Orientation.values()[getInt(R.styleable.GradientSeekBar_gsb_orientation, 0)]
-            recycle()
-        }
+        val array = context.obtainStyledAttributes(
+            attrs,
+            R.styleable.GradientSeekBar,
+            0,
+            R.style.GradientSeekBarDefaultStyle
+        )
+        readThumbColor(array)
+        readThumbStrokeColor(array)
+        readColorCircleScale(array)
+        readThumbRadius(array)
+        readBarSize(array)
+        readCornerRadius(array)
+        readOffset(array)
+        readOrientation(array)
+        readGradientColors(array)
+        array.recycle()
+    }
+
+    private fun readThumbColor(array: TypedArray) {
+        thumbColor = array.getColor(R.styleable.GradientSeekBar_tb_thumbColor, 0)
+    }
+
+    private fun readThumbStrokeColor(array: TypedArray) {
+        thumbStrokeColor = array.getColor(R.styleable.GradientSeekBar_tb_thumbStrokeColor, 0)
+    }
+
+    private fun readColorCircleScale(array: TypedArray) {
+        thumbColorCircleScale =
+            array.getFloat(R.styleable.GradientSeekBar_tb_thumbColorCircleScale, 0f)
+    }
+
+    private fun readThumbRadius(array: TypedArray) {
+        thumbRadius = array.getDimensionPixelSize(R.styleable.GradientSeekBar_tb_thumbRadius, 0)
+    }
+
+    private fun readBarSize(array: TypedArray) {
+        barSize = array.getDimensionPixelSize(R.styleable.GradientSeekBar_asb_barSize, 0)
+    }
+
+    private fun readCornerRadius(array: TypedArray) {
+        cornersRadius = array.getDimension(R.styleable.GradientSeekBar_gsb_barCornersRadius, 0f)
+    }
+
+    private fun readOffset(array: TypedArray) {
+        offset = array.getFloat(R.styleable.GradientSeekBar_gsb_offset, 0f)
+    }
+
+    private fun readOrientation(array: TypedArray) {
+        orientation =
+            Orientation.values()[array.getInt(R.styleable.GradientSeekBar_gsb_orientation, 0)]
     }
 
     private fun readGradientColors(array: TypedArray) {
@@ -156,14 +194,13 @@ open class GradientSeekBar @JvmOverloads constructor(
 
     private fun drawGradientRect(canvas: Canvas) {
         gradientDrawable.orientation = orientationStrategy.gradientOrientation
-        gradientDrawable.bounds = orientationStrategy.calculateGradientBounds(this)
+        gradientDrawable.bounds = orientationStrategy.calculateBarBounds(this)
         gradientDrawable.cornerRadius = cornersRadius
         gradientDrawable.draw(canvas)
     }
 
     private fun drawThumb(canvas: Canvas) {
-        val coordinates = orientationStrategy.calculateThumbCoordinates(this, gradientDrawable.bounds)
-
+        val coordinates = orientationStrategy.calculateThumbPos(this, gradientDrawable.bounds)
         thumbDrawable.indicatorColor = argb
         thumbDrawable.setCoordinates(coordinates.x, coordinates.y)
         thumbDrawable.draw(canvas)
@@ -192,7 +229,7 @@ open class GradientSeekBar @JvmOverloads constructor(
     override fun performClick() = super.performClick()
 
     private fun calculateOffsetOnMotionEvent(event: MotionEvent) {
-        offset = orientationStrategy.calculateOffsetOnMotionEvent(this, event, gradientDrawable.bounds)
+        offset = orientationStrategy.calculateOffset(this, event, gradientDrawable.bounds)
     }
 
     private fun calculateArgb() {
@@ -236,12 +273,18 @@ open class GradientSeekBar @JvmOverloads constructor(
 val GradientSeekBar.currentColorAlpha get() = Color.alpha(argb)
 
 fun GradientSeekBar.setTransparentToColor(color: Int, respectAlpha: Boolean = true) {
-    if (respectAlpha) this.offset = Color.alpha(color) / MAX_ALPHA.toFloat()
+    if (respectAlpha) {
+        this.offset = Color.alpha(color) / MAX_ALPHA.toFloat()
+    }
     this.setColors(setColorAlpha(color, 0), setColorAlpha(color, MAX_ALPHA))
 }
 
-inline fun GradientSeekBar.setAlphaChangeListener(crossinline listener: (Float, Int, Int) -> Unit) {
-    this.colorChangeListener = { offset, color -> listener(offset, color, this.currentColorAlpha) }
+inline fun GradientSeekBar.setAlphaChangeListener(
+    crossinline listener: (Float, Int, Int) -> Unit
+) {
+    this.colorChangeListener = { offset, color ->
+        listener(offset, color, this.currentColorAlpha)
+    }
 }
 
 fun GradientSeekBar.setBlackToColor(color: Int) {

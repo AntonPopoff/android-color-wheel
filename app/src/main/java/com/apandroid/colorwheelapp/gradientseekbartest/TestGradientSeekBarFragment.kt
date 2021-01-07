@@ -5,7 +5,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import com.apandroid.colorwheelapp.R
 import com.apandroid.colorwheelapp.databinding.FragmentTestGradientSeekBarBinding
-import com.apandroid.colorwheelapp.extensions.getViewModel
+import com.apandroid.colorwheelapp.extensions.android.getViewModel
 import java.util.*
 import kotlin.math.roundToInt
 

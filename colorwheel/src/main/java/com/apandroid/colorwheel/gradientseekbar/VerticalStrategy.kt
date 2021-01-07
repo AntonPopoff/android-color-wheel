@@ -16,30 +16,33 @@ internal class VerticalStrategy : OrientationStrategy {
     override val gradientOrientation = GradientDrawable.Orientation.BOTTOM_TOP
 
     override fun measure(view: GradientSeekBar, widthSpec: Int, heightSpec: Int): Rect {
-        val preferredWidth = maxOf(view.barSize, view.thumbRadius * 2) + view.paddingLeft + view.paddingRight
-        val preferredHeight = View.MeasureSpec.getSize(heightSpec) + view.paddingTop + view.paddingBottom
+        val heightSize = View.MeasureSpec.getSize(heightSpec)
+        val maxWidth = maxOf(view.barSize, view.thumbRadius * 2)
+        val preferredWidth = maxWidth + view.paddingLeft + view.paddingRight
+        val preferredHeight = heightSize + view.paddingTop + view.paddingBottom
         val finalWidth = View.resolveSize(preferredWidth, widthSpec)
         val finalHeight = View.resolveSize(preferredHeight, heightSpec)
         return rect.apply { set(0, 0, finalWidth, finalHeight) }
     }
 
-    override fun calculateGradientBounds(view: GradientSeekBar): Rect {
-        val left = view.paddingLeft + (view.width - view.paddingLeft - view.paddingRight - view.barSize) / 2
+    override fun calculateBarBounds(view: GradientSeekBar): Rect {
+        val availableWidth = view.width - view.paddingLeft - view.paddingRight
+        val left = view.paddingLeft + (availableWidth - view.barSize) / 2
         val right = left + view.barSize
         val top = view.paddingTop + view.thumbRadius
         val bottom = view.height - view.paddingBottom - view.thumbRadius
         return rect.apply { set(left, top, right, bottom) }
     }
 
-    override fun calculateThumbCoordinates(view: GradientSeekBar, barBounds: Rect): PointF {
-        val y = (barBounds.top + (1f - view.offset) * barBounds.height())
+    override fun calculateThumbPos(view: GradientSeekBar, bounds: Rect): PointF {
+        val y = (bounds.top + (1f - view.offset) * bounds.height())
         val x = view.width / 2f
         return point.apply { set(x, y) }
     }
 
-    override fun calculateOffsetOnMotionEvent(view: GradientSeekBar, event: MotionEvent, barBounds: Rect): Float {
-        val checkedY = ensureWithinRange(event.y.roundToInt(), barBounds.top, barBounds.bottom)
-        val relativeY = (checkedY - barBounds.top).toFloat()
-        return 1f - relativeY / barBounds.height()
+    override fun calculateOffset(view: GradientSeekBar, event: MotionEvent, bounds: Rect): Float {
+        val checkedY = ensureWithinRange(event.y.roundToInt(), bounds.top, bounds.bottom)
+        val relativeY = (checkedY - bounds.top).toFloat()
+        return 1f - relativeY / bounds.height()
     }
 }

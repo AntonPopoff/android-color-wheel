@@ -1,6 +1,7 @@
 package com.apandroid.colorwheel
 
 import android.content.Context
+import android.content.res.TypedArray
 import android.graphics.*
 import android.graphics.drawable.GradientDrawable
 import android.os.Parcel
@@ -110,18 +111,33 @@ open class ColorWheel @JvmOverloads constructor(
     }
 
     private fun parseAttributes(context: Context, attrs: AttributeSet?) {
-        context.obtainStyledAttributes(
+        val array = context.obtainStyledAttributes(
             attrs,
             R.styleable.ColorWheel,
             0,
             R.style.ColorWheelDefaultStyle
-        ).apply {
-            thumbRadius = getDimensionPixelSize(R.styleable.ColorWheel_tb_thumbRadius, 0)
-            thumbColor = getColor(R.styleable.ColorWheel_tb_thumbColor, 0)
-            thumbStrokeColor = getColor(R.styleable.ColorWheel_tb_thumbStrokeColor, 0)
-            thumbColorCircleScale = getFloat(R.styleable.ColorWheel_tb_thumbColorCircleScale, 0f)
-            recycle()
-        }
+        )
+        readThumbRadius(array)
+        readThumbColor(array)
+        readStrokeColor(array)
+        readColorCircleScale(array)
+        array.recycle()
+    }
+
+    private fun readThumbRadius(array: TypedArray) {
+        thumbRadius = array.getDimensionPixelSize(R.styleable.ColorWheel_tb_thumbRadius, 0)
+    }
+
+    private fun readThumbColor(array: TypedArray) {
+        thumbColor = array.getColor(R.styleable.ColorWheel_tb_thumbColor, 0)
+    }
+
+    private fun readStrokeColor(array: TypedArray) {
+        thumbStrokeColor = array.getColor(R.styleable.ColorWheel_tb_thumbStrokeColor, 0)
+    }
+
+    private fun readColorCircleScale(array: TypedArray) {
+        thumbColorCircleScale = array.getFloat(R.styleable.ColorWheel_tb_thumbColorCircleScale, 0f)
     }
 
     fun setRgb(r: Int, g: Int, b: Int) {

@@ -12,9 +12,9 @@ internal interface OrientationStrategy {
 
     fun measure(view: GradientSeekBar, widthSpec: Int, heightSpec: Int): Rect
 
-    fun calculateGradientBounds(view: GradientSeekBar): Rect
+    fun calculateBarBounds(view: GradientSeekBar): Rect
 
-    fun calculateOffsetOnMotionEvent(view: GradientSeekBar, event: MotionEvent, barBounds: Rect): Float
+    fun calculateThumbPos(view: GradientSeekBar, bounds: Rect): PointF
 
-    fun calculateThumbCoordinates(view: GradientSeekBar, barBounds: Rect): PointF
+    fun calculateOffset(view: GradientSeekBar, event: MotionEvent, bounds: Rect): Float
 }
