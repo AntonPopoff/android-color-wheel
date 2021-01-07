@@ -11,8 +11,10 @@ internal fun Parcel.writeBooleanCompat(value: Boolean) {
     }
 }
 
-internal fun Parcel.readBooleanCompat() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-    this.readBoolean()
-} else {
-    this.readInt() == 1
+internal fun Parcel.readBooleanCompat(): Boolean {
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        this.readBoolean()
+    } else {
+        this.readInt() == 1
+    }
 }

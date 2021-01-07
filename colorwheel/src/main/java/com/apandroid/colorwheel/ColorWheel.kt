@@ -17,10 +17,24 @@ import com.apandroid.colorwheel.thumb.ThumbDrawable
 import com.apandroid.colorwheel.thumb.ThumbDrawableState
 import com.apandroid.colorwheel.thumb.writeThumbState
 import com.apandroid.colorwheel.utils.*
-import com.apandroid.colorwheel.utils.HUE_COLORS
 import com.apandroid.colorwheel.utils.toDegrees
 import com.apandroid.colorwheel.utils.toRadians
 import kotlin.math.*
+
+private val HUE_COLORS = intArrayOf(
+    Color.RED,
+    Color.YELLOW,
+    Color.GREEN,
+    Color.CYAN,
+    Color.BLUE,
+    Color.MAGENTA,
+    Color.RED
+)
+
+private val SATURATION_COLORS = intArrayOf(
+    Color.WHITE,
+    setColorAlpha(Color.WHITE, 0)
+)
 
 open class ColorWheel @JvmOverloads constructor(
     context: Context,

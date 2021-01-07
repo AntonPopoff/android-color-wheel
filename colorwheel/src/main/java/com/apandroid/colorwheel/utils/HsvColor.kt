@@ -31,10 +31,11 @@ class HsvColor(hue: Float = 0f, saturation: Float = 0f, value: Float = 0f) {
         hsv[1] = ensureSaturationWithinRange(saturation)
         hsv[2] = ensureValueWithinRange(value)
     }
+
+    private fun ensureHueWithinRange(hue: Float) = ensureWithinRange(hue, 0f, 360f)
+
+    private fun ensureValueWithinRange(value: Float) = ensureWithinRange(value, 0f, 1f)
+
+    private fun ensureSaturationWithinRange(saturation: Float) = ensureValueWithinRange(saturation)
 }
 
-private fun ensureHueWithinRange(hue: Float) = ensureNumberWithinRange(hue, 0f, 360f)
-
-private fun ensureValueWithinRange(value: Float) = ensureNumberWithinRange(value, 0f, 1f)
-
-private fun ensureSaturationWithinRange(saturation: Float) = ensureNumberWithinRange(saturation, 0f, 1f)

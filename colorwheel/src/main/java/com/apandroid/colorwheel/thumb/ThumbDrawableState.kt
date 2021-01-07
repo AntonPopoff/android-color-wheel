@@ -51,4 +51,7 @@ internal fun Parcel.writeThumbState(state: ThumbDrawableState, flags: Int) {
     this.writeParcelable(state, flags)
 }
 
-internal fun Parcel.readThumbState() = this.readParcelable(ThumbDrawableState::class.java.classLoader) ?: ThumbDrawableState.EMPTY_STATE
+internal fun Parcel.readThumbState(): ThumbDrawableState {
+    return this.readParcelable(ThumbDrawableState::class.java.classLoader)
+        ?: ThumbDrawableState.EMPTY_STATE
+}

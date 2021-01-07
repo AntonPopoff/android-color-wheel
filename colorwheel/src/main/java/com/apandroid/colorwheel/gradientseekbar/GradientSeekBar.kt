@@ -13,10 +13,11 @@ import android.view.ViewConfiguration
 import com.apandroid.colorwheel.R
 import com.apandroid.colorwheel.thumb.ThumbDrawable
 import com.apandroid.colorwheel.utils.*
-import com.apandroid.colorwheel.utils.MAX_ALPHA
-import com.apandroid.colorwheel.utils.ensureNumberWithinRange
+import com.apandroid.colorwheel.utils.ensureWithinRange
 import com.apandroid.colorwheel.utils.interpolateColorLinear
 import com.apandroid.colorwheel.utils.setColorAlpha
+
+private const val MAX_ALPHA = 255
 
 open class GradientSeekBar @JvmOverloads constructor(
     context: Context,
@@ -247,4 +248,4 @@ fun GradientSeekBar.setBlackToColor(color: Int) {
     this.setColors(Color.BLACK, color)
 }
 
-private fun ensureOffsetWithinRange(offset: Float) = ensureNumberWithinRange(offset, 0f, 1f)
+private fun ensureOffsetWithinRange(offset: Float) = ensureWithinRange(offset, 0f, 1f)
