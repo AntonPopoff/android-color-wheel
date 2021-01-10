@@ -209,8 +209,6 @@ open class GradientSeekBar @JvmOverloads constructor(
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
-        val t1 = ViewConfiguration.get(context)
-        val t2 = ViewConfiguration.get(context)
         when (event.actionMasked) {
             MotionEvent.ACTION_DOWN -> onActionDown(event)
             MotionEvent.ACTION_MOVE -> calculateOffsetOnMotionEvent(event)
