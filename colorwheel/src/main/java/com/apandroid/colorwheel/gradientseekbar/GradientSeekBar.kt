@@ -10,11 +10,10 @@ import android.os.Parcelable
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
-import android.view.ViewConfiguration
 import com.apandroid.colorwheel.R
 import com.apandroid.colorwheel.thumb.ThumbDrawable
-import com.apandroid.colorwheel.utils.*
 import com.apandroid.colorwheel.utils.ensureWithinRange
+import com.apandroid.colorwheel.utils.isTap
 import com.apandroid.colorwheel.utils.setAlpha
 
 private const val MAX_ALPHA = 255
