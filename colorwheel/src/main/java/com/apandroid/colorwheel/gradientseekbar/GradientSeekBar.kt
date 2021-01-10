@@ -166,9 +166,11 @@ open class GradientSeekBar @JvmOverloads constructor(
         )
     }
 
-    private fun createOrientationStrategy() = when (orientation) {
-        Orientation.VERTICAL -> VerticalStrategy()
-        Orientation.HORIZONTAL -> HorizontalStrategy()
+    private fun createOrientationStrategy(): OrientationStrategy  {
+        return when (orientation) {
+            Orientation.VERTICAL -> VerticalStrategy()
+            Orientation.HORIZONTAL -> HorizontalStrategy()
+        }
     }
 
     fun setColors(startColor: Int = gradientColors[0], endColor: Int = gradientColors[1]) {
@@ -267,6 +269,8 @@ open class GradientSeekBar @JvmOverloads constructor(
         thumbDrawable.restoreState(state.thumbState)
     }
 
+    private fun ensureOffsetWithinRange(offset: Float) = ensureWithinRange(offset, 0f, 1f)
+
     enum class Orientation { VERTICAL, HORIZONTAL }
 }
 
@@ -290,5 +294,3 @@ inline fun GradientSeekBar.setAlphaChangeListener(
 fun GradientSeekBar.setBlackToColor(color: Int) {
     this.setColors(Color.BLACK, color)
 }
-
-private fun ensureOffsetWithinRange(offset: Float) = ensureWithinRange(offset, 0f, 1f)

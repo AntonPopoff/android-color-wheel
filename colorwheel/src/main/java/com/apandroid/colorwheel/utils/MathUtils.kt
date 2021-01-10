@@ -10,10 +10,4 @@ internal fun <T> ensureWithinRange(
     value: T,
     start: T,
     end: T
-): T where T : Number, T : Comparable<T> {
-    return when {
-        value < start -> start
-        value > end -> end
-        else -> value
-    }
-}
+): T where T : Number, T : Comparable<T> = minOf(maxOf(value, start), end)
