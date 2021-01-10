@@ -25,7 +25,6 @@ open class GradientSeekBar @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
 
-    private val viewConfig = ViewConfiguration.get(context)
     private val gradientColors = IntArray(2)
     private val thumbDrawable = ThumbDrawable()
     private val gradientDrawable = GradientDrawable()
@@ -196,25 +195,27 @@ open class GradientSeekBar @JvmOverloads constructor(
 
     private fun drawGradientRect(canvas: Canvas) {
         gradientDrawable.orientation = orientationStrategy.gradientOrientation
-        gradientDrawable.bounds = orientationStrategy.calculateBarBounds(this)
+        gradientDrawable.bounds = orientationStrategy.getGradientBounds(this)
         gradientDrawable.cornerRadius = cornersRadius
         gradientDrawable.draw(canvas)
     }
 
     private fun drawThumb(canvas: Canvas) {
-        val coordinates = orientationStrategy.calculateThumbPos(this, gradientDrawable.bounds)
+        val coordinates = orientationStrategy.getThumbPosition(this, gradientDrawable.bounds)
         thumbDrawable.indicatorColor = argb
         thumbDrawable.setCoordinates(coordinates.x, coordinates.y)
         thumbDrawable.draw(canvas)
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
+        val t1 = ViewConfiguration.get(context)
+        val t2 = ViewConfiguration.get(context)
         when (event.actionMasked) {
             MotionEvent.ACTION_DOWN -> onActionDown(event)
             MotionEvent.ACTION_MOVE -> calculateOffsetOnMotionEvent(event)
             MotionEvent.ACTION_UP -> {
                 calculateOffsetOnMotionEvent(event)
-                if (isTap(event, downX, downY, viewConfig)) performClick()
+                if (isTap(event, downX, downY)) performClick()
             }
         }
 
@@ -231,7 +232,7 @@ open class GradientSeekBar @JvmOverloads constructor(
     override fun performClick() = super.performClick()
 
     private fun calculateOffsetOnMotionEvent(event: MotionEvent) {
-        offset = orientationStrategy.calculateOffset(this, event, gradientDrawable.bounds)
+        offset = orientationStrategy.getOffset(this, event, gradientDrawable.bounds)
     }
 
     private fun calculateArgb() {

@@ -49,7 +49,6 @@ open class ColorWheel @JvmOverloads constructor(
         colors = SATURATION_COLORS
     }
 
-    private val viewConfig = ViewConfiguration.get(context)
     private val thumbDrawable = ThumbDrawable()
     private val hsvColor = HsvColor(value = 1f)
 
@@ -193,7 +192,7 @@ open class ColorWheel @JvmOverloads constructor(
             MotionEvent.ACTION_MOVE -> updateColorOnMotionEvent(event)
             MotionEvent.ACTION_UP -> {
                 updateColorOnMotionEvent(event)
-                if (isTap(event, downX, downY, viewConfig)) performClick()
+                if (isTap(event, downX, downY)) performClick()
             }
         }
 

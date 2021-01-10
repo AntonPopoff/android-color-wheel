@@ -25,7 +25,7 @@ internal class HorizontalStrategy : OrientationStrategy {
         return rect.apply { set(0, 0, finalWidth, finalHeight) }
     }
 
-    override fun calculateBarBounds(view: GradientSeekBar): Rect {
+    override fun getGradientBounds(view: GradientSeekBar): Rect {
         val availableHeight = view.height - view.paddingTop - view.paddingRight
         val left = view.paddingLeft + view.thumbRadius
         val right = view.width - view.paddingRight - view.thumbRadius
@@ -34,15 +34,15 @@ internal class HorizontalStrategy : OrientationStrategy {
         return rect.apply { set(left, top, right, bottom) }
     }
 
-    override fun calculateThumbPos(view: GradientSeekBar, bounds: Rect): PointF {
-        val x = (bounds.left + view.offset * bounds.width())
+    override fun getThumbPosition(view: GradientSeekBar, gradient: Rect): PointF {
+        val x = (gradient.left + view.offset * gradient.width())
         val y = view.height / 2f
         return point.apply { set(x, y) }
     }
 
-    override fun calculateOffset(view: GradientSeekBar, event: MotionEvent, bounds: Rect): Float {
-        val checkedX = ensureWithinRange(event.x.roundToInt(), bounds.left, bounds.right)
-        val relativeX = (checkedX - bounds.left).toFloat()
-        return relativeX / bounds.width()
+    override fun getOffset(view: GradientSeekBar, event: MotionEvent, gradient: Rect): Float {
+        val checkedX = ensureWithinRange(event.x.roundToInt(), gradient.left, gradient.right)
+        val relativeX = (checkedX - gradient.left).toFloat()
+        return relativeX / gradient.width()
     }
 }
