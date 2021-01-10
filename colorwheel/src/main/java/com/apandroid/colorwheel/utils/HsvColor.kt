@@ -38,4 +38,3 @@ class HsvColor(hue: Float = 0f, saturation: Float = 0f, value: Float = 0f) {
 
     private fun ensureSaturation(saturation: Float) = ensureValue(saturation)
 }
-

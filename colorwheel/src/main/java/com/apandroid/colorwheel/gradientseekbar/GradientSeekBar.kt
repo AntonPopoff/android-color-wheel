@@ -1,5 +1,6 @@
 package com.apandroid.colorwheel.gradientseekbar
 
+import android.animation.ArgbEvaluator
 import android.content.Context
 import android.content.res.TypedArray
 import android.graphics.Canvas
@@ -14,8 +15,7 @@ import com.apandroid.colorwheel.R
 import com.apandroid.colorwheel.thumb.ThumbDrawable
 import com.apandroid.colorwheel.utils.*
 import com.apandroid.colorwheel.utils.ensureWithinRange
-import com.apandroid.colorwheel.utils.interpolateColorLinear
-import com.apandroid.colorwheel.utils.setColorAlpha
+import com.apandroid.colorwheel.utils.setAlpha
 
 private const val MAX_ALPHA = 255
 
@@ -28,6 +28,7 @@ open class GradientSeekBar @JvmOverloads constructor(
     private val gradientColors = IntArray(2)
     private val thumbDrawable = ThumbDrawable()
     private val gradientDrawable = GradientDrawable()
+    private val argbEvaluator = ArgbEvaluator()
 
     private lateinit var orientationStrategy: OrientationStrategy
     private var downX = 0f
@@ -35,11 +36,11 @@ open class GradientSeekBar @JvmOverloads constructor(
 
     var startColor
         get() = gradientColors[0]
-        set(color) { setColors(startColor = color) }
+        set(color) { setColors(start = color) }
 
     var endColor
         get() = gradientColors[1]
-        set(color) { setColors(endColor = color) }
+        set(color) { setColors(end = color) }
 
     var offset = 0f
         set(offset) {
@@ -102,10 +103,10 @@ open class GradientSeekBar @JvmOverloads constructor(
     var interceptTouchEvent = true
 
     init {
-        parseAttributes(context, attrs, R.style.GradientSeekBarDefaultStyle)
+        parseAttributes(context, attrs)
     }
 
-    private fun parseAttributes(context: Context, attrs: AttributeSet?, defStyle: Int) {
+    private fun parseAttributes(context: Context, attrs: AttributeSet?) {
         val array = context.obtainStyledAttributes(
             attrs,
             R.styleable.GradientSeekBar,
@@ -172,14 +173,14 @@ open class GradientSeekBar @JvmOverloads constructor(
         }
     }
 
-    fun setColors(startColor: Int = gradientColors[0], endColor: Int = gradientColors[1]) {
-        updateGradientColors(startColor, endColor)
+    fun setColors(start: Int = startColor, end: Int = endColor) {
+        updateGradientColors(start, end)
         calculateArgb()
     }
 
-    private fun updateGradientColors(startColor: Int, endColor: Int) {
-        gradientColors[0] = startColor
-        gradientColors[1] = endColor
+    private fun updateGradientColors(start: Int, end: Int) {
+        gradientColors[0] = start
+        gradientColors[1] = end
         gradientDrawable.colors = gradientColors
     }
 
@@ -236,7 +237,7 @@ open class GradientSeekBar @JvmOverloads constructor(
     }
 
     private fun calculateArgb() {
-        argb = interpolateColorLinear(gradientColors[0], gradientColors[1], offset)
+        argb = argbEvaluator.evaluate(offset, startColor, endColor) as Int
         fireListener()
         invalidate()
     }
@@ -281,7 +282,10 @@ fun GradientSeekBar.setTransparentToColor(color: Int, respectAlpha: Boolean = tr
     if (respectAlpha) {
         this.offset = Color.alpha(color) / MAX_ALPHA.toFloat()
     }
-    this.setColors(setColorAlpha(color, 0), setColorAlpha(color, MAX_ALPHA))
+    this.setColors(
+        setAlpha(color, 0),
+        setAlpha(color, MAX_ALPHA)
+    )
 }
 
 inline fun GradientSeekBar.setAlphaChangeListener(

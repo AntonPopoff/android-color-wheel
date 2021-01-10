@@ -8,7 +8,6 @@ import android.os.Parcelable
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
-import android.view.ViewConfiguration
 
 import com.apandroid.colorwheel.thumb.ThumbDrawable
 import com.apandroid.colorwheel.utils.*
@@ -28,7 +27,7 @@ private val HUE_COLORS = intArrayOf(
 
 private val SATURATION_COLORS = intArrayOf(
     Color.WHITE,
-    setColorAlpha(Color.WHITE, 0)
+    setAlpha(Color.WHITE, 0)
 )
 
 open class ColorWheel @JvmOverloads constructor(
