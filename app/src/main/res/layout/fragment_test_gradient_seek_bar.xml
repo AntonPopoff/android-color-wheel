@@ -2,13 +2,13 @@
 <layout>
 
     <data>
-        <import type="com.apandroid.colorwheelapp.binding.converters.ConvertersKt"/>
-        <import type="com.apandroid.colorwheel.gradientseekbar.GradientSeekBarKt"/>
-        <import type="com.apandroid.colorwheelapp.utils.ColorUtilsKt"/>
+        <import type="com.github.antonpopoff.colorwheelapp.binding.converters.ConvertersKt"/>
+        <import type="com.github.antonpopoff.colorwheel.gradientseekbar.GradientSeekBarKt"/>
+        <import type="com.github.antonpopoff.colorwheelapp.utils.ColorUtilsKt"/>
 
         <variable
             name="viewModel"
-            type="com.apandroid.colorwheelapp.gradientseekbartest.TestGradientSeekBarViewModel" />
+            type="com.github.antonpopoff.colorwheelapp.gradientseekbartest.TestGradientSeekBarViewModel" />
 
         <variable
             name="random"
@@ -342,7 +342,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
-            <com.apandroid.colorwheel.gradientseekbar.GradientSeekBar
+            <com.github.antonpopoff.colorwheel.gradientseekbar.GradientSeekBar
                 android:id="@+id/gradientSeekBar"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"

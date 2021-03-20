@@ -2,13 +2,13 @@
 <layout>
 
     <data>
-        <import type="com.apandroid.colorwheelapp.binding.converters.ConvertersKt"/>
-        <import type="com.apandroid.colorwheelapp.utils.UIUtilsKt"/>
-        <import type="com.apandroid.colorwheelapp.utils.ColorUtilsKt"/>
+        <import type="com.github.antonpopoff.colorwheelapp.binding.converters.ConvertersKt"/>
+        <import type="com.github.antonpopoff.colorwheelapp.utils.UIUtilsKt"/>
+        <import type="com.github.antonpopoff.colorwheelapp.utils.ColorUtilsKt"/>
 
         <variable
             name="viewModel"
-            type="com.apandroid.colorwheelapp.colorwheeltest.TestColorWheelViewModel" />
+            type="com.github.antonpopoff.colorwheelapp.colorwheeltest.TestColorWheelViewModel" />
 
         <variable
             name="random"
@@ -179,7 +179,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/randomizeStrokeColorButton" />
 
-        <com.apandroid.colorwheel.ColorWheel
+        <com.github.antonpopoff.colorwheel.ColorWheel
             android:id="@+id/colorWheel"
             android:layout_width="0dp"
             android:layout_height="0dp"
