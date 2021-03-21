@@ -2,11 +2,11 @@
 <layout>
 
     <data>
-        <import type="com.apandroid.colorwheel.gradientseekbar.GradientSeekBarKt"/>
+        <import type="com.github.antonpopoff.colorwheel.gradientseekbar.GradientSeekBarKt"/>
 
         <variable
             name="viewModel"
-            type="com.apandroid.colorwheelapp.preview.PreviewViewModel" />
+            type="com.github.antonpopoff.colorwheelapp.preview.PreviewViewModel" />
 
     </data>
 
@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.apandroid.colorwheel.gradientseekbar.GradientSeekBar
+        <com.github.antonpopoff.colorwheel.gradientseekbar.GradientSeekBar
             android:id="@+id/gradientSeekBar"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
@@ -30,7 +30,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHeight_percent="0.55" />
 
-        <com.apandroid.colorwheel.ColorWheel
+        <com.github.antonpopoff.colorwheel.ColorWheel
             android:id="@+id/colorWheel"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -55,14 +55,14 @@
             app:layout_constraintHeight_percent="0.1"
             android:background="@android:color/black"/>
 
-        <com.apandroid.colorwheel.gradientseekbar.GradientSeekBar
+        <com.github.antonpopoff.colorwheel.gradientseekbar.GradientSeekBar
             android:id="@+id/valueSeekBar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             blackToColor="@{colorWheel.rgb}"
             colorListener="@{(color) -> viewModel.onColorChanged(color, GradientSeekBarKt.getCurrentColorAlpha(gradientSeekBar))}"
-            app:asb_orientation="horizontal"
+            app:gsb_orientation="horizontal"
             app:layout_constraintEnd_toEndOf="@id/colorWheel"
             app:layout_constraintStart_toStartOf="@id/colorWheel"
             app:layout_constraintTop_toBottomOf="@id/colorWheel"

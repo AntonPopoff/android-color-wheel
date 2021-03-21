@@ -1,23 +1,15 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'com.github.panpf.bintray-publish'
 
 buildscript {
-
-    ext.bintrayPublishVer = '1.0.0'
-
     repositories {
         jcenter()
-    }
-
-    dependencies {
-        classpath "com.github.panpf.bintray-publish:bintray-publish:$bintrayPublishVer"
     }
 }
 
 ext {
-    verCode = 19
-    verName = '1.1.12'
+    verCode = 20
+    verName = '1.1.13'
 }
 
 android {
@@ -46,12 +38,9 @@ repositories {
     mavenCentral()
 }
 
-publish {
-    userOrg = 'panton295'
-    repoName = 'com.apandroid'
-    groupId = 'com.apandroid'
-    artifactId = 'colorwheel'
-    desc = 'A color picker for Android'
-    website = 'https://github.com/AntonPopoff/android-color-wheel'
-    publishVersion = verName
+ext {
+    RELEASE_REPOSITORY_URL = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+    SNAPSHOT_REPOSITORY_URL = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
 }
+
+apply plugin: 'com.vanniktech.maven.publish'

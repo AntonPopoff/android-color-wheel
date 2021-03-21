@@ -12,23 +12,47 @@
 
 ## Installation
 
+**From version `1.1.13` the library will be hosted on Maven Central Repository because JCenter announced its deprecation in the future.
+This migration lead to change of the group id which now is `com.github.antonpopoff`.**
+
 To add the library to your project simply add the following line to your app module `build.gradle` file:
 
 ```groovy
+// For version 1.1.13 and above
+implementation 'com.github.antonpopoff:colorwheel:1.1.13'
+
+// For version 1.1.12 and below
 implementation 'com.apandroid:colorwheel:1.1.12'
 ```
 
-In case of problems make sure that **jCenter** repository is specified in your `build.gradle` file:
+In case of problems make sure that **jCenter** or **Maven Central** repositories are specified in your `build.gradle` file:
 
 ```groovy
 repositories {
-    jcenter()
+    mavenCentral() // Since version 1.1.13.
+    jcenter() // For version 1.1.12 and below.
 }
 ```
 
 ## Getting Started
 
 To start using views just add `ColorWheel` or `GradientSeekBar` to your xml layout file:
+
+**For version `1.1.13` and above:**
+
+```xml
+<com.github.antonpopoff.ColorWheel
+    android:id="@+id/colorWheel"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />
+
+<com.github.antonpopoff.gradientseekbar.GradientSeekBar
+    android:id="@+id/gradientSeekBar"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />
+```
+
+**For version `1.1.12` and below:**
 
 ```xml
 <com.apandroid.colorwheel.ColorWheel
@@ -141,19 +165,36 @@ You can use the following XML attributes to additionally customize `ColorWheel` 
 
 | XML Attribute              | Property                | Description                                                                                                                                                                          |
 |----------------------------|-------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `cw_thumbRadius`           | `thumbRadius`           | Sets `ColorWheel`'s thumb radius                                                                                                                                                     |
-| `cw_thumbColor`            | `thumbColor`            | Sets `ColorWheel`'s thumb color                                                                                                                                                      |
-| `cw_thumbStrokeColor`      | `thumbStrokeColor`      | Sets `ColorWheel`'s thumb stroke color                                                                                                                                               |
-| `cw_thumbColorCirlceScale` | `thumbColorCircleScale` | Sets `ColorWheel`'s thumb color circle size which is relative to `thumbRadius`. This value is in range from `0` to `1`. If it set to `1` it will have the same size as `thumbRadius` |
+| `tb_thumbRadius`           | `thumbRadius`           | Sets `ColorWheel`'s thumb radius                                                                                                                                                     |
+| `tb_thumbColor`            | `thumbColor`            | Sets `ColorWheel`'s thumb color                                                                                                                                                      |
+| `tb_thumbStrokeColor`      | `thumbStrokeColor`      | Sets `ColorWheel`'s thumb stroke color                                                                                                                                               |
+| `tb_thumbColorCirlceScale` | `thumbColorCircleScale` | Sets `ColorWheel`'s thumb color circle size which is relative to `thumbRadius`. This value is in range from `0` to `1`. If it set to `1` it will have the same size as `thumbRadius` |
 
 #### GradientSeekBar
 
+**For version `1.1.13` and above:**
+
 | XML Attribute               | Property                | Description                                                                                                                                                                               |
 |-----------------------------|-------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `asb_thumbRadius`           | `thumbRadius`           | Sets `GradientSeekBar`'s thumb radius                                                                                                                                                     |
-| `asb_thumbColor`            | `thumbColor`            | Sets `GradientSeekBar`'s thumb color                                                                                                                                                      |
-| `asb_thumbStrokeColor`      | `thumbStrokeColor`      | Sets `GradientSeekBar`'s thumb stroke color                                                                                                                                               |
-| `asb_thumbColorCirlceScale` | `thumbColorCircleScale` | Sets `GradientSeekBar`'s thumb color circle size which is relative to `thumbRadius`. This value is in range from `0` to `1`. If it set to `1` it will have the same size as `thumbRadius` |
+| `tb_thumbRadius`            | `thumbRadius`           | Sets `GradientSeekBar`'s thumb radius                                                                                                                                                     |
+| `tb_thumbColor`             | `thumbColor`            | Sets `GradientSeekBar`'s thumb color                                                                                                                                                      |
+| `tb_thumbStrokeColor`       | `thumbStrokeColor`      | Sets `GradientSeekBar`'s thumb stroke color                                                                                                                                               |
+| `tb_thumbColorCirlceScale`  | `thumbColorCircleScale` | Sets `GradientSeekBar`'s thumb color circle size which is relative to `thumbRadius`. This value is in range from `0` to `1`. If it set to `1` it will have the same size as `thumbRadius` |
+| `gsb_barSize`               | `barSize`               | Sets width(vertical)/height(horizontal) of `GradientSeekBar`'s gradient bar depending on it's orientation                                                                             |
+| `gsb_barCornersRadius`      | `cornerRadius`          | Sets `GradientSeekBar`'s gradient bar corners radius                                                                                                                                      |
+| `gsb_startColor`            | `startColor`            | Sets `GradientSeekBar`'s startColor                                                                                                                                                       |
+| `gsb_endColor`              | `endColor`              | Sets `GradientSeekBar`'s endColor                                                                                                                                                         |
+| `gsb_offset`                | `offset`                | Sets `GradientSeekBar`'s offset                                                                                                                                                           |
+| `gsb_orientation`           | `orientation`           | Sets `GradientSeekBar`'s orientation. Possible values: `vertical`/`horizontal`                                                                                                            |
+
+**For version `1.1.12` and below:**
+
+| XML Attribute               | Property                | Description                                                                                                                                                                               |
+|-----------------------------|-------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `tb_thumbRadius`            | `thumbRadius`           | Sets `GradientSeekBar`'s thumb radius                                                                                                                                                     |
+| `tb_thumbColor`             | `thumbColor`            | Sets `GradientSeekBar`'s thumb color                                                                                                                                                      |
+| `tb_thumbStrokeColor`       | `thumbStrokeColor`      | Sets `GradientSeekBar`'s thumb stroke color                                                                                                                                               |
+| `tb_thumbColorCirlceScale`  | `thumbColorCircleScale` | Sets `GradientSeekBar`'s thumb color circle size which is relative to `thumbRadius`. This value is in range from `0` to `1`. If it set to `1` it will have the same size as `thumbRadius` |
 | `asb_barSize`               | `barSize`               | Sets width(vertical)/height(horizontal) of `GradientSeekBar`'s gradient bar depending on it's orientation                                                                             |
 | `asb_barCornersRadius`      | `cornerRadius`          | Sets `GradientSeekBar`'s gradient bar corners radius                                                                                                                                      |
 | `asb_startColor`            | `startColor`            | Sets `GradientSeekBar`'s startColor                                                                                                                                                       |

@@ -1,7 +1,7 @@
 buildscript {
 
     ext {
-        kotlinVer = '1.4.10'
+        kotlinVer = '1.4.21'
         buildToolsVer = '4.1.0'
     }
 
@@ -13,6 +13,8 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:$buildToolsVer"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVer"
+        classpath 'com.vanniktech:gradle-maven-publish-plugin:0.13.0'
+        classpath 'org.jetbrains.dokka:dokka-gradle-plugin:1.4.10.2'
     }
 }
 
