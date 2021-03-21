@@ -25,7 +25,7 @@ implementation 'com.github.antonpopoff:colorwheel:1.1.13'
 implementation 'com.apandroid:colorwheel:1.1.12'
 ```
 
-In case of problems make sure that **jCenter** or **mavenCentral** repositories are specified in your `build.gradle` file:
+In case of problems make sure that **jCenter** or **Maven Central** repositories are specified in your `build.gradle` file:
 
 ```groovy
 repositories {
