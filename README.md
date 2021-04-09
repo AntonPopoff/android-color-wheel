@@ -1,11 +1,11 @@
 # ColorWheel
 
-**ColorWheel** is a library for Android which contains helpful views 
+**ColorWheel** is a library for Android which contains helpful views
 which can be used to pick an **ARGB** color.
 
 ## Gradle
 
-**From version `1.1.13` the library will be hosted on Maven Central Repository because JCenter 
+**From version `1.1.13` the library will be hosted on Maven Central Repository because JCenter
 announced its deprecation in the future. This migration lead to change of the group id
 which is now `com.github.antonpopoff`.**
 
@@ -19,7 +19,7 @@ implementation 'com.github.antonpopoff:colorwheel:1.1.13'
 implementation 'com.apandroid:colorwheel:1.1.12'
 ```
 
-In case of any problems make sure that **jCenter** or **Maven Central** repositories are specified 
+In case of any problems make sure that **jCenter** or **Maven Central** repositories are specified
 in your `build.gradle` file:
 
 ```groovy
@@ -74,11 +74,11 @@ colorWheel.rgb = Color.rgb(13, 37, 42)
 ```
 
 **Important note: keep in mind that `ColorWheel` is a two-dimensional implementation of HSV color
-model. Two-dimensional in that case means that its brightness (value) component of HSV is always 
+model. Two-dimensional in that case means that its brightness (value) component of HSV is always
 set to `1`. Because of that, `ColorWheel` can't display every single color supported by HSV.**
 
-**Therefore if you set a color which can't be displayed it will be transformed to the 
-closest *HSV* color which can be displayed by `ColorWheel`. In order to pick colors 
+**Therefore if you set a color which can't be displayed it will be transformed to the
+closest *HSV* color which can be displayed by `ColorWheel`. In order to pick colors
 which can't be displayed by `ColorWheel` you can additionally use `GradientSeekBar`.**
 
 You can set a listener via `ColorWheel.colorChangeListener` property:
@@ -89,7 +89,7 @@ colorWheel.colorChangeListener = { rgb: Int -> /* Code */ }
 
 ### GradientSeekBar
 
-`GradientSeekBar` view draws a vertical or horizontal bar filled with a linear gradient 
+`GradientSeekBar` view draws a vertical or horizontal bar filled with a linear gradient
 of two colors. You can use the view to pick an intermediate color in-between.
 
 #### Color
@@ -111,8 +111,8 @@ gradientSeekBar.endColor = endColor
 gradientSeekBar.setColors(startColor, endColor)
 ```
 
-If you want to change an intermediate color programmatically you can use `GradientSeekBar.offset` 
-property. Its value lies within the range from `0f` to `1f` and reflects how close 
+If you want to change an intermediate color programmatically you can use `GradientSeekBar.offset`
+property. Its value lies within the range from `0f` to `1f` and reflects how close
 the intermediate color to `startColor` or `endColor` properties.
 
 You can set a listener via `GradientSeekBar.colorChangeListener` property:
@@ -123,11 +123,11 @@ gradientSeekBar.colorChangeListener = { offset: Float, argb: Int -> /* Code */ }
 
 #### Brightness
 
-It's impossible to pick all different colors from `ColorWheel` because it's only two-dimensional 
+It's impossible to pick all different colors from `ColorWheel` because it's only two-dimensional
 and the **brightness (value)** component of **HSV** is always set to `1`.
 
-To compensate that you can use `GradientSeekBar` and its `setBlackToColor(color)` extension. 
-This method sets black color as `startColor` and supplied color as `endColor`. This gives you a 
+To compensate that you can use `GradientSeekBar` and its `setBlackToColor(color)` extension.
+This method sets black color as `startColor` and supplied color as `endColor`. This gives you a
 possibility to pick additional shades of a color picked from `ColorWheel`.
 
 #### Alpha
@@ -137,14 +137,14 @@ you can use the following extension:
 
 `GradientSeekBar.setTransparentToColor(color: Int, respectAlpha: Boolean = true)`
 
-This method takes an ARGB color and sets the transparent version of it as `startColor` and 
-an opaque version as `endColor`. `respectAlpha` parameter determines whether or not the thumb's 
+This method takes an ARGB color and sets the transparent version of it as `startColor` and
+an opaque version as `endColor`. `respectAlpha` parameter determines whether or not the thumb's
 position will be adjusted based on the alpha value of the color you supplied.
 
-To get the alpha value of the current color you can use `GradientSeekBar.currentColorAlpha` 
+To get the alpha value of the current color you can use `GradientSeekBar.currentColorAlpha`
 extension property.
 
-You can use `GradientSeekBar.setAlphaChangeListener` extenstion to set a listener that has additional 
+You can use `GradientSeekBar.setAlphaChangeListener` extenstion to set a listener that has additional
 `alpha` parameter which lies withing the range from `0` to `255`.
 
 ```kotlin
