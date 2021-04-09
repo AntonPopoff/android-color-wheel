@@ -73,11 +73,13 @@ colorWheel.rgb = Color.rgb(13, 37, 42)
 
 ```
 
-**Important note: keep in mind that since `ColorWheel` is a two-dimensional view it can't 
-display every possible color. Therefore when you set a color which can't be correctly 
-displayed it is transformed to the closest *HSV* color with the *brightness (value)* 
-component set to 1. In order to pick colors which can't be displayed by `ColorWheel`
-you can additionally use `GradientSeekBar`.**
+**Important note: keep in mind that `ColorWheel` is a two-dimensional implementation of HSV color
+model. Two-dimensional in that case means that its brightness (value) component of HSV is always 
+set to `1`. Because of that, `ColorWheel` can't display every single color supported by HSV.**
+
+**Therefore if you set a color which can't be displayed it will be transformed to the 
+closest *HSV* color which can be displayed by `ColorWheel`. In order to pick colors 
+which can't be displayed by `ColorWheel` you can additionally use `GradientSeekBar`.**
 
 You can set a listener via `ColorWheel.colorChangeListener` property:
 
