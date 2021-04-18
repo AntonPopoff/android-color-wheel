@@ -72,8 +72,16 @@ To `set/get` a RGB color you can use `ColorWheel.rgb` property:
 
 ```kotlin
 val colorWheel = findViewById<ColorWheel>(R.id.colorWheel)
+
 val previousColor = colorWheel.rgb
+
 colorWheel.rgb = Color.rgb(13, 37, 42)
+```
+
+You can set a listener via `ColorWheel.colorChangeListener` property:
+
+```kotlin
+colorWheel.colorChangeListener = { rgb: Int -> /* Code */ }
 ```
 
 **Important note: keep in mind that `ColorWheel` is a two-dimensional implementation of HSV color
@@ -83,12 +91,6 @@ set to `1`. Because of that, `ColorWheel` can't display every single color suppo
 **Therefore if you set a color which can't be displayed it will be transformed to the
 closest *HSV* color which can be displayed by `ColorWheel`. In order to pick colors
 which can't be displayed by `ColorWheel` you can additionally use `GradientSeekBar`.**
-
-You can set a listener via `ColorWheel.colorChangeListener` property:
-
-```kotlin
-colorWheel.colorChangeListener = { rgb: Int -> /* Code */ }
-```
 
 ### GradientSeekBar
 
