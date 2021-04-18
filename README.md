@@ -3,6 +3,10 @@
 **ColorWheel** is a library for Android which contains helpful views
 which can be used to pick an **ARGB** color.
 
+## Screenshots
+
+<img src="screenshots/preview_gif_00.gif" width="270" height="480"> <img src="screenshots/screenshot_00.png" width="270" height="480"> <img src="screenshots/screenshot_01.png" width="270" height="480">
+
 ## Gradle
 
 **From version `1.1.13` the library will be hosted on Maven Central Repository because JCenter
@@ -70,7 +74,6 @@ To `set/get` a RGB color you can use `ColorWheel.rgb` property:
 val colorWheel = findViewById<ColorWheel>(R.id.colorWheel)
 val previousColor = colorWheel.rgb
 colorWheel.rgb = Color.rgb(13, 37, 42)
-
 ```
 
 **Important note: keep in mind that `ColorWheel` is a two-dimensional implementation of HSV color
